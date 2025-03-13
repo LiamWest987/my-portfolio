@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Professional Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="wave"></div>
+        <div class="geometric-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">John Doe</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="index.html#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="projects" class="projects">
+            <div class="projects-container">
+                <div class="projects-header">
+                    <h1>Featured Projects</h1>
+                    <p class="projects-subtitle">A collection of my most impactful work</p>
+                    <div class="sort-controls">
+                        <button class="sort-button active" data-sort="dateDesc">Newest First</button>
+                        <button class="sort-button" data-sort="dateAsc">Oldest First</button>
+                        <button class="sort-button" data-sort="nameAsc">Name A-Z</button>
+                        <button class="sort-button" data-sort="nameDesc">Name Z-A</button>
+                        <button class="sort-button" data-sort="category">Category</button>
+                    </div>
+                </div>
+                <div class="project-grid">
+                    <!-- Projects will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- Modal content will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/your-kit-code.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

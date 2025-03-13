@@ -38,7 +38,7 @@ const projects = [
         id: 4,
         title: 'Crime Scene Simulation',
         category: 'Unity VR',
-        date: '2024-10-17',
+        date: '2024-9-1',
         image: '/photos/crime-scene.jpg',
         description: 'A highly interactive VR training simulation that immerses students in realistic crime scenes, teaching forensic investigation techniques through hands-on evidence collection and analysis.',
         longDescription: 'The crime scene investigation VR simulation is an immersive, hands-on training tool designed to teach students forensic techniques, evidence collection, and crime scene analysis in a realistic virtual environment. Utilizing interactive mechanics and detailed crime scene scenarios, the simulation challenges users to think critically, document findings accurately, and apply investigative procedures as they would in a real-world forensic investigation.',

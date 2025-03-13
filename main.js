@@ -2,6 +2,18 @@
 const projects = [
     {
         id: 1,
+        title: 'Random Number Generator',
+        category: 'Digital Electronics',
+        date: '2024-10-17',
+        image: 'https://picsum.photos/800/602',
+        description: 'This hardware RNG employs a 555 timer’s capacitor decay and logic circuits to create randomized LED patterns, simulating dice rolls through analog signal fading and digital processing.',
+        longDescription: 'The Random Number Generator uses a 555 timer-based analog circuit with fading capacitor signals to generate entropy, combined with sequential and combinational logic (ICs, AND/OR/NOT gates) to produce randomized LED outputs mimicking a dice roll. The project integrates Multi-sim simulation, component soldering, and truth tables to achieve a hardware-driven RNG.',
+        technologies: ['Multisim', 'Circuit Logic', 'Prototyping', 'Soldering'],
+        github: 'https://drive.google.com/file/d/1kOsWMMR2nAOrhcJB2yukpd8sTueXrqbZ/view?usp=sharing',
+        demo: 'https://drive.google.com/file/d/14m4PKFGFdnuxGtXrklP6yti_XJYTF-jA/view?usp=sharing'
+    },
+    {
+        id: 2,
         title: 'Majority Vote',
         category: 'Digital Electronics',
         date: '2024-11-13',
@@ -10,10 +22,9 @@ const projects = [
         longDescription: 'I designed an electronic voting machine using specified logic gates (AND, OR, NAND, NOR, inverters) to resolve voting controversies by ensuring accurate majority decisions for a four-member board, with the president’s vote breaking ties. The project includes truth tables, Karnaugh maps, Boolean algebra simplification, and circuit implementations (AOI, NAND, NOR) to validate the design.',
         technologies: ['MultiSim', 'Boolean Logic', 'Karnough Mapping', 'Prototyping'],
         github: 'https://drive.google.com/file/d/1_CRURGl8S9dinBUTRWVQbEcggrIE2tUT/view?usp=sharing',
-        //demo: 'https://demo-ecommerce.com'
     },
     {
-        id: 2,
+        id: 3,
         title: 'Date of Birth Counter',
         category: 'Digital Electronics',
         date: '2025-1-19',
@@ -22,19 +33,18 @@ const projects = [
         longDescription: 'The Date of Birth project simplifies storing and displaying numerical dates using three binary switches to drive a single seven-segment display, reducing hardware costs. It employs logic design (truth tables, K-maps, AOI/NAND/NOR circuits) and Tinkercad prototyping to decode switch inputs into segmented numeric outputs efficiently.',
         technologies: ['MultiSim', 'Boolean Logic', 'Tinkercad', 'Prototyping'],
         github: 'https://drive.google.com/file/d/1AG72sjsBNVecBDZuNOCTct0O6LO4COOr/view?usp=sharing',
-        //demo: 'https://vr-simulator-demo.com'
     },
     {
-        id: 3,
-        title: 'Random Number Generator',
-        category: 'Digital Electronics',
+        id: 4,
+        title: 'Crime Scene Simulation',
+        category: 'Unity VR',
         date: '2024-10-17',
-        image: 'https://picsum.photos/800/602',
-        description: 'A sophisticated analytics dashboard utilizing machine learning for predictive insights and data visualization.',
-        longDescription: 'This advanced analytics platform leverages artificial intelligence to provide predictive insights and beautiful data visualizations. Features include customizable dashboards, real-time data processing, and automated reporting systems. The platform helps businesses make data-driven decisions with confidence.',
-        technologies: ['Multisim', 'Circuit Logic', 'Prototyping', 'Soldering'],
-        github: 'https://drive.google.com/file/d/1kOsWMMR2nAOrhcJB2yukpd8sTueXrqbZ/view?usp=sharing',
-        demo: 'https://drive.google.com/file/d/14m4PKFGFdnuxGtXrklP6yti_XJYTF-jA/view?usp=sharing'
+        image: '/photos/crime-scene.jpg',
+        description: 'A highly interactive VR training simulation that immerses students in realistic crime scenes, teaching forensic investigation techniques through hands-on evidence collection and analysis.',
+        longDescription: 'The crime scene investigation VR simulation is an immersive, hands-on training tool designed to teach students forensic techniques, evidence collection, and crime scene analysis in a realistic virtual environment. Utilizing interactive mechanics and detailed crime scene scenarios, the simulation challenges users to think critically, document findings accurately, and apply investigative procedures as they would in a real-world forensic investigation.',
+        technologies: ['Unity', 'XR', 'Prototyping', 'VR Development'],
+        //github: 'https://drive.google.com/file/d/1kOsWMMR2nAOrhcJB2yukpd8sTueXrqbZ/view?usp=sharing',
+        demo: 'https://drive.google.com/file/d/1Y8ENOqjAnYbOuniipkVFmOv4OYWC5Svj/view?usp=sharing'
     }
 ];
 
@@ -56,6 +66,7 @@ function formatDate(dateString) {
     });
 }
 
+// Render projects
 // Render projects
 function renderProjects(sortType = 'dateDesc') {
     const projectGrid = document.querySelector('.project-grid');
@@ -80,6 +91,10 @@ function renderProjects(sortType = 'dateDesc') {
                     ${project.technologies.map(tech => 
                         `<span class="tech-tag">${tech}</span>`
                     ).join('')}
+                </div>
+                <div class="project-links">
+                    <a href="${project.github}" target="_blank" class="github-btn">GitHub</a>
+                    ${project.demo ? `<a href="${project.demo}" target="_blank" class="demo-btn">Demo</a>` : ''}
                 </div>
             </div>
         `;

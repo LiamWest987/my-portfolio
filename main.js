@@ -67,7 +67,6 @@ function formatDate(dateString) {
 }
 
 // Render projects
-// Render projects
 function renderProjects(sortType = 'dateDesc') {
     const projectGrid = document.querySelector('.project-grid');
     projectGrid.innerHTML = '';
@@ -77,7 +76,7 @@ function renderProjects(sortType = 'dateDesc') {
     sortedProjects.forEach(project => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card';
-        projectCard.innerHTML = `
+        projectCard.innerHTML = 
             <img src="${project.image}" alt="${project.title}" class="project-image">
             <div class="project-info">
                 <h3 class="project-title">${project.title}</h3>
@@ -89,20 +88,17 @@ function renderProjects(sortType = 'dateDesc') {
                 <p class="project-description">${project.description}</p>
                 <div class="tech-stack">
                     ${project.technologies.map(tech => 
-                        `<span class="tech-tag">${tech}</span>`
+                        <span class="tech-tag">${tech}</span>
                     ).join('')}
                 </div>
-                <div class="project-links">
-                    <a href="${project.github}" target="_blank" class="github-btn">GitHub</a>
-                    ${project.demo ? `<a href="${project.demo}" target="_blank" class="demo-btn">Demo</a>` : ''}
-                </div>
             </div>
-        `;
+        ;
         
         projectCard.addEventListener('click', () => showProjectModal(project));
         projectGrid.appendChild(projectCard);
     });
-}
+
+
 
 // Project modal
 function showProjectModal(project) {

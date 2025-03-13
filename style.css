@@ -436,6 +436,18 @@ main {
     object-fit: cover;
 }
 
+@media (max-width: 768px) {
+    .project-image {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-image {
+        height: 100px;
+    }
+}
+
 .project-info {
     padding: 1.5rem;
 }

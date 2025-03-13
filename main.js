@@ -2,39 +2,39 @@
 const projects = [
     {
         id: 1,
-        title: 'E-commerce Platform',
-        category: 'Web Development',
-        date: '2024-03-15',
-        image: 'https://picsum.photos/800/600',
-        description: 'A modern e-commerce platform built with cutting-edge web technologies. Features include real-time inventory management, secure payment processing, and an intuitive admin dashboard.',
-        longDescription: 'This comprehensive e-commerce solution provides businesses with everything they need to succeed in the digital marketplace. The platform includes advanced features such as real-time inventory tracking, secure payment processing through Stripe, detailed analytics, and a powerful admin dashboard for managing products, orders, and customer relationships.',
-        technologies: ['JavaScript', 'Node.js', 'MongoDB', 'React'],
-        github: 'https://github.com/username/ecommerce',
-        demo: 'https://demo-ecommerce.com'
+        title: 'Majority Vote',
+        category: 'Digital Electronics',
+        date: '2024-11-13',
+        image: 'https://raw.githubusercontent.com/LiamWest987/my-portfolio/main/photos/majority%20Vote.jpg',
+        description: 'A Majority Vote machine that uses logic gates to resolve voting controversies by ensuring majority decisions, prioritizing a tiebreaker, and validating reliability through truth tables and circuit designs.',
+        longDescription: 'I designed an electronic voting machine using specified logic gates (AND, OR, NAND, NOR, inverters) to resolve voting controversies by ensuring accurate majority decisions for a four-member board, with the president’s vote breaking ties. The project includes truth tables, Karnaugh maps, Boolean algebra simplification, and circuit implementations (AOI, NAND, NOR) to validate the design.',
+        technologies: ['MultiSim', 'Boolean Logic', 'Karnough Mapping', 'Prototyping'],
+        github: 'https://drive.google.com/file/d/1_CRURGl8S9dinBUTRWVQbEcggrIE2tUT/view?usp=sharing',
+        //demo: 'https://demo-ecommerce.com'
     },
     {
         id: 2,
-        title: 'Virtual Reality Training Simulator',
-        category: 'VR',
-        date: '2024-02-20',
+        title: 'Date of Birth Counter',
+        category: 'Digital Electronics',
+        date: '2025-1-19',
         image: 'https://picsum.photos/800/601',
-        description: 'An immersive VR training simulator for industrial safety procedures. Includes realistic physics and interactive scenarios.',
-        longDescription: 'This VR training simulator revolutionizes industrial safety training by providing immersive, hands-on experience without real-world risks. Users can practice complex procedures in a safe environment with realistic physics and immediate feedback. The system includes progress tracking and performance analytics.',
-        technologies: ['Unity', 'C#', 'VR', 'Oculus SDK'],
-        github: 'https://github.com/username/vr-simulator',
-        demo: 'https://vr-simulator-demo.com'
+        description: 'This project converts binary switch inputs into a seven-segment display output for date storage, using logic simplification and circuit prototyping to minimize hardware complexity.',
+        longDescription: 'The Date of Birth project simplifies storing and displaying numerical dates using three binary switches to drive a single seven-segment display, reducing hardware costs. It employs logic design (truth tables, K-maps, AOI/NAND/NOR circuits) and Tinkercad prototyping to decode switch inputs into segmented numeric outputs efficiently.',
+        technologies: ['MultiSim', 'Circuit Logic', 'Tinkercad', 'Prototyping'],
+        github: 'https://drive.google.com/file/d/1AG72sjsBNVecBDZuNOCTct0O6LO4COOr/view?usp=sharing',
+        //demo: 'https://vr-simulator-demo.com'
     },
     {
         id: 3,
-        title: 'AI-Powered Analytics Dashboard',
-        category: 'Engineering',
-        date: '2024-01-10',
+        title: 'Random Number Generator',
+        category: 'Digital Electronics',
+        date: '2024-10-17',
         image: 'https://picsum.photos/800/602',
         description: 'A sophisticated analytics dashboard utilizing machine learning for predictive insights and data visualization.',
         longDescription: 'This advanced analytics platform leverages artificial intelligence to provide predictive insights and beautiful data visualizations. Features include customizable dashboards, real-time data processing, and automated reporting systems. The platform helps businesses make data-driven decisions with confidence.',
-        technologies: ['Python', 'TensorFlow', 'React', 'D3.js'],
-        github: 'https://github.com/username/analytics',
-        demo: 'https://analytics-demo.com'
+        technologies: ['Multisim', 'TensorFlow', 'Prototyping', 'Soldering'],
+        github: 'https://drive.google.com/file/d/1kOsWMMR2nAOrhcJB2yukpd8sTueXrqbZ/view?usp=sharing',
+        demo: 'https://drive.google.com/file/d/14m4PKFGFdnuxGtXrklP6yti_XJYTF-jA/view?usp=sharing'
     }
 ];
 
@@ -114,10 +114,10 @@ function showProjectModal(project) {
             </div>
             <div class="modal-links">
                 <a href="${project.github}" target="_blank" class="modal-link">
-                    <i class="fab fa-github"></i> View on GitHub
+                    <i class="fab fa-github"></i> View PDF
                 </a>
                 <a href="${project.demo}" target="_blank" class="modal-link">
-                    <i class="fas fa-external-link-alt"></i> Live Demo
+                    <i class="fab fa-github"></i> Video Demo
                 </a>
             </div>
         </div>

@@ -20,7 +20,7 @@ const projects = [
         image: 'https://picsum.photos/800/601',
         description: 'This project converts binary switch inputs into a seven-segment display output for date storage, using logic simplification and circuit prototyping to minimize hardware complexity.',
         longDescription: 'The Date of Birth project simplifies storing and displaying numerical dates using three binary switches to drive a single seven-segment display, reducing hardware costs. It employs logic design (truth tables, K-maps, AOI/NAND/NOR circuits) and Tinkercad prototyping to decode switch inputs into segmented numeric outputs efficiently.',
-        technologies: ['MultiSim', 'Circuit Logic', 'Tinkercad', 'Prototyping'],
+        technologies: ['MultiSim', 'Boolean Logic', 'Tinkercad', 'Prototyping'],
         github: 'https://drive.google.com/file/d/1AG72sjsBNVecBDZuNOCTct0O6LO4COOr/view?usp=sharing',
         //demo: 'https://vr-simulator-demo.com'
     },
@@ -32,7 +32,7 @@ const projects = [
         image: 'https://picsum.photos/800/602',
         description: 'A sophisticated analytics dashboard utilizing machine learning for predictive insights and data visualization.',
         longDescription: 'This advanced analytics platform leverages artificial intelligence to provide predictive insights and beautiful data visualizations. Features include customizable dashboards, real-time data processing, and automated reporting systems. The platform helps businesses make data-driven decisions with confidence.',
-        technologies: ['Multisim', 'TensorFlow', 'Prototyping', 'Soldering'],
+        technologies: ['Multisim', 'Circuit Logic', 'Prototyping', 'Soldering'],
         github: 'https://drive.google.com/file/d/1kOsWMMR2nAOrhcJB2yukpd8sTueXrqbZ/view?usp=sharing',
         demo: 'https://drive.google.com/file/d/14m4PKFGFdnuxGtXrklP6yti_XJYTF-jA/view?usp=sharing'
     }

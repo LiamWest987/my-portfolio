@@ -118,6 +118,10 @@ main {
     letter-spacing: 0.5px;
 }
 
+.logo:hover {
+    opacity: 0.8; /* Optional hover effect */
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;

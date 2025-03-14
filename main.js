@@ -125,12 +125,8 @@ function showProjectModal(project) {
                 ).join('')}
             </div>
             <div class="modal-links">
-                <a href="${project.github}" target="_blank" class="modal-link">
-                    <i class="fab fa-github"></i> View PDF
-                </a>
-                <a href="${project.demo}" target="_blank" class="modal-link">
-                    <i class="fab fa-github"></i> Video Demo
-                </a>
+                ${project.github ? `<a href="${project.github}" target="_blank" class="modal-link"><i class="fas fa-file-pdf"></i> View PDF</a>` : ''}
+                ${project.demo ? `<a href="${project.demo}" target="_blank" class="modal-link"><i class="fas fa-video"></i> Video Demo</a>` : ''}
             </div>
         </div>
     `;
@@ -141,6 +137,7 @@ function showProjectModal(project) {
     const closeButton = modalBody.querySelector('.close-modal');
     closeButton.addEventListener('click', closeModal);
 }
+
 
 // Close modal
 function closeModal() {

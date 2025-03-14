@@ -21,7 +21,7 @@
         <div class="nav-content">
             <a href="index.html" class="logo">Liam West</a> <!-- Wrapped in <a> tag -->
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
             </ul>
         </div>
@@ -56,7 +56,20 @@
         </div>
     </div>
 
-    <script src="https://kit.fontawesome.com/your-kit-code.js"></script>
+    <script src="https://kit.fontawesome.com/2eadd46ea7.js"></script>
     <script src="main.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-links a");
+        const currentPage = window.location.pathname.split("/").pop(); // Get current page filename
+    
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active"); // Add the active class
+            }
+        });
+    });
+    </script>
+
 </body>
 </html>

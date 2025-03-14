@@ -443,14 +443,42 @@ main {
 }
 
 @media (max-width: 768px) {
-    .project-image {
-        height: 150px;
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
     }
 }
 
+
 @media (max-width: 480px) {
-    .project-image {
-        height: 100px;
+    .modal-content {
+        width: 98%;
+        padding: 1rem;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
     }
 }
 

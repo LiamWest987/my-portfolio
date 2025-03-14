@@ -474,18 +474,26 @@ main {
 @media (max-width: 480px) {
     .modal-content {
         width: 95%;
-        max-height: 85vh;
-        overflow-y: auto;
-        padding: 0.75rem;
+        max-height: 85vh; /* Ensures the whole modal scales well */
+        padding: 1.5rem;
+        overflow: hidden; /* Prevents inner content from scrolling independently */
+        display: flex;
+        flex-direction: column; /* Ensures the modal layout stays stacked */
     }
-
+    .modal-body {
+        overflow-y: auto; /* Enables scrolling for content */
+        max-height: 60vh; /* Ensures scrolling happens only inside the content */
+        padding-right: 0.5rem; /* Adds space to avoid cut-off text on mobile */
+    }
     .modal-title {
         font-size: 1.4rem;
     }
 
-    .modal img {
+    .modal-image {
         max-width: 100%;
         height: auto;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
     }
     .projects-container {
         display: flex;

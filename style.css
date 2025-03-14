@@ -462,6 +462,11 @@ main {
         height: auto;
         border-radius: 0.5rem;
     }
+    .projects-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 
@@ -481,6 +486,11 @@ main {
     .modal img {
         max-width: 100%;
         height: auto;
+    }
+    .projects-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 

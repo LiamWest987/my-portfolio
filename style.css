@@ -473,22 +473,33 @@ main {
 
 @media (max-width: 480px) {
     .modal-content {
-        width: 95%;
-        max-height: 85vh; /* Ensures the whole modal scales well */
-        padding: 1.5rem;
-        overflow: hidden; /* Prevents inner content from scrolling independently */
-        display: flex;
-        flex-direction: column; /* Ensures the modal layout stays stacked */
+        position: relative;
+        background: var(--card-bg);
+        width: 90%;
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 2rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border-color);
     }
     .modal-body {
-        overflow-y: auto; /* Enables scrolling for content */
-        max-height: 60vh; /* Ensures scrolling happens only inside the content */
-        padding-right: 0.5rem; /* Adds space to avoid cut-off text on mobile */
+        overflow: visible; /* Let content flow naturally */
     }
     .modal-title {
         font-size: 1.4rem;
     }
-
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1100;
+        padding: 2rem;
+        overflow-y: auto; /* Enable scrolling for the entire modal */
+    }
     .modal-image {
         max-width: 100%;
         height: auto;

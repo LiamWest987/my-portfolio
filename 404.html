@@ -16,21 +16,30 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const navLinks = document.querySelectorAll(".nav-links a");
-        let currentPage = window.location.pathname.split("/").pop().replace(".html", ""); // Get the current page without .html
-
-        // Check if currentPage is empty (i.e., we're on the home page)
+        // Extract the current page from the URL path
+        let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
+        
+        // Default to "index" for the home page
         if (currentPage === "") {
-            currentPage = "index"; // Default to "index" if we're on the home page
+            currentPage = "index";
         }
 
         navLinks.forEach(link => {
-            const linkHref = link.getAttribute("href").replace(".html", ""); // Remove ".html" from the href attribute
+            // Get the link's href and remove .html
+            let linkHref = link.getAttribute("href").replace(".html", "");
+            // Extract the last segment of the href (handles absolute/relative paths)
+            let linkPage = linkHref.split("/").pop();
 
-            // Compare the cleaned currentPage with the cleaned href
-            if (linkHref === currentPage) {
-                link.classList.add("active"); // Add the "active" class to the current page's link
+            // Handle home page links (empty segment or "/")
+            if (linkPage === "") {
+                linkPage = "index";
+            }
+
+            // Compare and toggle the 'active' class
+            if (linkPage === currentPage) {
+                link.classList.add("active");
             } else {
-                link.classList.remove("active"); // Remove "active" from the other links
+                link.classList.remove("active");
             }
         });
     });

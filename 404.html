@@ -13,22 +13,27 @@
             window.history.replaceState(null, "", newPath);
         }
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const navLinks = document.querySelectorAll(".nav-links a");
-            let currentPage = window.location.pathname.split("/").pop(); // Get current page filename
-    
-            // Handle the root URL ("/") case
-            if (currentPage === "" || currentPage === "index") {
-                currentPage = "index";
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-links a");
+        let currentPage = window.location.pathname.split("/").pop().replace(".html", ""); // Get the current page without .html
+
+        // Check if currentPage is empty (i.e., we're on the home page)
+        if (currentPage === "") {
+            currentPage = "index"; // Default to "index" if we're on the home page
+        }
+
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute("href").replace(".html", ""); // Remove ".html" from the href attribute
+
+            // Compare the cleaned currentPage with the cleaned href
+            if (linkHref === currentPage) {
+                link.classList.add("active"); // Add the "active" class to the current page's link
+            } else {
+                link.classList.remove("active"); // Remove "active" from the other links
             }
-    
-            navLinks.forEach(link => {
-                const href = link.getAttribute("href").replace(".html", ""); // Clean .html from links
-                if (href === currentPage) {
-                    link.classList.add("active"); // Add the active class
-                }
-            });
         });
-    </script>
+    });
+</script>
+
     

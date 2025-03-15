@@ -20,7 +20,7 @@
 
     <nav class="navbar">
         <div class="nav-content">
-            <a href="index.html" class="logo">Liam West</a> <!-- Wrapped in <a> tag -->
+            <a href="index" class="logo">Liam West</a> <!-- Wrapped in <a> tag -->
             <ul class="nav-links">
                 <li><a href="index">Home</a></li>
                 <li><a href="projects">Projects</a></li>
@@ -137,6 +137,12 @@
                 }
             });
         });
+        </script>
+        <script>
+            if (window.location.pathname.endsWith(".html")) {
+                const newPath = window.location.pathname.replace(".html", "");
+                window.history.replaceState(null, "", newPath);
+            }
         </script>
 </body>
 </html>

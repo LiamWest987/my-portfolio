@@ -36,6 +36,17 @@ const projects = [
     },
     {
         id: 4,
+        title: 'Digital Timer',
+        category: 'Digital Electronics',
+        date: '2025-03-14',
+        image: '/photos/timer.jpg',
+        description: 'I designed a digital timer circuit that uses logic components to display time on seven-segment displays.',
+        longDescription: 'For this project, I built a digital timer using 74LS93N, 74LS193N, and flip-flop circuits to control the seconds, minutes, and hours. The circuit runs sequentially, with each segment triggering the next, accurately displaying time while following design constraints.',
+        technologies: ['Multisim', 'Synchronous Logic', 'Counters', 'Logic Design'],
+        pdf: 'https://drive.google.com/file/d/115cOyF1QmPf-WUOUXng-5EDb2lYgIRZ8/view?usp=sharing',
+    },
+    {
+        id: 5,
         title: 'Crime Scene Simulation',
         category: 'Unity VR',
         date: '2024-9-1',
@@ -47,7 +58,7 @@ const projects = [
         demo: 'https://drive.google.com/file/d/1Y8ENOqjAnYbOuniipkVFmOv4OYWC5Svj/view?usp=sharing'
     },
     {
-        id: 5,
+        id: 6,
         title: 'Marble Sorter',
         category: 'PLTW POE',
         date: '2024-04-03',
@@ -58,7 +69,7 @@ const projects = [
         pdf: 'https://drive.google.com/file/d/1EPMkSKlVewyCHb6DpfNocVkwCJ0KGLhP/view?usp=sharing',
     },
     {
-        id: 6,
+        id: 7,
         title: 'Tensile Testing',
         category: 'PLTW POE',
         date: '2023-11-13',

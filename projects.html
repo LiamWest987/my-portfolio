@@ -62,8 +62,9 @@
         document.addEventListener("DOMContentLoaded", function () {
             const navLinks = document.querySelectorAll(".nav-links a");
             // Extract the current page from the URL path
-            let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
-            
+            let currentPage = window.location.pathname.split("/").pop();
+            currentPage = currentPage.replace(/\.html+$/g, ""); // Ensure we only remove one .html if it exists
+                        
             // Default to "home" for the home page
             if (currentPage === "") {
                 currentPage = "home";
@@ -92,10 +93,10 @@
     
     
     <script>
-        if (window.location.pathname.endsWith(".html")) {
-            const newPath = window.location.pathname.replace(".html", "");
-            window.history.replaceState(null, "", newPath);
-        }
+    if (window.location.pathname.includes(".html")) {
+        const newPath = window.location.pathname.replace(/\.html+/g, ""); // Removes multiple .html occurrences
+        window.history.replaceState(null, "", newPath);
+    }
     </script>
 </body>
 </html>

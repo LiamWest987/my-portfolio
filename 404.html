@@ -1,29 +1,31 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Redirect any unknown page to /home
-        const knownPages = ["/home", "/projects"]; // Add all valid routes
-        const path = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
+    // List of known valid pages
+    const knownPages = ["/home", "/projects"]; // Add more as needed
+    let path = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
 
-        if (!knownPages.includes(path) && path !== "") {
-            window.location.replace("/home");
-            return;
-        }
+    // If the path is not recognized, redirect to home
+    if (!knownPages.includes(path) && path !== "") {
+        window.location.replace("/home");
+        return;
+    }
 
-        // Remove .html from URLs in the address bar
-        if (window.location.pathname.includes(".html")) {
-            const newPath = window.location.pathname.replace(".html", "");
-            window.history.replaceState(null, "", newPath);
-        }
+    // Ensure we only strip `.html` once and prevent infinite loops
+    if (path.endsWith(".html")) {
+        const newPath = path.replace(/\.html$/, ""); // Remove only one instance of `.html`
+        window.history.replaceState(null, "", newPath);
+    }
 
-        // Highlight active navigation link
-        const navLinks = document.querySelectorAll(".nav-links a");
-        let currentPage = path.split("/").pop() || "home"; // Default to "home" if empty
+    // Highlight active navigation link
+    const navLinks = document.querySelectorAll(".nav-links a");
+    let currentPage = path.split("/").pop() || "home"; // Default to "home" if empty
 
-        navLinks.forEach(link => {
-            let linkPage = link.getAttribute("href").replace(".html", "").split("/").pop();
-            if (linkPage === "") linkPage = "home";
-            if (linkPage === currentPage) link.classList.add("active");
-            else link.classList.remove("active");
-        });
+    navLinks.forEach(link => {
+        let linkPage = link.getAttribute("href").replace(".html", "").split("/").pop();
+        if (linkPage === "") linkPage = "home";
+        if (linkPage === currentPage) link.classList.add("active");
+        else link.classList.remove("active");
     });
+});
+
 </script>

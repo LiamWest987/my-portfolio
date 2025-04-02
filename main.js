@@ -9,7 +9,7 @@ const projects = [
         description: 'This hardware RNG employs a 555 timer’s capacitor decay and logic circuits to create randomized LED patterns, simulating dice rolls through analog signal fading and digital processing.<br>',
         longDescription: 'The Random Number Generator uses a 555 timer-based analog circuit with fading capacitor signals to generate entropy, combined with sequential and combinational logic (ICs, AND/OR/NOT gates) to produce randomized LED outputs mimicking a dice roll. The project integrates Multi-sim simulation, component soldering, and truth tables to achieve a hardware-driven RNG.',
         technologies: ['Multisim', 'Circuit Logic', 'Prototyping', 'Soldering'],
-        pdf: 'https://drive.google.com/file/d/1kOsWMMR2nAOrhcJB2yukpd8sTueXrqbZ/view?usp=sharing',
+        pdf: '/PDFs/Resume.pdf',
         demo: 'https://drive.google.com/file/d/14m4PKFGFdnuxGtXrklP6yti_XJYTF-jA/view?usp=sharing'
     },
     {

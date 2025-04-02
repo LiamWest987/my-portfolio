@@ -19,9 +19,9 @@
 
     <nav class="navbar">
         <div class="nav-content">
-            <a href="index" class="logo">Liam West</a> <!-- Wrapped in <a> tag -->
+            <a href="home" class="logo">Liam West</a> <!-- Wrapped in <a> tag -->
             <ul class="nav-links">
-                <li><a href="index">Home</a></li>
+                <li><a href="home">Home</a></li>
                 <li><a href="/projects">Projects</a></li>
             </ul>
         </div>
@@ -64,9 +64,9 @@
             // Extract the current page from the URL path
             let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
             
-            // Default to "index" for the home page
+            // Default to "home" for the home page
             if (currentPage === "") {
-                currentPage = "index";
+                currentPage = "home";
             }
     
             navLinks.forEach(link => {
@@ -77,7 +77,7 @@
     
                 // Handle home page links (empty segment or "/")
                 if (linkPage === "") {
-                    linkPage = "index";
+                    linkPage = "home";
                 }
     
                 // Compare and toggle the 'active' class

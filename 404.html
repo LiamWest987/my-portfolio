@@ -1,7 +1,7 @@
     <script>
     var path = window.location.pathname;
     if (path.endsWith("/")) {
-      window.location.replace(path + "index.html");
+      window.location.replace(path + "home.html");
     } else {
       window.location.replace(path + ".html");
     }
@@ -19,9 +19,9 @@
         // Extract the current page from the URL path
         let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
         
-        // Default to "index" for the home page
+        // Default to "home" for the home page
         if (currentPage === "") {
-            currentPage = "index";
+            currentPage = "home";
         }
 
         navLinks.forEach(link => {
@@ -32,7 +32,7 @@
 
             // Handle home page links (empty segment or "/")
             if (linkPage === "") {
-                linkPage = "index";
+                linkPage = "home";
             }
 
             // Compare and toggle the 'active' class

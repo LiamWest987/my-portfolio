@@ -1,48 +1,29 @@
-    <script>
-    var path = window.location.pathname;
-    if (path.endsWith("/")) {
-      window.location.replace(path + "home.html");
-    } else {
-      window.location.replace(path + ".html");
-    }
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Redirect any unknown page to /home
+        const knownPages = ["/home", "/projects"]; // Add all valid routes
+        const path = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
 
-    </script>
-    <script>
-        if (window.location.pathname.endsWith(".html")) {
+        if (!knownPages.includes(path) && path !== "") {
+            window.location.replace("/home");
+            return;
+        }
+
+        // Remove .html from URLs in the address bar
+        if (window.location.pathname.includes(".html")) {
             const newPath = window.location.pathname.replace(".html", "");
             window.history.replaceState(null, "", newPath);
         }
-    </script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+
+        // Highlight active navigation link
         const navLinks = document.querySelectorAll(".nav-links a");
-        // Extract the current page from the URL path
-        let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
-        
-        // Default to "home" for the home page
-        if (currentPage === "") {
-            currentPage = "home";
-        }
+        let currentPage = path.split("/").pop() || "home"; // Default to "home" if empty
 
         navLinks.forEach(link => {
-            // Get the link's href and remove .html
-            let linkHref = link.getAttribute("href").replace(".html", "");
-            // Extract the last segment of the href (handles absolute/relative paths)
-            let linkPage = linkHref.split("/").pop();
-
-            // Handle home page links (empty segment or "/")
-            if (linkPage === "") {
-                linkPage = "home";
-            }
-
-            // Compare and toggle the 'active' class
-            if (linkPage === currentPage) {
-                link.classList.add("active");
-            } else {
-                link.classList.remove("active");
-            }
+            let linkPage = link.getAttribute("href").replace(".html", "").split("/").pop();
+            if (linkPage === "") linkPage = "home";
+            if (linkPage === currentPage) link.classList.add("active");
+            else link.classList.remove("active");
         });
     });
 </script>
-
-    

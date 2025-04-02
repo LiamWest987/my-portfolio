@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y638Y5ZJGN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y638Y5ZJGN');
+</script>
 <body>
     <div class="background-animation">
         <div class="wave"></div>
@@ -64,7 +73,7 @@
             // Extract the current page from the URL path
             let currentPage = window.location.pathname.split("/").pop();
             currentPage = currentPage.replace(/\.html+$/g, ""); // Ensure we only remove one .html if it exists
-                        
+
             // Default to "home" for the home page
             if (currentPage === "") {
                 currentPage = "home";

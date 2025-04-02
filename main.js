@@ -9,7 +9,7 @@ const projects = [
         description: 'This hardware RNG employs a 555 timer’s capacitor decay and logic circuits to create randomized LED patterns, simulating dice rolls through analog signal fading and digital processing.<br>',
         longDescription: 'The Random Number Generator uses a 555 timer-based analog circuit with fading capacitor signals to generate entropy, combined with sequential and combinational logic (ICs, AND/OR/NOT gates) to produce randomized LED outputs mimicking a dice roll. The project integrates Multi-sim simulation, component soldering, and truth tables to achieve a hardware-driven RNG.',
         technologies: ['Multisim', 'Circuit Logic', 'Prototyping', 'Soldering'],
-        pdf: '/PDFs/Resume.pdf',
+        pdf: '/PDFs/Random_Number_Generator.pdf',
         demo: 'https://drive.google.com/file/d/14m4PKFGFdnuxGtXrklP6yti_XJYTF-jA/view?usp=sharing'
     },
     {
@@ -21,7 +21,7 @@ const projects = [
         description: 'A Majority Vote machine that uses logic gates to resolve voting controversies by ensuring majority decisions, prioritizing a tiebreaker, and validating reliability through truth tables and circuit designs.<br>',
         longDescription: 'I designed an electronic voting machine using specified logic gates (AND, OR, NAND, NOR, inverters) to resolve voting controversies by ensuring accurate majority decisions for a four-member board, with the president’s vote breaking ties. The project includes truth tables, Karnaugh maps, Boolean algebra simplification, and circuit implementations (AOI, NAND, NOR) to validate the design.',
         technologies: ['MultiSim', 'Boolean Logic', 'Karnough Mapping', 'Prototyping'],
-        pdf: 'https://drive.google.com/file/d/1_CRURGl8S9dinBUTRWVQbEcggrIE2tUT/view?usp=sharing',
+        pdf: '/PDFs/Majority_Vote.pdf',
     },
     {
         id: 3,
@@ -32,7 +32,7 @@ const projects = [
         description: 'This project converts binary switch inputs into a seven-segment display output for date storage, using logic simplification and circuit prototyping to minimize hardware complexity.<br>',
         longDescription: 'The Date of Birth project simplifies storing and displaying numerical dates using three binary switches to drive a single seven-segment display, reducing hardware costs. It employs logic design (truth tables, K-maps, AOI/NAND/NOR circuits) and Tinkercad prototyping to decode switch inputs into segmented numeric outputs efficiently.',
         technologies: ['MultiSim', 'Boolean Logic', 'Tinkercad', 'Prototyping'],
-        pdf: 'https://drive.google.com/file/d/1AG72sjsBNVecBDZuNOCTct0O6LO4COOr/view?usp=sharing',
+        pdf: '/PDFs/Date_of_Birth',
     },
     {
         id: 4,
@@ -43,7 +43,7 @@ const projects = [
         description: 'I designed a digital timer circuit that uses logic components to display time on seven-segment displays.<br><br><br>',
         longDescription: 'For this project, I built a digital timer using 74LS93N, 74LS193N, and flip-flop circuits to control the seconds, minutes, and hours. The circuit runs sequentially, with each segment triggering the next, accurately displaying time while following design constraints.',
         technologies: ['Multisim', 'Synchronous Logic', 'Counters', 'Logic Design'],
-        pdf: 'https://drive.google.com/file/d/115cOyF1QmPf-WUOUXng-5EDb2lYgIRZ8/view?usp=sharing',
+        pdf: '/PDFs/Digital_Timer_Report.pdf',
     },
     {
         id: 5,
@@ -66,7 +66,7 @@ const projects = [
         description: 'The Marble Sorter project is an automated system inspired by a cow\'s stomach design that sorts marbles based on color using a light sensor, servo motor, and user controls for interaction and feedback.<br>',
         longDescription: 'Our team developed an innovative Marble Sorter that uses biomimicry to efficiently sort marbles by color. Combining a light sensor for detection and a motorized gear system for precise sorting, the project emphasizes automation, user interaction, and real-time feedback to enhance accuracy and efficiency in manufacturing-like environments.',
         technologies: ['VEX', 'Blockly', 'Prototyping', 'Biomimicry'],
-        pdf: 'https://drive.google.com/file/d/1EPMkSKlVewyCHb6DpfNocVkwCJ0KGLhP/view?usp=sharing',
+        pdf: '/PDFs/Marble_Sorter.pdf',
     },
     {
         id: 7,
@@ -77,7 +77,7 @@ const projects = [
         description: 'I built balsa wood trusses, tested them on an SSA Machine, and analyzed the resulting graph to understand key properties like modulus of toughness.<br>',
         longDescription: 'In this project, I constructed balsa wood trusses and tested their strength using an SSA Machine. I analyzed the resulting graph to identify important properties such as the modulus of elasticity and modulus of toughness, while also improving my attention to detail with units and numerical accuracy.',
         technologies: ['SSA Machines', 'Property Testing', 'Rapid Development', 'Calculations'],
-        pdf: 'https://drive.google.com/file/d/1nkDvxaIGGJ09dHg72MBQkCTFXN1qzq9I/view?usp=sharing',
+        pdf: '/PDFs/Tensile_Test_SSA.pdf',
     }
 ];
 

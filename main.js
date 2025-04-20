@@ -144,6 +144,7 @@ function renderProjects(sortType = 'dateDesc', categoryFilter = 'all') {
 function showProjectModal(project) {
     const modal = document.getElementById('project-modal');
     const modalBody = modal.querySelector('.modal-body');
+    const isMobile = window.innerWidth <= 480;
     
     modalBody.innerHTML = `
         <div class="modal-header">
@@ -171,7 +172,16 @@ function showProjectModal(project) {
     `;
     
     modal.style.display = 'block';
-    setTimeout(() => modal.classList.add('active'), 10);
+    
+    // Add a small delay to ensure the display change is processed before adding the active class
+    setTimeout(() => {
+        modal.classList.add('active');
+        
+        // On mobile, prevent body scrolling when modal is open
+        if (isMobile) {
+            document.body.style.overflow = 'hidden';
+        }
+    }, 10);
 
     const closeButton = modalBody.querySelector('.close-modal');
     closeButton.addEventListener('click', closeModal);
@@ -181,6 +191,12 @@ function showProjectModal(project) {
 function closeModal() {
     const modal = document.getElementById('project-modal');
     modal.classList.remove('active');
+    
+    // Re-enable body scrolling on mobile
+    if (window.innerWidth <= 480) {
+        document.body.style.overflow = '';
+    }
+    
     setTimeout(() => modal.style.display = 'none', 300);
 }
 
@@ -237,6 +253,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close dropdown when clicking outside
     document.addEventListener('click', () => {
         categoryFilter.classList.remove('active');
+    });
+
+    // Handle window resize for modal
+    window.addEventListener('resize', () => {
+        const modal = document.getElementById('project-modal');
+        if (modal.style.display === 'block') {
+            // If modal is open, update body overflow based on current width
+            if (window.innerWidth <= 480) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
     });
 
     // Setup intersection observer for sections

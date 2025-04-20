@@ -49,7 +49,18 @@
                         <button class="sort-button" data-sort="dateAsc">Oldest First</button>
                         <button class="sort-button" data-sort="nameAsc">Name A-Z</button>
                         <button class="sort-button" data-sort="nameDesc">Name Z-A</button>
-                        <button class="sort-button" data-sort="category">Category</button>
+                        <div class="category-filter">
+                            <button class="sort-button category-button">
+                                Category
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="category-dropdown">
+                                <button class="category-option active" data-category="all">All Categories</button>
+                                <button class="category-option" data-category="Digital Electronics">Digital Electronics</button>
+                                <button class="category-option" data-category="Unity VR">Unity VR</button>
+                                <button class="category-option" data-category="PLTW POE">PLTW POE</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="project-grid">

@@ -6,8 +6,8 @@ const projects = [
         category: 'Digital Electronics',
         date: '2024-10-17',
         image: '/photos/rng_dice.jpeg',
-        description: 'This hardware RNG employs a 555 timer’s capacitor decay and logic circuits to create randomized LED patterns, simulating dice rolls through analog signal fading and digital processing.<br>',
-        longDescription: 'This project is a hardware-based Random Number Generator designed to mimic a dice roll using a 555 timer circuit. Entropy is introduced through the natural fading signal of a capacitor, which triggers sequential and combinational logic built from ICs and basic logic gates (AND, OR, NOT). The randomized outputs are displayed through LEDs, simulating dice values from 1 to 6. The design process involved circuit simulation using Multisim, developing and analyzing truth tables, and hands-on construction through soldering and prototyping. Through this project, I learned how to integrate analog randomness with digital logic systems and gained practical experience debugging mixed-signal circuits. If I were to do it again, I’d add debouncing and output latching to stabilize the LED display, and explore more efficient logic mapping to reduce complexity. There\'s also room for improving randomness validation by applying basic statistical analysis to test output fairness.',
+        description: 'This hardware RNG employs a 555 timer\'s capacitor decay and logic circuits to create randomized LED patterns, simulating dice rolls through analog signal fading and digital processing.<br>',
+        longDescription: 'This project is a hardware-based Random Number Generator designed to mimic a dice roll using a 555 timer circuit. Entropy is introduced through the natural fading signal of a capacitor, which triggers sequential and combinational logic built from ICs and basic logic gates (AND, OR, NOT). The randomized outputs are displayed through LEDs, simulating dice values from 1 to 6. The design process involved circuit simulation using Multisim, developing and analyzing truth tables, and hands-on construction through soldering and prototyping. Through this project, I learned how to integrate analog randomness with digital logic systems and gained practical experience debugging mixed-signal circuits. If I were to do it again, I\'d add debouncing and output latching to stabilize the LED display, and explore more efficient logic mapping to reduce complexity. There\'s also room for improving randomness validation by applying basic statistical analysis to test output fairness.',
         technologies: ['Multisim', 'Circuit Logic', 'Prototyping', 'Soldering'],
         pdf: '/PDFs/Random_Number_Generator.pdf',
         demo: 'https://drive.google.com/file/d/14m4PKFGFdnuxGtXrklP6yti_XJYTF-jA/view?usp=sharing'
@@ -19,7 +19,7 @@ const projects = [
         date: '2024-11-13',
         image: '/photos/vote.jpg',
         description: 'A Majority Vote machine that uses logic gates to resolve voting controversies by ensuring majority decisions, prioritizing a tiebreaker, and validating reliability through truth tables and circuit designs.<br>',
-        longDescription: 'I designed an electronic voting machine that uses specified logic gates (AND, OR, NAND, NOR, and inverters) to accurately determine majority decisions among a four-member board, with the president\'s vote used to break ties. The logic was developed and verified using truth tables, Karnaugh maps, and Boolean algebra simplification, and implemented using AOI, NAND-only, and NOR-only logic circuits. This project taught me how to translate real-world decision-making rules into reliable digital logic, and how to optimize those rules for efficiency and minimal gate usage. If I were to revisit the design, I\’d focus on modularizing the logic for easier scalability and explore implementing the system on a programmable logic device to improve flexibility and reduce physical complexity.',
+        longDescription: 'I designed an electronic voting machine that uses specified logic gates (AND, OR, NAND, NOR, and inverters) to accurately determine majority decisions among a four-member board, with the president\'s vote used to break ties. The logic was developed and verified using truth tables, Karnaugh maps, and Boolean algebra simplification, and implemented using AOI, NAND-only, and NOR-only logic circuits. This project taught me how to translate real-world decision-making rules into reliable digital logic, and how to optimize those rules for efficiency and minimal gate usage. If I were to revisit the design, I\'d focus on modularizing the logic for easier scalability and explore implementing the system on a programmable logic device to improve flexibility and reduce physical complexity.',
         technologies: ['MultiSim', 'Boolean Logic', 'Karnough Mapping', 'Prototyping'],
         pdf: '/PDFs/Majority_Vote.pdf',
     },
@@ -30,7 +30,7 @@ const projects = [
         date: '2025-1-19',
         image: '/photos/time.jpeg',
         description: 'This project converts binary switch inputs into a seven-segment display output for date storage, using logic simplification and circuit prototyping to minimize hardware complexity.<br>',
-        longDescription: 'The Date of Birth project focuses on efficiently storing and displaying numerical dates using just three binary switches to control a single seven-segment display, minimizing hardware requirements. Logic design techniques—including truth tables, Karnaugh maps, and AOI, NAND, and NOR implementations—were used to decode binary inputs into the appropriate segmented outputs. The circuit was prototyped and tested using Tinkercad to ensure accurate display logic. Through this project, I deepened my understanding of binary-to-decimal conversion and display control using combinational logic. If I were to improve the design, I’d aim to streamline the logic further using a dedicated decoder IC and expand the switch range to support double-digit outputs, enabling full date representation while maintaining minimal hardware.',
+        longDescription: 'The Date of Birth project focuses on efficiently storing and displaying numerical dates using just three binary switches to control a single seven-segment display, minimizing hardware requirements. Logic design techniques—including truth tables, Karnaugh maps, and AOI, NAND, and NOR implementations—were used to decode binary inputs into the appropriate segmented outputs. The circuit was prototyped and tested using Tinkercad to ensure accurate display logic. Through this project, I deepened my understanding of binary-to-decimal conversion and display control using combinational logic. If I were to improve the design, I\'d aim to streamline the logic further using a dedicated decoder IC and expand the switch range to support double-digit outputs, enabling full date representation while maintaining minimal hardware.',
         technologies: ['MultiSim', 'Boolean Logic', 'Tinkercad', 'Prototyping'],
         pdf: '/PDFs/Date_of_Birth',
     },
@@ -41,7 +41,7 @@ const projects = [
         date: '2025-03-14',
         image: '/photos/timer.jpg',
         description: 'I designed a digital timer circuit that uses logic components to display time on seven-segment displays.<br><br><br>',
-        longDescription: 'In this project, I built a digital timer using 74LS93N and 74LS193N counter ICs along with flip-flop circuits to track and display seconds, minutes, and hours. The design operates sequentially, with each time unit triggering the next to maintain accurate timekeeping within set design constraints. Constructing this system helped me understand the coordination between asynchronous and synchronous counting, as well as the importance of timing and propagation delays in sequential logic. If I were to improve the project, I’d focus on optimizing reset logic to better handle overflow conditions and explore integrating a crystal oscillator for more precise timing instead of relying solely on manual or unstable pulse inputs.',
+        longDescription: 'In this project, I built a digital timer using 74LS93N and 74LS193N counter ICs along with flip-flop circuits to track and display seconds, minutes, and hours. The design operates sequentially, with each time unit triggering the next to maintain accurate timekeeping within set design constraints. Constructing this system helped me understand the coordination between asynchronous and synchronous counting, as well as the importance of timing and propagation delays in sequential logic. If I were to improve the project, I\'d focus on optimizing reset logic to better handle overflow conditions and explore integrating a crystal oscillator for more precise timing instead of relying solely on manual or unstable pulse inputs.',
         technologies: ['Multisim', 'Synchronous Logic', 'Counters', 'Logic Design'],
         pdf: '/PDFs/Digital_Timer_Report.pdf',
     },
@@ -100,11 +100,19 @@ function formatDate(dateString) {
 }
 
 // Render projects
-function renderProjects(sortType = 'dateDesc') {
+function renderProjects(sortType = 'dateDesc', categoryFilter = 'all') {
     const projectGrid = document.querySelector('.project-grid');
     projectGrid.innerHTML = '';
     
-    const sortedProjects = [...projects].sort(sortFunctions[sortType]);
+    let filteredProjects = [...projects];
+    
+    // Apply category filter
+    if (categoryFilter !== 'all') {
+        filteredProjects = filteredProjects.filter(project => project.category === categoryFilter);
+    }
+    
+    // Apply sorting
+    const sortedProjects = filteredProjects.sort(sortFunctions[sortType]);
 
     sortedProjects.forEach(project => {
         const projectCard = document.createElement('div');
@@ -131,8 +139,6 @@ function renderProjects(sortType = 'dateDesc') {
         projectGrid.appendChild(projectCard);
     });
 }
-
-
 
 // Project modal
 function showProjectModal(project) {
@@ -171,7 +177,6 @@ function showProjectModal(project) {
     closeButton.addEventListener('click', closeModal);
 }
 
-
 // Close modal
 function closeModal() {
     const modal = document.getElementById('project-modal');
@@ -181,20 +186,58 @@ function closeModal() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    renderProjects();
+    let currentSort = 'dateDesc';
+    let currentCategory = 'all';
+    renderProjects(currentSort, currentCategory);
     
     // Setup sort controls
     const sortControls = document.querySelector('.sort-controls');
     if (sortControls) {
         sortControls.addEventListener('click', (e) => {
-            if (e.target.classList.contains('sort-button')) {
+            if (e.target.classList.contains('sort-button') && !e.target.classList.contains('category-button')) {
                 const sortType = e.target.dataset.sort;
                 document.querySelector('.sort-button.active')?.classList.remove('active');
                 e.target.classList.add('active');
-                renderProjects(sortType);
+                currentSort = sortType;
+                renderProjects(currentSort, currentCategory);
             }
         });
     }
+
+    // Setup category filter
+    const categoryFilter = document.querySelector('.category-filter');
+    const categoryButton = categoryFilter.querySelector('.category-button');
+    const categoryOptions = categoryFilter.querySelectorAll('.category-option');
+
+    // Toggle dropdown
+    categoryButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        categoryFilter.classList.toggle('active');
+    });
+
+    // Handle category selection
+    categoryOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const category = option.dataset.category;
+            currentCategory = category;
+            
+            // Update active state
+            categoryOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+            
+            // Update button text
+            categoryButton.innerHTML = category === 'all' ? 'Category <i class="fas fa-chevron-down"></i>' : `${category} <i class="fas fa-chevron-down"></i>`;
+            
+            renderProjects(currentSort, currentCategory);
+            categoryFilter.classList.remove('active');
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+        categoryFilter.classList.remove('active');
+    });
 
     // Setup intersection observer for sections
     const sections = document.querySelectorAll('section');

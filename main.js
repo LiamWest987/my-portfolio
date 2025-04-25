@@ -3,7 +3,7 @@ const projects = [
     {
         id: 1,
         title: 'Random Number Generator',
-        category: 'PLTW Digital Electronics',
+        category: 'Digital Electronics',
         date: '2024-10-17',
         image: '/photos/rng_dice.jpeg',
         description: 'This hardware RNG employs a 555 timer\'s capacitor decay and logic circuits to create randomized LED patterns, simulating dice rolls through analog signal fading and digital processing.<br>',
@@ -15,7 +15,7 @@ const projects = [
     {
         id: 2,
         title: 'Majority Vote',
-        category: 'PLTW Digital Electronics',
+        category: 'Digital Electronics',
         date: '2024-11-13',
         image: '/photos/vote.jpg',
         description: 'A Majority Vote machine that uses logic gates to resolve voting controversies by ensuring majority decisions, prioritizing a tiebreaker, and validating reliability through truth tables and circuit designs.<br>',
@@ -26,7 +26,7 @@ const projects = [
     {
         id: 3,
         title: 'Date of Birth Counter',
-        category: 'PLTW Digital Electronics',
+        category: 'Digital Electronics',
         date: '2025-1-19',
         image: '/photos/time.jpeg',
         description: 'This project converts binary switch inputs into a seven-segment display output for date storage, using logic simplification and circuit prototyping to minimize hardware complexity.<br>',
@@ -37,7 +37,7 @@ const projects = [
     {
         id: 4,
         title: 'Digital Timer',
-        category: 'PLTW Digital Electronics',
+        category: 'Digital Electronics',
         date: '2025-03-14',
         image: '/photos/timer.jpg',
         description: 'I designed a digital timer circuit that uses logic components to display time on seven-segment displays.<br><br><br>',
@@ -60,7 +60,7 @@ const projects = [
     {
         id: 6,
         title: 'Marble Sorter',
-        category: 'PLTW Principles of Engineering',
+        category: 'PLTW POE',
         date: '2024-04-03',
         image: '/photos/marbles.jpg',
         description: 'The Marble Sorter project is an automated system inspired by a cow\'s stomach design that sorts marbles based on color using a light sensor, servo motor, and user controls for interaction and feedback.<br>',
@@ -71,7 +71,7 @@ const projects = [
     {
         id: 7,
         title: 'Tensile Testing',
-        category: 'PLTW Principles of Engineering',
+        category: 'PLTW POE',
         date: '2023-11-13',
         image: '/photos/tensiletest.jpg',
         description: 'I built balsa wood trusses, tested them on an SSA Machine, and analyzed the resulting graph to understand key properties like modulus of toughness.<br>',

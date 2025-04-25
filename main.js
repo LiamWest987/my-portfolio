@@ -97,7 +97,7 @@ const projects = [
         date: '2023-08-24',
         image: '/photos/evolution_of_flight.jpg',
         description: 'This project explores the groundbreaking flight of the Bell X-1, the first aircraft to break the sound barrier, and its impact on aviation history.<br>',
-        longDescription: 'The goal of this project was to study the Bell X-1’s design and its historic role in surpassing the sound barrier. We researched its engineering, Chuck Yeager’s contributions, and the broader impact on aviation to create an informative presentation. I learned how engineering and test piloting work hand-in-hand, and how this milestone paved the way for future aerospace breakthroughs.',
+        longDescription: 'The goal of this project was to study the Bell X-1\'s design and its historic role in surpassing the sound barrier. We researched its engineering, Chuck Yeager\'s contributions, and the broader impact on aviation to create an informative presentation. I learned how engineering and test piloting work hand-in-hand, and how this milestone paved the way for future aerospace breakthroughs.',
         technologies: ['Research', 'Analysis', 'Presenting'],
         pdf: '/pdfs/evolution_of_flight_presentation.pdf',
     },
@@ -119,7 +119,7 @@ const projects = [
         date: '2025-2-19',
         image: '/photos/reaction_wheels.jpg',
         description: 'This project explores how reaction wheels allow spacecraft to control their orientation using angular momentum rather than traditional fuel-based propulsion.<br>',
-        longDescription: 'The objective was to understand and explain how reaction wheels function and why they\’re crucial for fuel-efficient spacecraft attitude control. We researched their components, energy systems, and use cases, then analyzed how they apply Newton\'s Third Law to reorient a spacecraft without expelling mass. I learned how elegant and efficient non-thrust-based systems can be, especially in long-duration missions where conserving fuel is critical.',
+        longDescription: 'The objective was to understand and explain how reaction wheels function and why they\'re crucial for fuel-efficient spacecraft attitude control. We researched their components, energy systems, and use cases, then analyzed how they apply Newton\'s Third Law to reorient a spacecraft without expelling mass. I learned how elegant and efficient non-thrust-based systems can be, especially in long-duration missions where conserving fuel is critical.',
         technologies: ['Spacecraft Dynamics', 'Mechanical Principles'],
         pdf: '/pdfs/spacecraft_propulsion.pdf',
     },
@@ -214,11 +214,6 @@ function showProjectModal(project) {
                 <span>${formatDate(project.date)}</span>
             </div>
             <p class="modal-description">${project.longDescription}</p>
-            <div class="tech-stack">
-                ${project.technologies.map(tech => 
-                    `<span class="tech-tag">${tech}</span>`
-                ).join('')}
-            </div>
             <div class="modal-links">
                 ${project.pdf ? `<a href="${project.pdf}" target="_blank" class="modal-link"><i class="fas fa-file-pdf"></i> View PDF</a>` : ''}
                 ${project.demo ? `<a href="${project.demo}" target="_blank" class="modal-link"><i class="fas fa-video"></i> Video Demo</a>` : ''}

@@ -28,7 +28,7 @@ const projects = [
         title: 'Date of Birth Counter',
         category: 'Digital Electronics',
         date: '2025-1-19',
-        image: '/photos/time.jpeg',
+        image: '/photos/date_of_birth.jpeg',
         description: 'This project converts binary switch inputs into a seven-segment display output for date storage, using logic simplification and circuit prototyping to minimize hardware complexity.<br>',
         longDescription: 'The Date of Birth project focuses on efficiently storing and displaying numerical dates using just three binary switches to control a single seven-segment display, minimizing hardware requirements. Logic design techniques—including truth tables, Karnaugh maps, and AOI, NAND, and NOR implementations—were used to decode binary inputs into the appropriate segmented outputs. The circuit was prototyped and tested using Tinkercad to ensure accurate display logic. Through this project, I deepened my understanding of binary-to-decimal conversion and display control using combinational logic. If I were to improve the design, I\'d aim to streamline the logic further using a dedicated decoder IC and expand the switch range to support double-digit outputs, enabling full date representation while maintaining minimal hardware.',
         technologies: ['MultiSim', 'Boolean Logic', 'Tinkercad'],

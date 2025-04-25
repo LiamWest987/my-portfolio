@@ -474,7 +474,7 @@ main {
     align-items: center;
     gap: var(--spacing-sm);
     min-width: 120px;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .category-button i {

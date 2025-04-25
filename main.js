@@ -124,7 +124,7 @@ const projects = [
         pdf: '/pdfs/spacecraft_propulsion.pdf',
     },
     {
-        id: 11,
+        id: 12,
         title: 'Microgravity Presentation',
         category: 'PLTW Aerospace',
         date: '2025-3-12',

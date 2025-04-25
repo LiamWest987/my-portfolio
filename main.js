@@ -133,6 +133,17 @@ const projects = [
         longDescription: 'The objective was to investigate the effects of microgravity on the human visual system and understand how astronauts prepare for and recover from these changes. We researched fluid shifts in space, the impact on intraocular pressure and vision, and current countermeasures like vision training and pressure devices. I learned how spaceflight poses unique biomedical challenges and how critical vision health is to long-term human space exploration.',
         technologies: ['Human Biology', 'Research', 'Presenting'],
         pdf: '/pdfs/microgravity_presentation.pdf',
+    },
+    {
+        id: 13,
+        title: 'Airfoil Simulation',
+        category: 'PLTW Aerospace',
+        date: '2024-9-19',
+        image: '/photos/airfoil.png',
+        description: 'This project was about comparing airfoil simulations to study how shape and angle of attack affect aerodynamic performance.<br>',
+        longDescription: 'The objective was to understand how airfoil shape and angle of attack influence lift and drag. I simulated multiple airfoil setups, changing the angle of attack and recording Cl and Cd values. It showed me how critical small design changes are in optimizing aerodynamic performance.',
+        technologies: ['Aerodynamics', 'Simulation Analysis'],
+        pdf: '/pdfs/airfoil_simulation.pdf',
     }
 ];
 

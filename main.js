@@ -252,43 +252,9 @@ function showProjectModal(project) {
     closeButton.addEventListener('click', closeModal);
 }
 
-// Show PDF in embedded viewer
+// Show PDF in new tab
 function showPDF(pdfUrl) {
-    const modal = document.getElementById('project-modal');
-    const modalBody = modal.querySelector('.modal-body');
-    const currentContent = modalBody.innerHTML;
-    
-    modalBody.innerHTML = `
-        <div class="modal-header">
-            <button class="back-button" onclick="restoreModalContent()">
-                <i class="fas fa-arrow-left"></i> Back
-            </button>
-            <span class="close-modal">&times;</span>
-        </div>
-        <div class="pdf-container">
-            <iframe src="${pdfUrl}" width="100%" height="100%" frameborder="0"></iframe>
-        </div>
-    `;
-    
-    // Store current content for back button
-    modalBody.dataset.previousContent = currentContent;
-    
-    const closeButton = modalBody.querySelector('.close-modal');
-    closeButton.addEventListener('click', () => {
-        restoreModalContent();
-        closeModal();
-    });
-}
-
-// Restore previous modal content
-function restoreModalContent() {
-    const modal = document.getElementById('project-modal');
-    const modalBody = modal.querySelector('.modal-body');
-    if (modalBody.dataset.previousContent) {
-        modalBody.innerHTML = modalBody.dataset.previousContent;
-        const closeButton = modalBody.querySelector('.close-modal');
-        closeButton.addEventListener('click', closeModal);
-    }
+    window.open(pdfUrl, '_blank');
 }
 
 // Close modal

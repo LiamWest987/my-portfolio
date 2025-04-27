@@ -4,6 +4,12 @@
         const knownPages = ["/home", "/projects"]; // Add more pages if necessary
         const path = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
 
+        // Check if the path is a PDF file
+        if (path.endsWith('.pdf')) {
+            // Allow PDF files to be accessed directly
+            return;
+        }
+
         // If the path is not recognized, redirect to /home
         if (path === "" || !knownPages.includes(path)) {
             window.location.replace("/home");

@@ -1,36 +1,93 @@
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Define all known valid pages
-        const knownPages = ["/home", "/projects"]; // Add more pages if necessary
-        const path = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
-
-        // Check if the path is a PDF file
-        if (path.endsWith('.pdf')) {
-            // Allow PDF files to be accessed directly
-            return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 0 20px;
         }
-
-        // If the path is not recognized, redirect to /home
-        if (path === "" || !knownPages.includes(path)) {
-            window.location.replace("/home");
-            return;
+        .error-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
-
-        // Remove .html from URLs in the address bar
-        if (window.location.pathname.includes(".html")) {
-            const newPath = window.location.pathname.replace(".html", "");
-            window.history.replaceState(null, "", newPath);
+        .error-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
         }
+        .back-button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-title">404</h1>
+        <p class="error-message">The page you're looking for doesn't exist.</p>
+        <a href="/home" class="back-button">Go Back Home</a>
+    </div>
 
-        // Highlight active navigation link
-        const navLinks = document.querySelectorAll(".nav-links a");
-        let currentPage = path.split("/").pop() || "home"; // Default to "home" if empty
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const path = window.location.pathname;
+            
+            // Immediately return if this is a PDF file
+            if (path.toLowerCase().endsWith('.pdf')) {
+                return;
+            }
 
-        navLinks.forEach(link => {
-            let linkPage = link.getAttribute("href").replace(".html", "").split("/").pop();
-            if (linkPage === "") linkPage = "home";
-            if (linkPage === currentPage) link.classList.add("active");
-            else link.classList.remove("active");
+            // Define all known valid pages
+            const knownPages = ["/home", "/projects"]; // Add more pages if necessary
+            const cleanPath = path.replace(/\/$/, ""); // Remove trailing slash
+
+            // If the path is not recognized, show the 404 page
+            if (cleanPath === "" || !knownPages.includes(cleanPath)) {
+                // If we're already on the 404 page, don't redirect
+                if (cleanPath === "/404") {
+                    return;
+                }
+                // Otherwise, redirect to the 404 page
+                window.location.replace("/404");
+                return;
+            }
+
+            // Remove .html from URLs in the address bar
+            if (window.location.pathname.includes(".html")) {
+                const newPath = window.location.pathname.replace(".html", "");
+                window.history.replaceState(null, "", newPath);
+            }
+
+            // Highlight active navigation link
+            const navLinks = document.querySelectorAll(".nav-links a");
+            let currentPage = cleanPath.split("/").pop() || "home"; // Default to "home" if empty
+
+            navLinks.forEach(link => {
+                let linkPage = link.getAttribute("href").replace(".html", "").split("/").pop();
+                if (linkPage === "") linkPage = "home";
+                if (linkPage === currentPage) link.classList.add("active");
+                else link.classList.remove("active");
+            });
         });
-    });
-</script>
+    </script>
+</body>
+</html>

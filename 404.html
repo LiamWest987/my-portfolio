@@ -48,52 +48,54 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const path = window.location.pathname;
-            
-            // Immediately return if this is a PDF file
-            if (path.toLowerCase().endsWith('.pdf')) {
-                return;
-            }
+document.addEventListener("DOMContentLoaded", function () {
+    const path = window.location.pathname.toLowerCase();
 
-            // Define all known valid pages
-            const knownPages = ["/home", "/projects"]; // Add more pages if necessary
-            const cleanPath = path.replace(/\/$/, ""); // Remove trailing slash
+    // Immediately allow access to PDFs or any other static file like images
+    if (path.startsWith('/pdfs/') && path.endsWith('.pdf')) {
+        // Do nothing – let the browser handle the PDF
+        return;
+    }
 
-            // If the path is empty (root path), redirect to home
-            if (cleanPath === "") {
-                window.location.replace("/home");
-                return;
-            }
+    // Define all known valid pages
+    const knownPages = ["/home", "/projects"]; // Add more pages as needed
+    const cleanPath = path.replace(/\/$/, ""); // Remove trailing slash
 
-            // If the path is not recognized, show the 404 page
-            if (!knownPages.includes(cleanPath)) {
-                // If we're already on the 404 page, don't redirect
-                if (cleanPath === "/404") {
-                    return;
-                }
-                // Otherwise, redirect to the 404 page
-                window.location.replace("/404");
-                return;
-            }
+    // If the path is empty (root path), redirect to home
+    if (cleanPath === "") {
+        window.location.replace("/home");
+        return;
+    }
 
-            // Remove .html from URLs in the address bar
-            if (window.location.pathname.includes(".html")) {
-                const newPath = window.location.pathname.replace(".html", "");
-                window.history.replaceState(null, "", newPath);
-            }
+    // If the path is not recognized, show the 404 page
+    if (!knownPages.includes(cleanPath)) {
+        // If we're already on the 404 page, don't redirect again
+        if (cleanPath === "/404") {
+            return;
+        }
+        // Redirect to custom 404 page
+        window.location.replace("/404");
+        return;
+    }
 
-            // Highlight active navigation link
-            const navLinks = document.querySelectorAll(".nav-links a");
-            let currentPage = cleanPath.split("/").pop() || "home"; // Default to "home" if empty
+    // Remove .html from URLs in the address bar
+    if (window.location.pathname.includes(".html")) {
+        const newPath = window.location.pathname.replace(".html", "");
+        window.history.replaceState(null, "", newPath);
+    }
 
-            navLinks.forEach(link => {
-                let linkPage = link.getAttribute("href").replace(".html", "").split("/").pop();
-                if (linkPage === "") linkPage = "home";
-                if (linkPage === currentPage) link.classList.add("active");
-                else link.classList.remove("active");
-            });
-        });
+    // Highlight active navigation link
+    const navLinks = document.querySelectorAll(".nav-links a");
+    let currentPage = cleanPath.split("/").pop() || "home"; // Default to "home" if empty
+
+    navLinks.forEach(link => {
+        let linkPage = link.getAttribute("href").replace(".html", "").split("/").pop();
+        if (linkPage === "") linkPage = "home";
+        if (linkPage === currentPage) link.classList.add("active");
+        else link.classList.remove("active");
+    });
+});
+
     </script>
 </body>
 </html>

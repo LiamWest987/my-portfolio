@@ -804,22 +804,26 @@ main {
 .modal-link {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-md) var(--spacing-lg);
-    background: var(--accent-primary);
-    color: white;
-    text-decoration: none;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
     border-radius: var(--radius-md);
-    transition: all var(--transition-medium);
-    font-size: var(--font-size-sm);
+    text-decoration: none;
     font-weight: 500;
-    box-shadow: var(--elevation-1);
+    transition: all var(--transition-speed) ease;
+    cursor: pointer;
 }
 
 .modal-link:hover {
-    background: var(--accent-secondary);
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: var(--elevation-2);
+}
+
+.modal-link i {
+    font-size: 1.1rem;
 }
 
 /* Responsive Design */

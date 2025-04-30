@@ -983,7 +983,25 @@ main {
     
     .modal-link {
         width: 100%;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: 1px solid var(--primary-color);
+        border-radius: var(--radius-md);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all var(--transition-speed) ease;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
         justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .modal-link:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+        transform: translateY(-2px);
     }
     
     .project-meta {

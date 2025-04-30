@@ -9,6 +9,7 @@
     --card-bg: #1E293B;
     --nav-bg: rgba(15, 23, 42, 0.95);
     --border-color: rgba(139, 92, 246, 0.2);
+    --hover-color: rgba(139, 92, 246, 0.1);
     
     /* Material UI spacing */
     --spacing-xs: 0.25rem;
@@ -53,13 +54,15 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--background);
+    background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color var(--transition-speed) ease,
+                color var(--transition-speed) ease;
 }
 
 main {
@@ -217,11 +220,13 @@ main {
     margin: 0 auto;
     padding: var(--spacing-md) var(--spacing-xl);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    gap: 2rem;
 }
 
 .logo {
+    margin-right: auto;
     text-decoration: none;
     font-size: var(--font-size-lg);
     font-weight: bold;
@@ -270,7 +275,7 @@ main {
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: var(--primary-color);
+    color: var(--accent-primary);
     background: rgba(139, 92, 246, 0.1);
 }
 
@@ -342,6 +347,7 @@ main {
 .btn-primary {
     background: var(--primary-color);
     color: white;
+    border: 1px solid var(--primary-dark);
 }
 
 .btn-primary:hover {
@@ -351,15 +357,14 @@ main {
 }
 
 .btn-secondary {
-    background: rgba(139, 92, 246, 0.1);
-    color: var(--primary-color);
+    background: transparent;
     border: 1px solid var(--primary-color);
+    color: var(--primary-color);
 }
 
 .btn-secondary:hover {
-    background: rgba(139, 92, 246, 0.2);
-    transform: translateY(-2px);
-    box-shadow: var(--elevation-2);
+    background: var(--primary-color);
+    color: white;
 }
 
 /* About Section */
@@ -422,7 +427,7 @@ main {
 
 .expertise-card:hover {
     transform: translateY(-5px);
-    border-color: var(--primary-color);
+    border-color: var(--accent-primary);
     box-shadow: var(--elevation-3);
 }
 
@@ -470,9 +475,9 @@ main {
 }
 
 .social-link:hover {
-    color: var(--primary-color);
+    color: var(--accent-primary);
     transform: translateY(-5px);
-    border-color: var(--primary-color);
+    border-color: var(--accent-primary);
     box-shadow: var(--elevation-2);
 }
 
@@ -519,8 +524,8 @@ main {
 .sort-button {
     padding: var(--spacing-sm) var(--spacing-md);
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all var(--transition-medium);
@@ -533,7 +538,8 @@ main {
 .sort-button:hover,
 .sort-button.active {
     background: var(--primary-color);
-    border-color: var(--primary-color);
+    border-color: var(--primary-dark);
+    color: white;
     transform: translateY(-2px);
     box-shadow: var(--elevation-2);
 }
@@ -549,6 +555,15 @@ main {
     gap: var(--spacing-sm);
     min-width: 120px;
     justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
 }
 
 .category-button i {
@@ -566,7 +581,7 @@ main {
     left: 0;
     width: 100%;
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-color);
     border-radius: var(--radius-md);
     margin-top: var(--spacing-sm);
     padding: var(--spacing-sm);
@@ -593,7 +608,7 @@ main {
     text-align: center;
     background: none;
     border: none;
-    color: var(--text-primary);
+    color: var(--primary-color);
     cursor: pointer;
     transition: all var(--transition-medium);
     border-radius: var(--radius-sm);
@@ -601,8 +616,8 @@ main {
 }
 
 .category-option:hover {
-    background: rgba(139, 92, 246, 0.1);
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
 }
 
 .category-option.active {
@@ -619,7 +634,7 @@ main {
 
 .project-card {
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    border: 1px solid transparent;
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: all var(--transition-medium);
@@ -716,7 +731,7 @@ main {
     margin: var(--spacing-xl) auto;
     padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-color);
     transform: scale(0.95);
     opacity: 0;
     transition: all var(--transition-medium);
@@ -755,7 +770,7 @@ main {
 }
 
 .close-modal:hover {
-    color: var(--primary-color);
+    color: var(--accent-primary);
 }
 
 .modal-body {
@@ -791,7 +806,7 @@ main {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-md) var(--spacing-lg);
-    background: var(--primary-color);
+    background: var(--accent-primary);
     color: white;
     text-decoration: none;
     border-radius: var(--radius-md);
@@ -802,7 +817,7 @@ main {
 }
 
 .modal-link:hover {
-    background: var(--primary-dark);
+    background: var(--accent-secondary);
     transform: translateY(-2px);
     box-shadow: var(--elevation-2);
 }
@@ -1012,8 +1027,295 @@ main {
 }
 
 .back-button:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
     transform: translateY(-2px);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: transform var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: rotate(30deg);
+    color: var(--accent-primary);
+}
+
+/* Theme Picker Modal */
+.theme-picker-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.theme-picker-content {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--elevation-4);
+}
+
+.theme-picker-content h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.theme-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.theme-option {
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+}
+
+.theme-option:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-primary);
+}
+
+.theme-option span {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.theme-preview {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--border-color);
+}
+
+.theme-preview.dark {
+    background: linear-gradient(135deg, #0F172A, #1E293B);
+}
+
+.theme-preview.neon {
+    background: linear-gradient(135deg, #0A0F2E, #1A1F3C);
+    box-shadow: 0 0 10px #00F5FF;
+}
+
+.theme-preview.golden {
+    background: linear-gradient(135deg, #2C1810, #3D2316);
+    box-shadow: 0 0 10px #FF6B35;
+}
+
+.theme-preview.mint {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    box-shadow: 0 0 10px #4CAF50;
+}
+
+/* Theme Settings Styles */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.theme-settings {
+    position: relative;
+}
+
+.theme-button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: 50%;
+    transition: all var(--transition-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.theme-button:hover {
+    background: var(--hover-color);
+    color: var(--primary-color);
+    transform: rotate(15deg);
+}
+
+.theme-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    min-width: 200px;
+    display: none;
+    z-index: 1000;
+    box-shadow: var(--elevation-3);
+    margin-top: var(--spacing-sm);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity var(--transition-medium) ease,
+                transform var(--transition-medium) ease;
+}
+
+.theme-settings.active .theme-dropdown {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    text-align: left;
+}
+
+.theme-option i {
+    width: 20px;
+    text-align: center;
+}
+
+.theme-option:hover {
+    background: var(--hover-color);
+    color: var(--primary-color);
+}
+
+.theme-option.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.theme-option.active:hover {
+    background: var(--primary-dark);
+    color: white;
+}
+
+/* Theme Transition */
+body {
+    transition: background-color var(--transition-medium),
+                color var(--transition-medium);
+}
+
+/* Update existing elements to use theme variables */
+.navbar {
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-medium);
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--elevation-1);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--elevation-3);
+    border-color: var(--primary-color);
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--primary-color);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --primary-color: #8B5CF6;
+    --primary-dark: #6D28D9;
+    --primary-light: #A78BFA;
+    --background: #0F172A;
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --card-bg: #1E293B;
+    --nav-bg: rgba(15, 23, 42, 0.95);
+    --border-color: rgba(139, 92, 246, 0.2);
+    --hover-color: rgba(139, 92, 246, 0.1);
+    --accent-color: #8B5CF6;
+    --surface-color: #1E293B;
+}
+
+/* Neon Dreams Theme */
+[data-theme="neon"] {
+    --primary-color: #FF00FF;
+    --primary-dark: #FF0080;
+    --primary-light: #FF80FF;
+    --background: #0D001A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #FF80FF;
+    --card-bg: #1A0033;
+    --nav-bg: rgba(13, 0, 26, 0.95);
+    --border-color: rgba(255, 0, 255, 0.3);
+    --hover-color: rgba(255, 0, 255, 0.2);
+    --accent-color: #FF00FF;
+    --surface-color: #1A0033;
+}
+
+/* Golden Hour Theme */
+[data-theme="golden"] {
+    --primary-color: #FF7E5F;
+    --primary-dark: #FEB47B;
+    --primary-light: #FFB088;
+    --background: #2C1810;
+    --text-primary: #FFF5E6;
+    --text-secondary: #FFE4CC;
+    --card-bg: #3D2314;
+    --nav-bg: rgba(44, 24, 16, 0.95);
+    --border-color: rgba(255, 126, 95, 0.2);
+    --hover-color: rgba(255, 126, 95, 0.1);
+    --accent-color: #FFB088;
+    --surface-color: #3D2314;
+}
+
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--primary-color);
+    color: white;
 }
 

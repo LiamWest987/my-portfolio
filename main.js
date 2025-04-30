@@ -165,6 +165,25 @@ function formatDate(dateString) {
     });
 }
 
+// Get URL parameters
+function getUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        sort: params.get('sort') || 'dateDesc',
+        category: params.get('category') || 'all'
+    };
+}
+
+// Update URL with current parameters
+function updateUrl(sort, category) {
+    const params = new URLSearchParams();
+    if (sort !== 'dateDesc') params.set('sort', sort);
+    if (category !== 'all') params.set('category', category);
+    
+    const newUrl = window.location.pathname + (params.toString() ? `?${params.toString()}` : '');
+    window.history.pushState({ sort, category }, '', newUrl);
+}
+
 // Render projects
 function renderProjects(sortType = 'dateDesc', categoryFilter = 'all') {
     const projectGrid = document.querySelector('.project-grid');
@@ -179,6 +198,9 @@ function renderProjects(sortType = 'dateDesc', categoryFilter = 'all') {
     
     // Apply sorting
     const sortedProjects = filteredProjects.sort(sortFunctions[sortType]);
+
+    // Update URL with current parameters
+    updateUrl(sortType, categoryFilter);
 
     sortedProjects.forEach(project => {
         const projectCard = document.createElement('div');
@@ -272,33 +294,54 @@ function closeModal() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    let currentSort = 'dateDesc';
-    let currentCategory = 'all';
+    // Get initial parameters from URL
+    const { sort, category } = getUrlParams();
+    let currentSort = sort;
+    let currentCategory = category;
+    
     renderProjects(currentSort, currentCategory);
     
     // Setup sort controls
     const sortControls = document.querySelector('.sort-controls');
-    if (sortControls) {
-        sortControls.addEventListener('click', (e) => {
-            if (e.target.classList.contains('sort-button') && !e.target.classList.contains('category-button')) {
-                const sortType = e.target.dataset.sort;
-                document.querySelector('.sort-button.active')?.classList.remove('active');
-                e.target.classList.add('active');
-                currentSort = sortType;
-                renderProjects(currentSort, currentCategory);
-            }
-        });
-    }
-
-    // Setup category filter
+    const sortButtons = sortControls.querySelectorAll('.sort-button');
+    const categoryButton = document.querySelector('.category-button');
     const categoryFilter = document.querySelector('.category-filter');
-    const categoryButton = categoryFilter.querySelector('.category-button');
-    const categoryOptions = categoryFilter.querySelectorAll('.category-option');
+    const categoryOptions = document.querySelectorAll('.category-option');
 
-    // Toggle dropdown
+    // Toggle category dropdown
     categoryButton.addEventListener('click', (e) => {
         e.stopPropagation();
         categoryFilter.classList.toggle('active');
+    });
+
+    // Set initial active states based on URL parameters
+    sortButtons.forEach(button => {
+        if (button.dataset.sort === currentSort) {
+            button.classList.add('active');
+        }
+    });
+
+    categoryOptions.forEach(option => {
+        if (option.dataset.category === currentCategory) {
+            option.classList.add('active');
+            categoryButton.innerHTML = currentCategory === 'all' ? 
+                'Category <i class="fas fa-chevron-down"></i>' : 
+                `${currentCategory} <i class="fas fa-chevron-down"></i>`;
+        }
+    });
+
+    // Handle sort button clicks
+    sortButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const sortType = button.dataset.sort;
+            currentSort = sortType;
+            
+            // Update active state
+            sortButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            renderProjects(currentSort, currentCategory);
+        });
     });
 
     // Handle category selection
@@ -313,7 +356,9 @@ document.addEventListener('DOMContentLoaded', () => {
             option.classList.add('active');
             
             // Update button text
-            categoryButton.innerHTML = category === 'all' ? 'Category <i class="fas fa-chevron-down"></i>' : `${category} <i class="fas fa-chevron-down"></i>`;
+            categoryButton.innerHTML = category === 'all' ? 
+                'Category <i class="fas fa-chevron-down"></i>' : 
+                `${category} <i class="fas fa-chevron-down"></i>`;
             
             renderProjects(currentSort, currentCategory);
             categoryFilter.classList.remove('active');

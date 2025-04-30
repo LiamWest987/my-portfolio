@@ -60,8 +60,14 @@
             const knownPages = ["/home", "/projects"]; // Add more pages if necessary
             const cleanPath = path.replace(/\/$/, ""); // Remove trailing slash
 
+            // If the path is empty (root path), redirect to home
+            if (cleanPath === "") {
+                window.location.replace("/home");
+                return;
+            }
+
             // If the path is not recognized, show the 404 page
-            if (cleanPath === "" || !knownPages.includes(cleanPath)) {
+            if (!knownPages.includes(cleanPath)) {
                 // If we're already on the 404 page, don't redirect
                 if (cleanPath === "/404") {
                     return;

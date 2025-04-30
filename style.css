@@ -484,6 +484,7 @@ main {
 /* Projects Section */
 .projects {
     padding: var(--spacing-xxl) var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
 }
 
 .projects-container {

@@ -144,7 +144,19 @@ const projects = [
         longDescription: 'The objective was to understand how airfoil shape and angle of attack influence lift and drag. I simulated multiple airfoil setups, changing the angle of attack and recording Cl and Cd values. It showed me how critical small design changes are in optimizing aerodynamic performance.',
         technologies: ['Aerodynamics', 'Simulation Analysis'],
         pdf: '/pdfs/airfoil_simulation.pdf',
-    }
+    },
+    {
+        id: 14,
+        title: 'Traffic Light State Machine',
+        category: 'Digital Electronics',
+        date: '2025-05-02',
+        image: 'photos/state_machine.png',
+        description: 'I built a traffic light state machine using flip-flops, logic gates, and preemption control to simulate real-world traffic signal behavior.<br>',
+        longDescription: 'This project involved designing and simulating a three-state traffic light controller in Multisim using D flip-flops, combinational logic, and preemption override functionality. The system cycles through green, yellow, and red lights using a finite statemachine (FSM) that updates on clock pulses. I wrote Boolean equations for state transitions and outputs, implemented logic gates to match those equations, and added a traffic preemption input that forces the light to turn green—just like emergency vehicles do in the real world. Initially, I encountered issues where the FSM cycled in reverse, but Ifixed this by adjusting my Da and Db logic. I learned how to debug timing-dependent logic systems, build clock-driven FSMs, and map real-world behavior into digital design. The goal was to better understand sequential circuits and model real-time control systemswith accurate logic simulation.',
+        technologies: ['Multisim', 'FSM Design', 'Logic Gates'],
+        //pdf: '/pdfs/traffic_light_state_machine.pdf',
+        //demo: 'https://drive.google.com/file/d/your_demo_file_id/view?usp=sharing'
+    },
 ];
 
 // Sort functions

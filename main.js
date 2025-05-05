@@ -55,7 +55,7 @@ const projects = [
         longDescription: 'The crime scene investigation VR simulation is an immersive, hands-on training tool designed to teach students forensic techniques, evidence collection, and crime scene analysis in a realistic virtual environment. Utilizing interactive mechanics and detailed crime scene scenarios, the simulation challenges users to think critically, document findings accurately, and apply investigative procedures as they would in a real-world forensic investigation.',
         technologies: ['Unity', 'XR', 'Prototyping', 'VR Development'],
         //pdf: 'https://drive.google.com/file/d/1kOsWMMR2nAOrhcJB2yukpd8sTueXrqbZ/view?usp=sharing',
-        demo: 'https://drive.google.com/file/d/1Y8ENOqjAnYbOuniipkVFmOv4OYWC5Svj/view?usp=sharing'
+        demo: 'https://drive.google.com/file/d/12YLKNvgazM30xmMHBnim2p_Efx-TkIFQ/view?usp=sharing'
     },
     {
         id: 6,

@@ -154,9 +154,19 @@ const projects = [
         description: 'I built a traffic light state machine using flip-flops, logic gates, and preemption control to simulate real-world traffic signal behavior.<br>',
         longDescription: 'This project involved designing and simulating a three-state traffic light controller in Multisim using D flip-flops, combinational logic, and preemption override functionality. The system cycles through green, yellow, and red lights using a finite statemachine (FSM) that updates on clock pulses. I wrote Boolean equations for state transitions and outputs, implemented logic gates to match those equations, and added a traffic preemption input that forces the light to turn green—just like emergency vehicles do in the real world. Initially, I encountered issues where the FSM cycled in reverse, but Ifixed this by adjusting my Da and Db logic. I learned how to debug timing-dependent logic systems, build clock-driven FSMs, and map real-world behavior into digital design. The goal was to better understand sequential circuits and model real-time control systemswith accurate logic simulation.',
         technologies: ['Multisim', 'FSM Design', 'Logic Gates'],
-        //pdf: '/pdfs/traffic_light_state_machine.pdf',
-        //demo: 'https://drive.google.com/file/d/your_demo_file_id/view?usp=sharing'
+        pdf: '/pdfs/traffic_light_state_machine.pdf',
     },
+    {
+        id: 15,
+        title: 'Samsung Field Trip',
+        category: 'Digital Electronics',
+        date: '2024-12-20',
+        image: 'photos/samsung.jpg',
+        description: 'I practiced phone disassembly and reassembly while observing real repair techniques like glass removal at a Samsung center.<br>',
+        longDescription: 'At the Samsung repair learning center, I got hands-on experience taking apart and reassembling smartphones while observing professionals perform more advanced repairs like screen glass removal. This gave me a closer look at internal phone components and helped me understand the precision and care involved in tech hardware servicing.',
+        technologies: ['Phone Repair', 'Component Handling'],
+        pdf: '/pdfs/samsung.pdf',
+    }
 ];
 
 // Sort functions

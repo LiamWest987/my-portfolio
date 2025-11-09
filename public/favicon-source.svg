@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background with more rounded corners -->
+  <rect width="100" height="100" fill="#0f172a" rx="22"/>
+
+  <!-- Opening bracket < - better centered -->
+  <text x="7" y="63" font-family="monospace, sans-serif" font-size="40" font-weight="bold" fill="#64748b">&lt;</text>
+
+  <!-- LW in center - perfectly centered -->
+  <text x="50" y="61" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#f8fafc" text-anchor="middle" dominant-baseline="middle">LW</text>
+
+  <!-- Closing bracket /> - better aligned -->
+  <text x="68" y="63" font-family="monospace, sans-serif" font-size="40" font-weight="bold" fill="#38bdf8">/&gt;</text>
+</svg>

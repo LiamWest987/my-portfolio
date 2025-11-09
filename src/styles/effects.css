@@ -1,0 +1,257 @@
+/**
+ * Animated Background Effects
+ * Gradient orbs, grid patterns, and dot patterns
+ */
+
+/* ===== BACKGROUND ANIMATION CONTAINER ===== */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-background);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Base gradient background */
+.background-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 53, 97, 0.05) 0%,
+    var(--background) 50%,
+    rgba(230, 169, 85, 0.05) 100%
+  );
+}
+
+/* ===== GRADIENT ORBS ===== */
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  opacity: 0.3;
+  animation: float 20s ease-in-out infinite;
+}
+
+.gradient-orb-1 {
+  top: 10%;
+  left: 10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  animation:
+    float 15s ease-in-out infinite,
+    pulse 8s ease-in-out infinite;
+}
+
+.gradient-orb-2 {
+  bottom: 10%;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  animation:
+    float 20s ease-in-out infinite reverse,
+    pulse 10s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.gradient-orb-3 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+  animation:
+    float 18s ease-in-out infinite,
+    pulse 12s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* ===== GRID PATTERN ===== */
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===== DOT PATTERN ===== */
+.dot-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== UTILITY ANIMATION CLASSES ===== */
+.animate-fade-in {
+  animation: fadeIn var(--transition-medium) ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft var(--transition-medium) ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight var(--transition-medium) ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--transition-medium) ease-out;
+}
+
+/* Stagger animations for lists */
+.stagger-animation > * {
+  opacity: 0;
+  animation: fadeIn var(--transition-medium) ease-out forwards;
+}
+
+.stagger-animation > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-animation > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-animation > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-animation > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-animation > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-animation > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.stagger-animation > *:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.stagger-animation > *:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.stagger-animation > *:nth-child(9) {
+  animation-delay: 0.9s;
+}
+
+/* ===== HERO SECTION BACKGROUND ===== */
+.hero-background {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 53, 97, 0.05) 0%,
+    var(--background) 50%,
+    rgba(230, 169, 85, 0.05) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .gradient-orb {
+    animation: none;
+  }
+}

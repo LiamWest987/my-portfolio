@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Y638Y5ZJGN"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-Y638Y5ZJGN");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects</title>
+    <link rel="stylesheet" href="/src/styles/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="background-animation">
+      <div class="wave"></div>
+      <div class="geometric-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-content">
+        <a href="home" class="logo">Liam West</a>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="home">Home</a></li>
+            <li><a href="projects">Projects</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section id="projects" class="projects">
+        <div class="projects-container">
+          <div class="projects-header">
+            <h1>Featured Projects</h1>
+            <p class="projects-subtitle">
+              A collection of my most impactful work
+            </p>
+            <div class="sort-controls">
+              <button class="sort-button active" data-sort="dateDesc">
+                Newest First
+              </button>
+              <button class="sort-button" data-sort="dateAsc">
+                Oldest First
+              </button>
+              <button class="sort-button" data-sort="nameAsc">Name A-Z</button>
+              <button class="sort-button" data-sort="nameDesc">Name Z-A</button>
+              <div class="category-filter">
+                <button class="sort-button category-button">
+                  Category
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="category-dropdown">
+                  <button class="category-option active" data-category="all">
+                    All Categories
+                  </button>
+                  <button
+                    class="category-option"
+                    data-category="Digital Electronics"
+                  >
+                    Digital Electronics
+                  </button>
+                  <button class="category-option" data-category="Unity VR">
+                    Unity VR
+                  </button>
+                  <button class="category-option" data-category="PLTW POE">
+                    PLTW POE
+                  </button>
+                  <button
+                    class="category-option"
+                    data-category="PLTW Aerospace"
+                  >
+                    PLTW Aerospace
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-grid">
+            <!-- Projects will be dynamically added here -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="project-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <!-- Modal content will be dynamically added here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/2eadd46ea7.js"></script>
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-links a");
+        // Extract the current page from the URL path
+        let currentPage = window.location.pathname.split("/").pop();
+        currentPage = currentPage.replace(/\.html+$/g, ""); // Ensure we only remove one .html if it exists
+
+        // Default to "home" for the home page
+        if (currentPage === "") {
+          currentPage = "home";
+        }
+
+        navLinks.forEach((link) => {
+          // Get the link's href and remove .html
+          let linkHref = link.getAttribute("href").replace(".html", "");
+          // Extract the last segment of the href (handles absolute/relative paths)
+          let linkPage = linkHref.split("/").pop();
+
+          // Handle home page links (empty segment or "/")
+          if (linkPage === "") {
+            linkPage = "home";
+          }
+
+          // Compare and toggle the 'active' class
+          if (linkPage === currentPage) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      });
+    </script>
+
+    <script>
+      if (window.location.pathname.includes(".html")) {
+        const newPath = window.location.pathname.replace(/\.html+/g, ""); // Removes multiple .html occurrences
+        window.history.replaceState(null, "", newPath);
+      }
+    </script>
+  </body>
+</html>

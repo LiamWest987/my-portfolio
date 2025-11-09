@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y638Y5ZJGN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Y638Y5ZJGN');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liam West - Engineering Portfolio</title>
+    <link rel="stylesheet" href="/src/styles/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="background-gradient"></div>
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+        <div class="grid-pattern"></div>
+        <div class="dot-pattern"></div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="header-content">
+            <a href="home" class="logo">
+                <span class="logo-bracket">&lt;</span>Liam West<span class="logo-accent"> /&gt;</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home" class="active">Home</a></li>
+                    <li><a href="projects">Projects</a></li>
+                    <li><a href="about">About & Skills</a></li>
+                    <li><a href="contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Theme Color Selector -->
+                <div class="theme-selector">
+                    <button class="theme-swatch" data-theme="navy" title="Navy & Amber (Default)" aria-label="Navy theme">
+                        <span class="swatch-primary" style="background: #2d3561;"></span>
+                        <span class="swatch-accent" style="background: #e6a955;"></span>
+                    </button>
+                    <button class="theme-swatch" data-theme="emerald" title="Emerald & Amber" aria-label="Emerald theme">
+                        <span class="swatch-primary" style="background: #047857;"></span>
+                        <span class="swatch-accent" style="background: #f59e0b;"></span>
+                    </button>
+                    <button class="theme-swatch" data-theme="purple" title="Purple & Pink" aria-label="Purple theme">
+                        <span class="swatch-primary" style="background: #7c3aed;"></span>
+                        <span class="swatch-accent" style="background: #ec4899;"></span>
+                    </button>
+                    <button class="theme-swatch" data-theme="slate" title="Slate & Blue" aria-label="Slate theme">
+                        <span class="swatch-primary" style="background: #334155;"></span>
+                        <span class="swatch-accent" style="background: #0ea5e9;"></span>
+                    </button>
+                </div>
+
+                <!-- Dark Mode Toggle -->
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-badge">
+                    Engineering & VR Development Portfolio
+                </div>
+
+                <h1 class="hero-title">
+                    Hi, I'm <span class="highlight">Liam West</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Engineering student driving <span class="accent-text">innovation and excellence</span> through circuit design, aerospace systems, and immersive VR development
+                </p>
+
+                <div class="hero-actions">
+                    <a href="projects" class="button button-primary button-lg">
+                        View My Work
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a id="home-resume-link" href="/pdfs/resume.pdf" class="button button-outline button-lg" download>
+                        Download Resume
+                    </a>
+                </div>
+
+                <div class="hero-social-links">
+                    <a id="home-linkedin-link" href="https://www.linkedin.com/in/liam-west-/" target="_blank" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a id="home-email-link" href="#" data-email-user="liamwest987" data-email-domain="gmail.com" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section" style="background: var(--secondary);">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 3rem;">
+                    <h2 style="font-size: 2rem; font-weight: var(--font-weight-bold); margin-bottom: 1rem;">About Me</h2>
+                    <p class="text-muted" style="max-width: 42rem; margin: 0 auto;">
+                        Engineering student passionate about circuit design, aerospace systems, and VR development. I combine technical expertise with creativity to build innovative solutions that push the boundaries of technology and learning.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                            <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                        </svg>
+                        <h3 class="value-title">Technical Excellence</h3>
+                        <p class="value-description">Mastering circuit design, digital electronics, and aerospace engineering fundamentals</p>
+                    </div>
+
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <h3 class="value-title">Innovation Focus</h3>
+                        <p class="value-description">Developing cutting-edge VR simulations and immersive training experiences</p>
+                    </div>
+
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <h3 class="value-title">Collaborative Problem-Solving</h3>
+                        <p class="value-description">Working with teams to tackle complex engineering challenges and deliver real-world solutions</p>
+                    </div>
+
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        <h3 class="value-title">Continuous Learning</h3>
+                        <p class="value-description">Constantly exploring new technologies and expanding skills in electronics, aerospace, and software development</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section id="featured-projects" class="section">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 3rem;">
+                    <h2 style="font-size: 2rem; font-weight: var(--font-weight-bold); margin-bottom: 1rem;">Featured Projects</h2>
+                    <p class="text-muted" style="max-width: 42rem; margin: 0 auto;">
+                        Highlights from my work in digital electronics, aerospace engineering, and VR development
+                    </p>
+                </div>
+
+                <div class="project-grid" id="featured-grid" style="margin-bottom: 2rem;">
+                    <!-- Populated by JavaScript -->
+                </div>
+
+                <div class="text-center">
+                    <a href="projects" class="button button-primary button-lg">
+                        View All Projects
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--secondary); border-top: 1px solid var(--border-color); padding: 3rem 0 2rem;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 2.5rem;">
+                <!-- About Section -->
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: var(--font-weight-bold); margin-bottom: 1rem; color: var(--text-primary);">
+                        <span class="logo-bracket">&lt;</span>Liam West<span class="logo-accent"> /&gt;</span>
+                    </h3>
+                    <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+                        Engineering student passionate about digital electronics, VR development, and aerospace technology.
+                    </p>
+                    <div style="display: flex; gap: 0.75rem;">
+                        <a id="footer-linkedin-link" href="https://www.linkedin.com/in/liam-west-/" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 0.5rem; background: var(--background); border: 1px solid var(--border-color); color: var(--text-primary); transition: all 0.2s;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a id="footer-email-link" href="#" data-email-user="liamwest987" data-email-domain="gmail.com" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 0.5rem; background: var(--background); border: 1px solid var(--border-color); color: var(--text-primary); transition: all 0.2s;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 style="font-size: 1rem; font-weight: var(--font-weight-semibold); margin-bottom: 1rem; color: var(--text-primary);">Quick Links</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><a href="home" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Home</a></li>
+                        <li><a href="projects" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Projects</a></li>
+                        <li><a href="about" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">About & Skills</a></li>
+                        <li><a href="contact" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Specialties -->
+                <div>
+                    <h3 style="font-size: 1rem; font-weight: var(--font-weight-semibold); margin-bottom: 1rem; color: var(--text-primary);">Specialties</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li style="color: var(--text-muted);">Digital Electronics</li>
+                        <li style="color: var(--text-muted);">Unity VR Development</li>
+                        <li style="color: var(--text-muted);">Aerospace Engineering</li>
+                        <li style="color: var(--text-muted);">Circuit Design</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div style="padding-top: 2rem; border-top: 1px solid var(--border-color); text-align: center;">
+                <p id="footer-copyright" style="margin: 0; color: var(--text-muted); font-size: 0.875rem;">
+                    © 2024 Liam West. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-container">
+            <!-- Content populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/js/dark-mode.js"></script>
+    <script type="module" src="/src/js/home.js"></script>
+    <script src="/src/js/script.js"></script>
+
+    <script type="module">
+        import { fetchContact } from '/src/js/sanity.js';
+
+        // Load contact data from Sanity
+        async function loadContactData() {
+            try {
+                const contact = await fetchContact();
+                if (contact) {
+                    // Update resume link
+                    if (contact.resume) {
+                        document.getElementById('home-resume-link').href = contact.resume;
+                    }
+
+                    // Update hero LinkedIn link
+                    if (contact.linkedinUrl) {
+                        document.getElementById('home-linkedin-link').href = contact.linkedinUrl;
+                    }
+
+                    // Update hero email link with obfuscation
+                    if (contact.email) {
+                        const homeEmailLink = document.getElementById('home-email-link');
+                        const [user, domain] = contact.email.split('@');
+                        homeEmailLink.setAttribute('data-email-user', user);
+                        homeEmailLink.setAttribute('data-email-domain', domain);
+                    }
+
+                    // Update footer LinkedIn link
+                    if (contact.linkedinUrl) {
+                        document.getElementById('footer-linkedin-link').href = contact.linkedinUrl;
+                    }
+
+                    // Update footer email link with obfuscation
+                    if (contact.email) {
+                        const footerEmailLink = document.getElementById('footer-email-link');
+                        const [user, domain] = contact.email.split('@');
+                        footerEmailLink.setAttribute('data-email-user', user);
+                        footerEmailLink.setAttribute('data-email-domain', domain);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading contact data:', error);
+            }
+        }
+
+        // Update copyright year to current year
+        function updateCopyrightYear() {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('footer-copyright').textContent = `© ${currentYear} Liam West. All rights reserved.`;
+        }
+
+        // Load contact data and update year on page load
+        loadContactData();
+        updateCopyrightYear();
+    </script>
+
+    <script>
+        // Active nav link highlighting
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelectorAll(".nav-links a");
+            let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
+
+            if (currentPage === "") {
+                currentPage = "home";
+            }
+
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute("href").replace(".html", "");
+                let linkPage = linkHref.split("/").pop();
+
+                if (linkPage === "") {
+                    linkPage = "home";
+                }
+
+                if (linkPage === currentPage) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+
+            // Email obfuscation - reconstruct mailto links on click
+            const homeEmailLink = document.getElementById('home-email-link');
+            const footerEmailLink = document.getElementById('footer-email-link');
+
+            [homeEmailLink, footerEmailLink].forEach(link => {
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const user = this.getAttribute('data-email-user');
+                        const domain = this.getAttribute('data-email-domain');
+                        window.location.href = 'mailto:' + user + '@' + domain;
+                    });
+                }
+            });
+        });
+
+        // Remove .html from URL
+        if (window.location.pathname.includes(".html")) {
+            const newPath = window.location.pathname.replace(/\.html+/g, "");
+            window.history.replaceState(null, "", newPath);
+        }
+    </script>
+</body>
+</html>

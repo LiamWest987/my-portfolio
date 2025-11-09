@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y638Y5ZJGN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Y638Y5ZJGN');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Liam West</title>
+    <link rel="stylesheet" href="/src/styles/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="background-gradient"></div>
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+        <div class="grid-pattern"></div>
+        <div class="dot-pattern"></div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="header-content">
+            <a href="home" class="logo">
+                <span class="logo-bracket">&lt;</span>Portfolio<span class="logo-accent"> /&gt;</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home">Home</a></li>
+                    <li><a href="projects" class="active">Projects</a></li>
+                    <li><a href="about">About & Skills</a></li>
+                    <li><a href="contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">All Projects</h1>
+                    <p class="page-description">
+                        Explore my portfolio of <span id="project-count">8</span> product management and industrial engineering initiatives
+                    </p>
+                </div>
+
+                <!-- Controls Bar -->
+                <div class="controls-bar">
+                    <!-- Search Input -->
+                    <div class="search-wrapper">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input
+                            type="text"
+                            class="search-input"
+                            placeholder="Search projects, tags, or technologies..."
+                            id="project-search"
+                        />
+                    </div>
+
+                    <!-- Filter and Sort Controls -->
+                    <div class="filter-controls">
+                        <!-- Category Dropdown -->
+                        <div class="dropdown category-filter">
+                            <button class="dropdown-button category-button">
+                                <span class="dropdown-label">All Categories</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="dropdown-content category-dropdown">
+                                <button class="dropdown-item active" data-category="all">All Categories</button>
+                                <button class="dropdown-item" data-category="Digital Electronics">Digital Electronics</button>
+                                <button class="dropdown-item" data-category="Unity VR">Unity VR</button>
+                                <button class="dropdown-item" data-category="PLTW POE">PLTW POE</button>
+                                <button class="dropdown-item" data-category="PLTW Aerospace">PLTW Aerospace</button>
+                            </div>
+                        </div>
+
+                        <!-- Sort Dropdown -->
+                        <div class="dropdown sort-filter">
+                            <button class="dropdown-button sort-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <line x1="6" y1="12" x2="18" y2="12"></line>
+                                    <line x1="9" y1="18" x2="15" y2="18"></line>
+                                </svg>
+                                <span class="dropdown-label">Newest First</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="dropdown-content sort-dropdown">
+                                <button class="dropdown-item active" data-sort="dateDesc">Newest First</button>
+                                <button class="dropdown-item" data-sort="dateAsc">Oldest First</button>
+                                <button class="dropdown-item" data-sort="nameAsc">Name A-Z</button>
+                                <button class="dropdown-item" data-sort="nameDesc">Name Z-A</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Count -->
+                <div class="results-info">
+                    <p id="results-count">Showing 8 of 8 projects</p>
+                </div>
+
+                <!-- Project Grid (populated by JavaScript) -->
+                <div class="project-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal-backdrop">
+        <div class="modal-container">
+            <!-- Content populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/js/dark-mode.js"></script>
+    <script type="module" src="/src/js/main.js"></script>
+    <script src="/src/js/script.js"></script>
+
+    <script>
+        // Active nav link highlighting
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelectorAll(".nav-links a");
+            let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
+
+            if (currentPage === "") {
+                currentPage = "home";
+            }
+
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute("href").replace(".html", "");
+                let linkPage = linkHref.split("/").pop();
+
+                if (linkPage === "") {
+                    linkPage = "home";
+                }
+
+                if (linkPage === currentPage) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+
+            // Dropdown functionality
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('.dropdown-button');
+                const content = dropdown.querySelector('.dropdown-content');
+
+                if (button && content) {
+                    button.addEventListener('click', (e) => {
+                        e.stopPropagation();
+
+                        // Close all other dropdowns
+                        dropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.querySelector('.dropdown-content')?.classList.remove('show');
+                            }
+                        });
+
+                        // Toggle this dropdown
+                        content.classList.toggle('show');
+                    });
+
+                    // Handle dropdown item clicks
+                    content.querySelectorAll('.dropdown-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            // Update active state
+                            content.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('active'));
+                            item.classList.add('active');
+
+                            // Update button label
+                            const label = button.querySelector('.dropdown-label');
+                            if (label) {
+                                label.textContent = item.textContent;
+                            }
+
+                            // Close dropdown
+                            content.classList.remove('show');
+                        });
+                    });
+                }
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', () => {
+                dropdowns.forEach(dropdown => {
+                    dropdown.querySelector('.dropdown-content')?.classList.remove('show');
+                });
+            });
+        });
+
+        // Remove .html from URL
+        if (window.location.pathname.includes(".html")) {
+            const newPath = window.location.pathname.replace(/\.html+/g, "");
+            window.history.replaceState(null, "", newPath);
+        }
+    </script>
+</body>
+</html>

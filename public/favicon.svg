@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#0f172a" rx="16"/>
+
+  <!-- Opening bracket < -->
+  <text x="10" y="70" font-family="monospace, sans-serif" font-size="48" font-weight="bold" fill="#64748b">&lt;</text>
+
+  <!-- LW in center -->
+  <text x="50" y="68" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#f8fafc" text-anchor="middle">LW</text>
+
+  <!-- Closing bracket /> -->
+  <text x="67" y="70" font-family="monospace, sans-serif" font-size="48" font-weight="bold" fill="#38bdf8">/&gt;</text>
+</svg>

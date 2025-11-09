@@ -2,7 +2,21 @@
   "rewrites": [
     { "source": "/home", "destination": "/home.html" },
     { "source": "/projects", "destination": "/projects.html" },
-    { "source": "/", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/pdfs/:file", "destination": "https://cdn.sanity.io/files/40f0qafr/portfolio/:file" }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studio.(?<domain>.*)"
+        }
+      ],
+      "destination": "http://localhost:5174/:path*",
+      "permanent": false
+    }
   ],
   "cleanUrls": true,
   "trailingSlash": false

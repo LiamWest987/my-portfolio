@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y638Y5ZJGN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Y638Y5ZJGN');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & Skills - Liam West</title>
+    <link rel="stylesheet" href="/src/styles/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="background-gradient"></div>
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+        <div class="grid-pattern"></div>
+        <div class="dot-pattern"></div>
+    </div>
+
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Section -->
+        <section id="about" class="section" style="background: var(--secondary); padding-top: 5rem;">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 3rem;">
+                    <h2 style="font-size: 2rem; font-weight: var(--font-weight-bold); margin-bottom: 1rem;">About Me</h2>
+                    <p class="text-muted" style="max-width: 42rem; margin: 0 auto;">
+                        Engineering student passionate about circuit design, aerospace systems, and VR development. I combine technical expertise with creativity to build innovative solutions that push the boundaries of technology and learning.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                            <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                        </svg>
+                        <h3 class="value-title">Technical Excellence</h3>
+                        <p class="value-description">Mastering circuit design, digital electronics, and aerospace engineering fundamentals</p>
+                    </div>
+
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <h3 class="value-title">Innovation Focus</h3>
+                        <p class="value-description">Developing cutting-edge VR simulations and immersive training experiences</p>
+                    </div>
+
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <h3 class="value-title">Collaborative Problem-Solving</h3>
+                        <p class="value-description">Working with teams to tackle complex engineering challenges and deliver real-world solutions</p>
+                    </div>
+
+                    <div class="value-card">
+                        <svg class="value-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        <h3 class="value-title">Continuous Learning</h3>
+                        <p class="value-description">Constantly exploring new technologies and expanding skills in electronics, aerospace, and software development</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section with Tabs -->
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="text-center" style="margin-bottom: 3rem;">
+                    <h2 style="font-size: 2rem; font-weight: var(--font-weight-bold); margin-bottom: 1rem;">Skills & Experience</h2>
+                    <p class="text-muted" style="max-width: 42rem; margin: 0 auto;">
+                        Combining engineering expertise with creative problem-solving to deliver innovative solutions
+                    </p>
+                </div>
+
+                <div class="tabs">
+                    <!-- Tab Navigation -->
+                    <div class="tabs-list">
+                        <button class="tabs-trigger active" data-tab="skills-content">Skills</button>
+                        <button class="tabs-trigger" data-tab="education-content">Education</button>
+                        <button class="tabs-trigger" data-tab="experience-content">Experience</button>
+                        <button class="tabs-trigger" data-tab="achievements-content">Awards</button>
+                    </div>
+
+                    <!-- Skills Tab -->
+                    <div id="skills-content" class="tabs-content active">
+                        <div class="tabs-content-grid">
+                            <div class="skill-category-card">
+                                <h3 class="skill-category-title">Digital Electronics</h3>
+                                <div class="skill-badges">
+                                    <span class="badge badge-secondary">Circuit Design</span>
+                                    <span class="badge badge-secondary">Logic Gates</span>
+                                    <span class="badge badge-secondary">Multisim</span>
+                                    <span class="badge badge-secondary">Boolean Algebra</span>
+                                    <span class="badge badge-secondary">Soldering</span>
+                                    <span class="badge badge-secondary">555 Timers</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category-card">
+                                <h3 class="skill-category-title">VR Development</h3>
+                                <div class="skill-badges">
+                                    <span class="badge badge-secondary">Unity</span>
+                                    <span class="badge badge-secondary">XR Toolkit</span>
+                                    <span class="badge badge-secondary">C# Scripting</span>
+                                    <span class="badge badge-secondary">VR Interaction</span>
+                                    <span class="badge badge-secondary">Scene Design</span>
+                                    <span class="badge badge-secondary">Prototyping</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category-card">
+                                <h3 class="skill-category-title">Aerospace Engineering</h3>
+                                <div class="skill-badges">
+                                    <span class="badge badge-secondary">Aerodynamics</span>
+                                    <span class="badge badge-secondary">Flight Testing</span>
+                                    <span class="badge badge-secondary">CAD Design</span>
+                                    <span class="badge badge-secondary">Aery Simulation</span>
+                                    <span class="badge badge-secondary">Structural Analysis</span>
+                                    <span class="badge badge-secondary">Prototyping</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category-card">
+                                <h3 class="skill-category-title">Robotics & Automation</h3>
+                                <div class="skill-badges">
+                                    <span class="badge badge-secondary">VEX Robotics</span>
+                                    <span class="badge badge-secondary">Blockly</span>
+                                    <span class="badge badge-secondary">Sensor Integration</span>
+                                    <span class="badge badge-secondary">Motor Control</span>
+                                    <span class="badge badge-secondary">Biomimicry</span>
+                                    <span class="badge badge-secondary">System Design</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category-card">
+                                <h3 class="skill-category-title">Engineering Tools</h3>
+                                <div class="skill-badges">
+                                    <span class="badge badge-secondary">Multisim</span>
+                                    <span class="badge badge-secondary">Tinkercad</span>
+                                    <span class="badge badge-secondary">SSA Testing</span>
+                                    <span class="badge badge-secondary">Circuit Analysis</span>
+                                    <span class="badge badge-secondary">Simulation Software</span>
+                                    <span class="badge badge-secondary">Data Analysis</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category-card">
+                                <h3 class="skill-category-title">Soft Skills</h3>
+                                <div class="skill-badges">
+                                    <span class="badge badge-secondary">Problem Solving</span>
+                                    <span class="badge badge-secondary">Team Collaboration</span>
+                                    <span class="badge badge-secondary">Project Management</span>
+                                    <span class="badge badge-secondary">Technical Writing</span>
+                                    <span class="badge badge-secondary">Critical Thinking</span>
+                                    <span class="badge badge-secondary">Communication</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Tab -->
+                    <div id="education-content" class="tabs-content">
+                        <div class="tabs-content-list">
+                            <div class="timeline-card">
+                                <div class="timeline-card-inner">
+                                    <div class="timeline-icon education">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-header">
+                                            <div>
+                                                <h3 class="timeline-title">High School Engineering Track</h3>
+                                                <p class="timeline-subtitle">Frisco Independent School District</p>
+                                            </div>
+                                            <span class="badge">Current</span>
+                                        </div>
+                                        <p class="timeline-description">
+                                            Specialized coursework in Digital Electronics, Aerospace Engineering (PLTW), and Principles of Engineering. Gained hands-on experience with circuit design, logic systems, CAD modeling, and engineering principles.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-card">
+                                <div class="timeline-card-inner">
+                                    <div class="timeline-icon education">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-header">
+                                            <div>
+                                                <h3 class="timeline-title">PLTW Engineering Program</h3>
+                                                <p class="timeline-subtitle">Project Lead The Way</p>
+                                            </div>
+                                            <span class="badge badge-outline">2023-2024</span>
+                                        </div>
+                                        <p class="timeline-description">
+                                            Completed coursework in Principles of Engineering (POE) and Aerospace Engineering. Projects included tensile testing, marble sorting automation, glider design, and flight simulation analysis.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Tab -->
+                    <div id="experience-content" class="tabs-content">
+                        <div class="tabs-content-list">
+                            <div class="timeline-card">
+                                <div class="timeline-card-inner">
+                                    <div class="timeline-icon experience">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-header">
+                                            <div>
+                                                <h3 class="timeline-title">VR Developer - Crime Scene Simulation</h3>
+                                                <p class="timeline-subtitle">Collaboration with Texas A&M</p>
+                                            </div>
+                                            <span class="badge badge-outline">2024-Present</span>
+                                        </div>
+                                        <p class="timeline-description">
+                                            Developing immersive VR training simulation for crime scene investigation with team of FISD students and A&M professor. Designing interactive mechanics for forensic evidence collection and analysis in realistic virtual environments.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-card">
+                                <div class="timeline-card-inner">
+                                    <div class="timeline-icon experience">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-header">
+                                            <div>
+                                                <h3 class="timeline-title">Engineering Student</h3>
+                                                <p class="timeline-subtitle">Digital Electronics & Aerospace</p>
+                                            </div>
+                                            <span class="badge badge-outline">2023-Present</span>
+                                        </div>
+                                        <p class="timeline-description">
+                                            Completed 15+ engineering projects including hardware random number generators, voting machines, digital timers, glider designs, and robotic marble sorters. Gained expertise in circuit design, logic systems, and aerospace principles.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements Tab -->
+                    <div id="achievements-content" class="tabs-content">
+                        <div class="tabs-content-list">
+                            <div class="achievement-list-card">
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="8" r="6"></circle>
+                                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="achievement-text">
+                                        Developed comprehensive VR crime scene simulation selected for collaboration with Texas A&M professor and law enforcement training program
+                                    </p>
+                                </div>
+
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="8" r="6"></circle>
+                                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="achievement-text">
+                                        Successfully completed 15+ engineering projects spanning digital electronics, aerospace, and robotics with documented results
+                                    </p>
+                                </div>
+
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="8" r="6"></circle>
+                                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="achievement-text">
+                                        Mastered advanced circuit design techniques including Boolean algebra, Karnaugh mapping, and AOI/NAND/NOR logic implementations
+                                    </p>
+                                </div>
+
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="8" r="6"></circle>
+                                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="achievement-text">
+                                        Demonstrated leadership in team projects, coordinating with peers on complex automation and simulation projects
+                                    </p>
+                                </div>
+
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="8" r="6"></circle>
+                                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="achievement-text">
+                                        Built portfolio of documented engineering work demonstrating problem-solving, iteration, and continuous improvement
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/js/theme-manager.js"></script>
+    <script type="module" src="/src/js/tabs.js"></script>
+    <script type="module" src="/src/js/about.js"></script>
+    <script src="/src/js/script.js"></script>
+
+    <script>
+        // Active nav link highlighting
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelectorAll(".nav-links a");
+            let currentPage = window.location.pathname.split("/").pop().replace(".html", "");
+
+            if (currentPage === "") {
+                currentPage = "home";
+            }
+
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute("href").replace(".html", "");
+                let linkPage = linkHref.split("/").pop();
+
+                if (linkPage === "") {
+                    linkPage = "home";
+                }
+
+                if (linkPage === currentPage) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+        });
+
+        // Remove .html from URL
+        if (window.location.pathname.includes(".html")) {
+            const newPath = window.location.pathname.replace(/\.html+/g, "");
+            window.history.replaceState(null, "", newPath);
+        }
+    </script>
+</body>
+</html>

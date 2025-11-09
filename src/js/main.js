@@ -1,5 +1,7 @@
-// Project data
-const projects = [
+import { fetchProjects } from './sanity.js';
+
+// Fallback project data (used if Sanity fails to load)
+const fallbackProjects = [
     {
         id: 1,
         title: 'Random Number Generator',
@@ -169,6 +171,38 @@ const projects = [
     }
 ];
 
+// Global projects variable
+let projects = [];
+
+// Load projects from Sanity or use fallback
+async function loadProjects() {
+    try {
+        const sanityProjects = await fetchProjects();
+        if (sanityProjects && sanityProjects.length > 0) {
+            projects = sanityProjects.map((project, index) => ({
+                id: index + 1,
+                title: project.title,
+                category: project.category,
+                date: project.date,
+                image: project.image,
+                description: project.description,
+                longDescription: project.longDescription,
+                technologies: project.technologies || [],
+                pdf: project.pdf,
+                demo: project.demo
+            }));
+            console.log('✅ Projects loaded from Sanity CMS');
+        } else {
+            projects = fallbackProjects;
+            console.log('⚠️ Using fallback project data');
+        }
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        projects = fallbackProjects;
+        console.log('⚠️ Using fallback project data');
+    }
+}
+
 // Sort functions
 const sortFunctions = {
     dateDesc: (a, b) => new Date(b.date) - new Date(a.date),
@@ -315,12 +349,15 @@ function closeModal() {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load projects first
+    await loadProjects();
+
     // Get initial parameters from URL
     const { sort, category } = getUrlParams();
     let currentSort = sort;
     let currentCategory = category;
-    
+
     renderProjects(currentSort, currentCategory);
     
     // Setup sort controls

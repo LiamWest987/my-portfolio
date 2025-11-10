@@ -85,7 +85,7 @@ describe('Header', () => {
   it('has correct link hrefs', () => {
     renderWithTheme(<Header />)
 
-    expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/home')
+    expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/')
     expect(screen.getByText('Projects').closest('a')).toHaveAttribute('href', '/projects')
     expect(screen.getByText('About & Skills').closest('a')).toHaveAttribute('href', '/about')
     expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact')
@@ -94,6 +94,6 @@ describe('Header', () => {
   it('logo links to home page', () => {
     renderWithTheme(<Header />)
     const logo = screen.getByText(/Liam West/).closest('a')
-    expect(logo).toHaveAttribute('href', '/home')
+    expect(logo).toHaveAttribute('href', '/')
   })
 })

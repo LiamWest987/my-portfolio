@@ -47,7 +47,7 @@ describe('Footer', () => {
 
   it('site map links have correct hrefs', () => {
     render(<Footer />)
-    expect(screen.getByText('Homepage').closest('a')).toHaveAttribute('href', '/home')
+    expect(screen.getByText('Homepage').closest('a')).toHaveAttribute('href', '/')
     expect(screen.getByText('About & Skills').closest('a')).toHaveAttribute('href', '/about')
     expect(screen.getByText('Projects').closest('a')).toHaveAttribute('href', '/projects')
     expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact')
@@ -118,7 +118,7 @@ describe('Footer', () => {
     render(<Footer />)
     const logoElements = screen.getAllByText(/Liam West/)
     const logo = logoElements[0]?.closest('a')
-    expect(logo).toHaveAttribute('href', '/home')
+    expect(logo).toHaveAttribute('href', '/')
   })
 
   it('renders section headings', () => {

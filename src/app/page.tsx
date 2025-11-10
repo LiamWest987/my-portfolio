@@ -78,8 +78,7 @@ export default function Home() {
           {/* Background Pattern */}
           <div className="dot-pattern text-primary" />
 
-          <Container>
-            <HeroSection
+          <HeroSection
               badge="Engineering & VR Development Portfolio"
               title={
                 <>
@@ -173,7 +172,6 @@ export default function Home() {
                 },
               ]}
             />
-          </Container>
         </section>
 
         {/* About Section */}

@@ -1,0 +1,34 @@
+/* ===== BADGE COMPONENT ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.secondary {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  text-transform: capitalize;
+}
+
+.outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.accent {
+  background: rgba(230, 169, 85, 0.1);
+  color: var(--accent-dark);
+  border: 1px solid rgba(230, 169, 85, 0.2);
+}

@@ -1,0 +1,21 @@
+// Shadcn/ui atomic components (base layer)
+export * from './atoms'
+
+// Composite components (molecules/organisms) - backward compatible API
+export { Button } from './Button'
+export { Badge } from './Badge'
+export { Container } from './Container'
+export { Section } from './Section'
+export { HeroSection } from './HeroSection'
+export { ProjectCard } from './ProjectCard'
+export { ProjectModal } from './ProjectModal'
+export { default as SearchInput } from './SearchInput'
+export { Dropdown } from './Dropdown'
+export { ControlsBar } from './ControlsBar'
+export { PageHeader } from './PageHeader'
+export { ResultsInfo } from './ResultsInfo'
+export { default as ProjectGrid } from './ProjectGrid'
+export { default as ValueCard } from './ValueCard'
+export { SectionHeader } from './SectionHeader'
+export { SkillCategoryCard } from './SkillCategoryCard'
+export { TimelineItem } from './TimelineItem'

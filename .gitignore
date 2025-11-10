@@ -12,10 +12,16 @@ dist
 dist-ssr
 *.local
 
+# Next.js
+.next/
+out/
+next-env.d.ts
+
 # Environment variables
 .env
 .env.local
 .env.production
+sanity/.env
 
 # Editor directories and files
 .vscode/*
@@ -31,3 +37,7 @@ dist-ssr
 
 # Archive folder (optional - keep out of version control)
 archive/
+
+# Test coverage
+coverage/
+.vitest/

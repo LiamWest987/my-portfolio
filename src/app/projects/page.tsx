@@ -2,7 +2,26 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { fetchProjects } from '@/lib/sanity/client'
-import { Section, Container, PageHeader, SearchInput, Dropdown, ControlsBar, ResultsInfo, ProjectGrid, Button } from '@/components/ui/'
+import {
+  Section,
+  Container,
+  PageHeader,
+  SearchInput,
+  Dropdown,
+  ControlsBar,
+  ResultsInfo,
+  ProjectGrid,
+  Button,
+  ProjectCard,
+} from '@/components/ui/'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/atoms/dialog'
+import { Skeleton } from '@/components/ui/atoms/skeleton'
+import { Badge } from '@/components/ui/Badge'
 
 interface Project {
   _id: string
@@ -119,12 +138,10 @@ export default function ProjectsPage() {
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project)
-    document.body.style.overflow = 'hidden'
   }
 
   const closeModal = () => {
     setSelectedProject(null)
-    document.body.style.overflow = 'auto'
   }
 
   useEffect(() => {
@@ -273,40 +290,21 @@ export default function ProjectsPage() {
             {/* Project Grid */}
             <ProjectGrid>
               {loading ? (
-                <p className="text-muted" style={{ textAlign: 'center', gridColumn: '1 / -1' }}>
-                  Loading projects...
-                </p>
+                <>
+                  {[1, 2, 3, 4, 5, 6].map(i => (
+                    <Skeleton key={i} className="h-96 w-full" />
+                  ))}
+                </>
               ) : filteredProjects.length > 0 ? (
-                filteredProjects.map((project) => (
-                  <div
+                filteredProjects.map(project => (
+                  <ProjectCard
                     key={project._id}
-                    className="project-card"
+                    project={project}
                     onClick={() => handleProjectClick(project)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    {project.image && (
-                      <div className="project-image">
-                        <img src={project.image} alt={project.title} />
-                      </div>
-                    )}
-                    <div className="project-content">
-                      <div className="project-category">{project.category}</div>
-                      <h3 className="project-title">{project.title}</h3>
-                      <p className="project-description">{project.description}</p>
-                      {project.technologies && project.technologies.length > 0 && (
-                        <div className="project-tags">
-                          {project.technologies.slice(0, 3).map((tech, index) => (
-                            <span key={index} className="tag">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                  />
                 ))
               ) : (
-                <p className="text-muted" style={{ textAlign: 'center', gridColumn: '1 / -1' }}>
+                <p className="text-muted-foreground text-center col-span-full">
                   No projects found matching your criteria.
                 </p>
               )}
@@ -315,114 +313,111 @@ export default function ProjectsPage() {
         </Section>
       </main>
 
-      {/* Project Modal */}
-      {selectedProject && (
-        <div
-          id="project-modal"
-          className="modal-backdrop"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) closeModal()
-          }}
-        >
-          <div className="modal-container">
-            <button className="modal-close" onClick={closeModal} aria-label="Close modal">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
+      {/* Project Dialog */}
+      <Dialog open={!!selectedProject} onOpenChange={(open) => !open && closeModal()}>
+        {selectedProject && (
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <Badge variant="outline" className="w-fit mb-2">
+                {selectedProject.category}
+              </Badge>
+              <DialogTitle className="text-3xl">{selectedProject.title}</DialogTitle>
+            </DialogHeader>
 
-            <div className="modal-header">
-              <div className="modal-category">{selectedProject.category}</div>
-              <h2 className="modal-title">{selectedProject.title}</h2>
-            </div>
-
-            <div className="modal-body">
-              {selectedProject.images && Array.isArray(selectedProject.images) && selectedProject.images.length > 0 && (
-                <div className="modal-gallery">
-                  {selectedProject.images.map((img, index) => (
-                    <img key={index} src={img} alt={`${selectedProject.title} ${index + 1}`} />
-                  ))}
-                </div>
-              )}
+            <div className="space-y-6 mt-4">
+              {selectedProject.images &&
+                Array.isArray(selectedProject.images) &&
+                selectedProject.images.length > 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {selectedProject.images.map((img, index) => (
+                      <img
+                        key={index}
+                        src={img}
+                        alt={`${selectedProject.title} ${index + 1}`}
+                        className="rounded-lg w-full object-cover"
+                      />
+                    ))}
+                  </div>
+                )}
 
               {selectedProject.overview && (
-                <div className="modal-section">
-                  <h3 className="modal-section-title">Overview</h3>
-                  <p className="modal-section-content">{selectedProject.overview}</p>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Overview</h3>
+                  <p className="text-muted-foreground">{selectedProject.overview}</p>
                 </div>
               )}
 
               {selectedProject.longDescription && (
-                <div className="modal-section">
-                  <h3 className="modal-section-title">Description</h3>
-                  <p className="modal-section-content">{selectedProject.longDescription}</p>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Description</h3>
+                  <p className="text-muted-foreground">{selectedProject.longDescription}</p>
                 </div>
               )}
 
-              {selectedProject.technologies && Array.isArray(selectedProject.technologies) && selectedProject.technologies.length > 0 && (
-                <div className="modal-section">
-                  <h3 className="modal-section-title">Technologies</h3>
-                  <div className="modal-tags">
-                    {selectedProject.technologies.map((tech, index) => (
-                      <span key={index} className="tag">
-                        {tech}
-                      </span>
-                    ))}
+              {selectedProject.technologies &&
+                Array.isArray(selectedProject.technologies) &&
+                selectedProject.technologies.length > 0 && (
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Technologies</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.technologies.map((tech, index) => (
+                        <Badge key={index} variant="outline">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              {selectedProject.challenges && Array.isArray(selectedProject.challenges) && selectedProject.challenges.length > 0 && (
-                <div className="modal-section">
-                  <h3 className="modal-section-title">Challenges</h3>
-                  <ul className="modal-list">
-                    {selectedProject.challenges.map((challenge, index) => (
-                      <li key={index}>{challenge}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              {selectedProject.challenges &&
+                Array.isArray(selectedProject.challenges) &&
+                selectedProject.challenges.length > 0 && (
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Challenges</h3>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      {selectedProject.challenges.map((challenge, index) => (
+                        <li key={index}>{challenge}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-              {selectedProject.outcomes && Array.isArray(selectedProject.outcomes) && selectedProject.outcomes.length > 0 && (
-                <div className="modal-section">
-                  <h3 className="modal-section-title">Outcomes</h3>
-                  <ul className="modal-list">
-                    {selectedProject.outcomes.map((outcome, index) => (
-                      <li key={index}>{outcome}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              {selectedProject.outcomes &&
+                Array.isArray(selectedProject.outcomes) &&
+                selectedProject.outcomes.length > 0 && (
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Outcomes</h3>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      {selectedProject.outcomes.map((outcome, index) => (
+                        <li key={index}>{outcome}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
               {(selectedProject.pdf || selectedProject.demo) && (
-                <div className="modal-actions">
+                <div className="flex gap-3 pt-4">
                   {selectedProject.pdf && (
                     <Button href={selectedProject.pdf} variant="primary" download>
                       Download PDF
                     </Button>
                   )}
                   {selectedProject.demo && (
-                    <Button href={selectedProject.demo} variant="outline" target="_blank" rel="noopener noreferrer">
+                    <Button
+                      href={selectedProject.demo}
+                      variant="outline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       View Demo
                     </Button>
                   )}
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      )}
+          </DialogContent>
+        )}
+      </Dialog>
     </>
   )
 }

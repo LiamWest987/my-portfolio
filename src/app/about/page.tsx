@@ -2,10 +2,16 @@
 
 import { useState, useEffect } from 'react'
 import { fetchSkills, fetchEducation, fetchExperience, fetchAwards } from '@/lib/sanity/client'
-import { Section, Container } from '@/components/ui'
+import {
+  Section,
+  Container,
+  SectionHeader,
+  SkillCategoryCard,
+  TimelineItem,
+} from '@/components/ui'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/atoms/tabs'
+import { Skeleton } from '@/components/ui/atoms/skeleton'
 import ValueCard from '@/components/ui/ValueCard'
-
-type TabType = 'skills' | 'education' | 'experience' | 'achievements'
 
 interface SkillCategory {
   _id: string
@@ -55,7 +61,6 @@ interface Award {
 }
 
 export default function AboutPage() {
-  const [activeTab, setActiveTab] = useState<TabType>('skills')
   const [skills, setSkills] = useState<SkillCategory[]>([])
   const [education, setEducation] = useState<Education[]>([])
   const [experience, setExperience] = useState<Experience[]>([])
@@ -112,22 +117,14 @@ export default function AboutPage() {
 
       <main>
         {/* About Section */}
-        <Section id="about" style={{ background: 'var(--secondary)', paddingTop: '5rem' }}>
+        <Section id="about" className="bg-secondary pt-20">
           <Container>
-            <div className="text-center" style={{ marginBottom: '3rem' }}>
-              <h2 style={{
-                fontSize: '2rem',
-                fontWeight: 'var(--font-weight-bold)',
-                marginBottom: '1rem'
-              }}>
-                About Me
-              </h2>
-              <p className="text-muted" style={{ maxWidth: '42rem', margin: '0 auto' }}>
-                Engineering student passionate about circuit design, aerospace systems, and VR development. I combine technical expertise with creativity to build innovative solutions that push the boundaries of technology and learning.
-              </p>
-            </div>
+            <SectionHeader
+              title="About Me"
+              description="Engineering student passionate about circuit design, aerospace systems, and VR development. I combine technical expertise with creativity to build innovative solutions that push the boundaries of technology and learning."
+            />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
+            <div className="grid grid-cols-1 gap-6">
               <ValueCard
                 icon={
                   <svg
@@ -219,170 +216,132 @@ export default function AboutPage() {
         {/* Skills Section with Tabs */}
         <Section id="skills">
           <Container>
-            <div className="text-center" style={{ marginBottom: '3rem' }}>
-              <h2 style={{
-                fontSize: '2rem',
-                fontWeight: 'var(--font-weight-bold)',
-                marginBottom: '1rem'
-              }}>
-                Skills & Experience
-              </h2>
-              <p className="text-muted" style={{ maxWidth: '42rem', margin: '0 auto' }}>
-                Combining engineering expertise with creative problem-solving to deliver innovative solutions
-              </p>
-            </div>
+            <SectionHeader
+              title="Skills & Experience"
+              description="Combining engineering expertise with creative problem-solving to deliver innovative solutions"
+            />
 
-            <div className="tabs">
-              {/* Tab Navigation */}
-              <div className="tabs-list">
-                <button
-                  className={`tabs-trigger ${activeTab === 'skills' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('skills')}
-                >
-                  Skills
-                </button>
-                <button
-                  className={`tabs-trigger ${activeTab === 'education' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('education')}
-                >
-                  Education
-                </button>
-                <button
-                  className={`tabs-trigger ${activeTab === 'experience' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('experience')}
-                >
-                  Experience
-                </button>
-                <button
-                  className={`tabs-trigger ${activeTab === 'achievements' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('achievements')}
-                >
-                  Awards
-                </button>
-              </div>
+            <Tabs defaultValue="skills" className="w-full">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="skills">Skills</TabsTrigger>
+                <TabsTrigger value="education">Education</TabsTrigger>
+                <TabsTrigger value="experience">Experience</TabsTrigger>
+                <TabsTrigger value="achievements">Awards</TabsTrigger>
+              </TabsList>
 
               {/* Skills Tab */}
-              <div id="skills-content" className={`tabs-content ${activeTab === 'skills' ? 'active' : ''}`}>
-                <div className="tabs-content-grid">
-                  {loading ? (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>Loading skills...</p>
-                  ) : skills.length > 0 ? (
-                    skills.map((category) => (
-                      <div key={category._id} className="skill-category-card">
-                        {category.icon && (
-                          <div className="skill-category-icon" dangerouslySetInnerHTML={{ __html: category.icon }} />
-                        )}
-                        <h3 className="skill-category-title">{category.title}</h3>
-                        <ul className="skill-list">
-                          {category.skills.map((skill, index) => (
-                            <li key={index} className="skill-item">{skill}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>No skills found.</p>
-                  )}
-                </div>
-              </div>
+              <TabsContent value="skills" className="mt-6">
+                {loading ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[1, 2, 3].map(i => (
+                      <Skeleton key={i} className="h-48 w-full" />
+                    ))}
+                  </div>
+                ) : skills.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {skills.map(category => (
+                      <SkillCategoryCard
+                        key={category._id}
+                        icon={
+                          category.icon ? (
+                            <div dangerouslySetInnerHTML={{ __html: category.icon }} />
+                          ) : undefined
+                        }
+                        title={category.title}
+                        skills={category.skills}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-center">No skills found.</p>
+                )}
+              </TabsContent>
 
               {/* Education Tab */}
-              <div id="education-content" className={`tabs-content ${activeTab === 'education' ? 'active' : ''}`}>
-                <div className="tabs-content-list">
-                  {loading ? (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>Loading education...</p>
-                  ) : education.length > 0 ? (
-                    education.map((edu) => (
-                      <div key={edu._id} className="timeline-item">
-                        <div className="timeline-header">
-                          <h3 className="timeline-title">{edu.degree}</h3>
-                          <span className="timeline-date">
-                            {formatDate(edu.startDate, edu.endDate, edu.isCurrent, edu.year)}
-                          </span>
-                        </div>
-                        <p className="timeline-subtitle">{edu.school}</p>
-                        {edu.description && (
-                          <p className="timeline-description">{edu.description}</p>
-                        )}
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>No education entries found.</p>
-                  )}
-                </div>
-              </div>
+              <TabsContent value="education" className="mt-6">
+                {loading ? (
+                  <div className="space-y-4">
+                    {[1, 2].map(i => (
+                      <Skeleton key={i} className="h-32 w-full" />
+                    ))}
+                  </div>
+                ) : education.length > 0 ? (
+                  <div className="space-y-4">
+                    {education.map(edu => (
+                      <TimelineItem
+                        key={edu._id}
+                        title={edu.degree}
+                        subtitle={edu.school}
+                        date={formatDate(edu.startDate, edu.endDate, edu.isCurrent, edu.year)}
+                        description={edu.description}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-center">No education entries found.</p>
+                )}
+              </TabsContent>
 
               {/* Experience Tab */}
-              <div id="experience-content" className={`tabs-content ${activeTab === 'experience' ? 'active' : ''}`}>
-                <div className="tabs-content-list">
-                  {loading ? (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>Loading experience...</p>
-                  ) : experience.length > 0 ? (
-                    experience.map((exp) => (
-                      <div key={exp._id} className="timeline-item">
-                        <div className="timeline-header">
-                          <h3 className="timeline-title">{exp.role}</h3>
-                          <span className="timeline-date">
-                            {formatDate(exp.startDate, exp.endDate, exp.isCurrent, undefined, exp.period)}
-                          </span>
-                        </div>
-                        <p className="timeline-subtitle">{exp.company}</p>
-                        {exp.description && (
-                          <p className="timeline-description">{exp.description}</p>
+              <TabsContent value="experience" className="mt-6">
+                {loading ? (
+                  <div className="space-y-4">
+                    {[1, 2, 3].map(i => (
+                      <Skeleton key={i} className="h-40 w-full" />
+                    ))}
+                  </div>
+                ) : experience.length > 0 ? (
+                  <div className="space-y-4">
+                    {experience.map(exp => (
+                      <TimelineItem
+                        key={exp._id}
+                        title={exp.role}
+                        subtitle={exp.company}
+                        date={formatDate(
+                          exp.startDate,
+                          exp.endDate,
+                          exp.isCurrent,
+                          undefined,
+                          exp.period
                         )}
-                        {exp.skills && exp.skills.length > 0 && (
-                          <div className="timeline-tags">
-                            {exp.skills.map((skill, index) => (
-                              <span key={index} className="tag">{skill}</span>
-                            ))}
-                          </div>
-                        )}
-                        {exp.achievements && exp.achievements.length > 0 && (
-                          <ul className="timeline-achievements">
-                            {exp.achievements.map((achievement, index) => (
-                              <li key={index}>{achievement}</li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>No experience entries found.</p>
-                  )}
-                </div>
-              </div>
+                        description={exp.description}
+                        tags={exp.skills}
+                        achievements={exp.achievements}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-center">No experience entries found.</p>
+                )}
+              </TabsContent>
 
               {/* Achievements Tab */}
-              <div id="achievements-content" className={`tabs-content ${activeTab === 'achievements' ? 'active' : ''}`}>
-                <div className="tabs-content-list">
-                  {loading ? (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>Loading awards...</p>
-                  ) : awards.length > 0 ? (
-                    awards.map((award) => (
-                      <div key={award._id} className={`timeline-item ${award.isHighlighted ? 'highlighted' : ''}`}>
-                        <div className="timeline-header">
-                          <h3 className="timeline-title">{award.title}</h3>
-                          <span className="timeline-date">{award.date || award.year}</span>
-                        </div>
-                        {award.issuer && (
-                          <p className="timeline-subtitle">{award.issuer}</p>
-                        )}
-                        {award.description && (
-                          <p className="timeline-description">{award.description}</p>
-                        )}
-                        {award.category && (
-                          <div className="timeline-tags">
-                            <span className="tag">{award.category}</span>
-                          </div>
-                        )}
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-muted" style={{ textAlign: 'center' }}>No awards found.</p>
-                  )}
-                </div>
-              </div>
-            </div>
+              <TabsContent value="achievements" className="mt-6">
+                {loading ? (
+                  <div className="space-y-4">
+                    {[1, 2, 3].map(i => (
+                      <Skeleton key={i} className="h-32 w-full" />
+                    ))}
+                  </div>
+                ) : awards.length > 0 ? (
+                  <div className="space-y-4">
+                    {awards.map(award => (
+                      <TimelineItem
+                        key={award._id}
+                        title={award.title}
+                        subtitle={award.issuer}
+                        date={(award.date || award.year) ?? ''}
+                        description={award.description}
+                        tags={award.category ? [award.category] : undefined}
+                        className={award.isHighlighted ? 'border-primary' : undefined}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-center">No awards found.</p>
+                )}
+              </TabsContent>
+            </Tabs>
           </Container>
         </Section>
       </main>

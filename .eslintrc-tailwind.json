@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "extends": [
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": ["tailwindcss"],
+  "rules": {
+    "tailwindcss/classnames-order": "warn",
+    "tailwindcss/enforces-negative-arbitrary-values": "warn",
+    "tailwindcss/enforces-shorthand": "warn",
+    "tailwindcss/migration-from-tailwind-2": "off",
+    "tailwindcss/no-arbitrary-value": "off",
+    "tailwindcss/no-contradicting-classname": "error",
+    "tailwindcss/no-custom-classname": "warn"
+  },
+  "settings": {
+    "tailwindcss": {
+      "callees": ["cn", "cva", "clsx", "classnames"],
+      "config": "tailwind.config.ts",
+      "cssFiles": [
+        "**/*.css",
+        "!**/node_modules",
+        "!**/.*",
+        "!**/dist",
+        "!**/build"
+      ],
+      "whitelist": [
+        "sr-only",
+        "not-sr-only",
+        "motion-reduce",
+        "group",
+        "group-hover"
+      ]
+    }
+  }
+}

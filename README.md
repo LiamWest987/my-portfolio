@@ -57,7 +57,7 @@ my-portfolio/
 
 ## 🎨 Customizing the Theme
 
-All design tokens (colors, spacing, typography) are centralized in [`src/styles/theme.css`](src/styles/theme.css).
+All design tokens (colors, spacing, typography) are centralized in `src/app/globals.css`.
 
 **Quick color change:**
 
@@ -68,7 +68,7 @@ All design tokens (colors, spacing, typography) are centralized in [`src/styles/
    --background: #0F172A;     /* Background color */
    ```
 
-See [THEME-GUIDE.md](THEME-GUIDE.md) for detailed customization options and pre-made color schemes.
+Customize colors in `src/app/globals.css` and `tailwind.config.ts` for detailed customization options.
 
 ## 📝 Managing Content with Sanity CMS
 
@@ -102,7 +102,7 @@ See [THEME-GUIDE.md](THEME-GUIDE.md) for detailed customization options and pre-
    ```
 3. Restart dev server - projects will now load from Sanity!
 
-See [sanity-schemas/README.md](sanity-schemas/README.md) for detailed schema setup.
+Schema files are located in the `sanity/` directory.
 
 ## 🌐 Deployment
 
@@ -128,7 +128,7 @@ See [sanity-schemas/README.md](sanity-schemas/README.md) for detailed schema set
    ```
    Or deploy to Vercel separately
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions.
+Your site will be live at your Vercel URL within minutes.
 
 ## 🛠 Tech Stack
 
@@ -159,15 +159,15 @@ npm run preview  # Preview production build locally
 
 ## 📚 Documentation
 
-- [DEPLOYMENT.md](DEPLOYMENT.md) - Complete deployment guide
-- [THEME-GUIDE.md](THEME-GUIDE.md) - Theme customization guide
-- [sanity-schemas/README.md](sanity-schemas/README.md) - CMS schema setup
+- See the deployment section above for deployment instructions
+- See `src/app/globals.css` and `tailwind.config.ts` for theming
+- See `sanity/` directory for CMS schema files
 
 ## 🤝 Environment Variables
 
 Create a `.env` file in the root directory:
 
-```env
+```bash
 VITE_SANITY_PROJECT_ID=your-project-id-here
 ```
 

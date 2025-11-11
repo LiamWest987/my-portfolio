@@ -42,3 +42,12 @@ archive/
 coverage/
 .vitest/
 tsconfig.tsbuildinfo
+
+# TypeDoc generated documentation
+docs/
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+*.log

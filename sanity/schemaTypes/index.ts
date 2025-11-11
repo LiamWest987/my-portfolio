@@ -3,11 +3,13 @@ import skillCategory from './skillCategory.js'
 import education from './education.js'
 import experience from './experience.js'
 import award from './award.js'
+import contact from './contact.js'
 
 export const schemaTypes = [
   project,
   skillCategory,
   education,
   experience,
-  award
+  award,
+  contact
 ]

@@ -272,14 +272,62 @@ describe('Header', () => {
     // Menu should be open
     expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'true')
 
-    // Click backdrop (div with bg-background/80 class)
-    const backdrop = document.querySelector('.bg-background\\/80')
+    // Click backdrop (div with bg-black/50 class)
+    const backdrop = document.querySelector('.bg-black\\/50')
     if (backdrop) {
       await user.click(backdrop as HTMLElement)
     }
 
     // Menu should be closed
     expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('renders visible backdrop when mobile menu is open', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(<Header />)
+
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+
+    // Initially no visible backdrop
+    const backdropClosed = document.querySelector('.bg-black\\/50')
+    expect(backdropClosed?.parentElement).toHaveClass('invisible')
+
+    // Open menu
+    await user.click(mobileMenuButton)
+
+    // Backdrop should be visible
+    const backdropOpen = document.querySelector('.bg-black\\/50')
+    expect(backdropOpen?.parentElement).toHaveClass('visible')
+  })
+
+  it('prevents body scroll when mobile menu is open', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(<Header />)
+
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+
+    // Initially body scroll is not restricted
+    expect(document.body.style.overflow).toBe('')
+
+    // Open menu
+    await user.click(mobileMenuButton)
+
+    // Body scroll should be prevented
+    expect(document.body.style.overflow).toBe('hidden')
+
+    // Close menu
+    await user.click(mobileMenuButton)
+
+    // Body scroll should be restored
+    expect(document.body.style.overflow).toBe('')
+  })
+
+  it('mobile menu has proper ARIA labels', () => {
+    renderWithTheme(<Header />)
+
+    const mobileNav = screen.getByLabelText('Mobile navigation')
+    expect(mobileNav).toBeInTheDocument()
+    expect(mobileNav.tagName).toBe('NAV')
   })
 
   it('closes mobile menu when Escape key is pressed', async () => {

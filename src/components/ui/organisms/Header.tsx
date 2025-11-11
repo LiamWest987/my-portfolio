@@ -262,9 +262,9 @@ export function Header() {
           isMobileMenuOpen ? 'visible opacity-100' : 'pointer-events-none invisible opacity-0'
         }`}
       >
-        {/* Backdrop */}
+        {/* Backdrop - Semi-transparent overlay */}
         <div
-          className="bg-background/80 absolute inset-0 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-hidden="true"
         />

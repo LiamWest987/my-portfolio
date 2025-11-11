@@ -291,29 +291,213 @@ test.describe('Navigation', () => {
   test.describe('Mobile Navigation', () => {
     test.use({ viewport: { width: 375, height: 667 } })
 
-    test('should display navigation on mobile', async ({ page }) => {
+    test('should display mobile menu button on mobile', async ({ page }) => {
       await page.goto('/')
 
-      // Header should be visible
-      const header = page.locator('header')
-      await expect(header).toBeVisible()
-
-      // Logo should be visible
-      const logo = page.getByRole('link', { name: /Liam West/i }).first()
-      await expect(logo).toBeVisible()
+      // Mobile menu button should be visible
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await expect(menuButton).toBeVisible()
     })
 
-    test('should allow navigation on mobile devices', async ({ page }) => {
+    test('should open mobile menu when hamburger button is clicked', async ({ page }) => {
       await page.goto('/')
 
-      // Use header navigation specifically
-      const projectsLink = page.getByRole('banner').getByRole('link', { name: 'Projects' })
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'false')
 
-      // May be hidden in mobile menu, so check if visible first
-      if (await projectsLink.isVisible()) {
-        await projectsLink.click()
-        await expect(page).toHaveURL('/projects')
-      }
+      // Click to open menu
+      await menuButton.click()
+
+      // Menu should be open
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'true')
+
+      // Mobile navigation should be visible
+      const mobileNav = page.getByLabel('Mobile navigation')
+      await expect(mobileNav).toBeVisible()
+    })
+
+    test('should display visible backdrop when mobile menu is open', async ({ page }) => {
+      await page.goto('/')
+
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+
+      // Backdrop should be visible (semi-transparent black overlay)
+      const backdrop = page.locator('.bg-black\\/50')
+      await expect(backdrop).toBeVisible()
+    })
+
+    test('should close mobile menu when backdrop is clicked', async ({ page }) => {
+      await page.goto('/')
+
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+
+      // Menu should be open
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'true')
+
+      // Click backdrop to close
+      const backdrop = page.locator('.bg-black\\/50')
+      await backdrop.click({ position: { x: 10, y: 10 } })
+
+      // Menu should be closed
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    test('should close mobile menu when X button is clicked', async ({ page }) => {
+      await page.goto('/')
+
+      const menuButton = page.getByLabel('Toggle mobile menu')
+
+      // Open menu
+      await menuButton.click()
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'true')
+
+      // Close menu by clicking same button (now shows X icon)
+      await menuButton.click()
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    test('should close mobile menu when Escape key is pressed', async ({ page }) => {
+      await page.goto('/')
+
+      const menuButton = page.getByLabel('Toggle mobile menu')
+
+      // Open menu
+      await menuButton.click()
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'true')
+
+      // Press Escape
+      await page.keyboard.press('Escape')
+
+      // Menu should be closed
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    test('should navigate to Projects page from mobile menu', async ({ page }) => {
+      await page.goto('/')
+
+      // Open mobile menu
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+
+      // Click Projects link in mobile nav
+      const mobileNav = page.getByLabel('Mobile navigation')
+      const projectsLink = mobileNav.getByRole('link', { name: 'Projects' })
+      await projectsLink.click()
+
+      // Should navigate to projects page
+      await expect(page).toHaveURL('/projects')
+    })
+
+    test('should navigate to About page from mobile menu', async ({ page }) => {
+      await page.goto('/')
+
+      // Open mobile menu
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+
+      // Click About link in mobile nav
+      const mobileNav = page.getByLabel('Mobile navigation')
+      const aboutLink = mobileNav.getByRole('link', { name: /About.*Skills/i })
+      await aboutLink.click()
+
+      // Should navigate to about page
+      await expect(page).toHaveURL('/about')
+    })
+
+    test('should navigate to Contact page from mobile menu', async ({ page }) => {
+      await page.goto('/')
+
+      // Open mobile menu
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+
+      // Click Contact link in mobile nav
+      const mobileNav = page.getByLabel('Mobile navigation')
+      const contactLink = mobileNav.getByRole('link', { name: 'Contact' })
+      await contactLink.click()
+
+      // Should navigate to contact page
+      await expect(page).toHaveURL('/contact')
+    })
+
+    test('should highlight active page in mobile menu', async ({ page }) => {
+      await page.goto('/projects')
+
+      // Open mobile menu
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+
+      // Projects link should have active styling
+      const mobileNav = page.getByLabel('Mobile navigation')
+      const projectsLink = mobileNav.getByRole('link', { name: 'Projects' })
+      await expect(projectsLink).toHaveClass(/bg-accent/)
+    })
+
+    test('should close mobile menu after navigating to new page', async ({ page }) => {
+      await page.goto('/')
+
+      // Open mobile menu
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'true')
+
+      // Click Projects link
+      const mobileNav = page.getByLabel('Mobile navigation')
+      const projectsLink = mobileNav.getByRole('link', { name: 'Projects' })
+      await projectsLink.click()
+
+      // Wait for navigation
+      await expect(page).toHaveURL('/projects')
+
+      // Menu should auto-close after navigation
+      await expect(menuButton).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    test('should show hamburger icon when menu is closed', async ({ page }) => {
+      await page.goto('/')
+
+      const menuButton = page.getByLabel('Toggle mobile menu')
+
+      // Should show hamburger icon (3 horizontal lines)
+      const hamburgerIcon = menuButton.locator('svg line[x1="3"]')
+      await expect(hamburgerIcon).toBeVisible()
+    })
+
+    test('should show X icon when menu is open', async ({ page }) => {
+      await page.goto('/')
+
+      const menuButton = page.getByLabel('Toggle mobile menu')
+      await menuButton.click()
+
+      // Should show X icon (2 diagonal lines)
+      const closeIcon = menuButton.locator('svg line[x1="18"][y1="6"]')
+      await expect(closeIcon).toBeVisible()
+    })
+
+    test('should prevent body scroll when mobile menu is open', async ({ page }) => {
+      await page.goto('/')
+
+      const menuButton = page.getByLabel('Toggle mobile menu')
+
+      // Initially body should be scrollable
+      let bodyOverflow = await page.evaluate(() => document.body.style.overflow)
+      expect(bodyOverflow).toBe('')
+
+      // Open menu
+      await menuButton.click()
+
+      // Body scroll should be prevented
+      bodyOverflow = await page.evaluate(() => document.body.style.overflow)
+      expect(bodyOverflow).toBe('hidden')
+
+      // Close menu
+      await menuButton.click()
+
+      // Body scroll should be restored
+      bodyOverflow = await page.evaluate(() => document.body.style.overflow)
+      expect(bodyOverflow).toBe('')
     })
   })
 })

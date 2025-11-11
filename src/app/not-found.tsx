@@ -1,22 +1,30 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui'
+import styles from './not-found.module.css'
 
+/**
+ * Custom 404 Not Found error page component.
+ * Displayed when users navigate to a non-existent route.
+ *
+ * @returns JSX element rendering a centered 404 error message with navigation back to home
+ *
+ * @remarks
+ * Route: Displayed for any non-existent routes
+ *
+ * Features:
+ * - Large 404 heading
+ * - User-friendly error message
+ * - Call-to-action button to return to homepage
+ * - Styled using CSS modules for scoped styling
+ */
 export default function NotFound() {
   return (
-    <div className="container" style={{
-      minHeight: '60vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center',
-      padding: '2rem'
-    }}>
-      <h1 style={{ fontSize: '4rem', marginBottom: '1rem' }}>404</h1>
-      <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Page Not Found</h2>
-      <p style={{ marginBottom: '2rem', opacity: 0.8 }}>
-        Sorry, the page you&apos;re looking for doesn&apos;t exist.
-      </p>
-      <Button href="/" variant="primary" size="lg">Return Home</Button>
+    <div className={styles.container}>
+      <h1 className={styles.title}>404</h1>
+      <h2 className={styles.subtitle}>Page Not Found</h2>
+      <p className={styles.text}>Sorry, the page you&apos;re looking for doesn&apos;t exist.</p>
+      <Button href="/" variant="primary" size="lg">
+        Return Home
+      </Button>
     </div>
-  );
+  )
 }

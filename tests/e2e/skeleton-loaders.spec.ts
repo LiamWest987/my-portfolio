@@ -19,7 +19,10 @@ test.describe('Skeleton Loaders', () => {
       // Try to catch skeleton loaders before data loads
       // This may not always be visible if data loads very fast
       const skeletons = page.locator('.animate-pulse')
-      const skeletonVisible = await skeletons.first().isVisible().catch(() => false)
+      const skeletonVisible = await skeletons
+        .first()
+        .isVisible()
+        .catch(() => false)
 
       await navigationPromise
 
@@ -36,7 +39,9 @@ test.describe('Skeleton Loaders', () => {
       await expect(projectCards.first()).toBeVisible({ timeout: 5000 })
     })
 
-    test('should display exactly 3 skeleton cards for featured projects when loading', async ({ page }) => {
+    test('should display exactly 3 skeleton cards for featured projects when loading', async ({
+      page,
+    }) => {
       // Slow down Sanity requests significantly
       await page.route('**/*cdn.sanity.io/**', async route => {
         await new Promise(resolve => setTimeout(resolve, 2000))
@@ -136,7 +141,10 @@ test.describe('Skeleton Loaders', () => {
 
       // Try to catch skeletons
       const skeletons = page.locator('.animate-pulse')
-      const skeletonVisible = await skeletons.first().isVisible().catch(() => false)
+      const skeletonVisible = await skeletons
+        .first()
+        .isVisible()
+        .catch(() => false)
 
       await navigationPromise
 
@@ -170,6 +178,10 @@ test.describe('Skeleton Loaders', () => {
         // If we saw any skeletons, the loading state is working
         expect(skeletonCount).toBeGreaterThan(0)
       }
+
+      // Wait for network to settle and data to load
+      await page.waitForLoadState('networkidle')
+      await page.waitForSelector('[data-testid="project-card"]', { timeout: 15000 })
 
       // Verify actual project cards eventually load (should be at least 6)
       const projectCards = page.locator('[data-testid="project-card"]')
@@ -253,7 +265,9 @@ test.describe('Skeleton Loaders', () => {
       await expect(title).toBeVisible()
 
       // Badge should be visible
-      const badge = modal.locator('text=/Digital Electronics|PLTW Aerospace|PLTW POE|Engineering/i').first()
+      const badge = modal
+        .locator('text=/Digital Electronics|PLTW Aerospace|PLTW POE|Engineering/i')
+        .first()
       await expect(badge).toBeVisible()
 
       // Close button should be visible
@@ -357,10 +371,11 @@ test.describe('Skeleton Loaders', () => {
 
       // Screen reader text should be present if skeletons are showing
       const srOnly = page.locator('.sr-only:has-text("Loading projects")')
-      const srVisible = await srOnly.isVisible().catch(() => false)
+      const srCount = await srOnly.count()
 
-      if (srVisible) {
-        await expect(srOnly).toBeInViewport({ timeout: 2000 })
+      if (srCount > 0) {
+        // SR-only text is in the DOM (not visible but accessible to screen readers)
+        await expect(srOnly).toBeAttached()
       } else {
         // Data loaded fast, verify we have project cards
         await page.waitForSelector('[data-testid="project-card"]', { timeout: 10000 })

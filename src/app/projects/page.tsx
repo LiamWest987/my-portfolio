@@ -2,8 +2,25 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { fetchProjects } from '@/lib/sanity/client'
-import { Section, Container, PageHeader, SearchInput, Dropdown, ControlsBar, ResultsInfo, ProjectGrid, Button, ProjectCard, Dialog, DialogContent, DialogHeader, DialogTitle, Skeleton, Badge } from '@/components/ui'
+import {
+  Section,
+  Container,
+  PageHeader,
+  SearchInput,
+  Dropdown,
+  ControlsBar,
+  ResultsInfo,
+  ProjectGrid,
+  ProjectCard,
+  ProjectCardSkeleton,
+  ProjectModal,
+  BackgroundAnimation,
+} from '@/components/ui'
+import { cn } from '@/lib/utils'
 
+/**
+ * Project data structure from Sanity CMS.
+ */
 interface Project {
   _id: string
   title: string
@@ -23,8 +40,41 @@ interface Project {
   demo?: string
 }
 
+/**
+ * Available sorting options for the projects list.
+ */
 type SortOption = 'dateDesc' | 'dateAsc' | 'nameAsc' | 'nameDesc'
 
+/**
+ * Projects page component displaying a filterable and sortable portfolio of projects.
+ * Features search, category filtering, sorting options, and detailed project modals.
+ *
+ * @returns JSX element rendering the projects page with filtering, sorting, and project grid
+ *
+ * @remarks
+ * Route: /projects
+ *
+ * This page includes:
+ * - Animated background
+ * - Page header with dynamic project count
+ * - Controls bar with:
+ *   - Search input for filtering by title, description, category, tags, or technologies
+ *   - Category dropdown filter for project categories
+ *   - Sort dropdown with options: Newest First, Oldest First, Name A-Z, Name Z-A
+ * - Results info showing filtered count vs total count
+ * - Project grid displaying filtered and sorted projects
+ * - Loading skeletons for improved UX during data fetch
+ * - Project detail dialog/modal with comprehensive project information:
+ *   - Images gallery
+ *   - Overview and detailed description
+ *   - Technologies used
+ *   - Challenges faced
+ *   - Outcomes achieved
+ *   - PDF download and demo links
+ *
+ * All projects are fetched from Sanity CMS on component mount.
+ * Filtering and sorting are performed client-side using useMemo for performance.
+ */
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
@@ -32,6 +82,7 @@ export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [sortBy, setSortBy] = useState<SortOption>('dateDesc')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false)
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false)
 
@@ -51,7 +102,7 @@ export default function ProjectsPage() {
 
   // Get unique categories
   const categories = useMemo(() => {
-    const cats = new Set(projects.map((p) => p.category))
+    const cats = new Set(projects.map(p => p.category))
     return Array.from(cats).sort()
   }, [projects])
 
@@ -62,20 +113,20 @@ export default function ProjectsPage() {
     // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase()
-      filtered = filtered.filter((project) => {
+      filtered = filtered.filter(project => {
         return (
           project.title.toLowerCase().includes(query) ||
           project.description.toLowerCase().includes(query) ||
           project.category.toLowerCase().includes(query) ||
-          project.tags?.some((tag) => tag.toLowerCase().includes(query)) ||
-          project.technologies?.some((tech) => tech.toLowerCase().includes(query))
+          project.tags?.some(tag => tag.toLowerCase().includes(query)) ||
+          project.technologies?.some(tech => tech.toLowerCase().includes(query))
         )
       })
     }
 
     // Filter by category
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter((project) => project.category === selectedCategory)
+      filtered = filtered.filter(project => project.category === selectedCategory)
     }
 
     // Sort projects
@@ -119,10 +170,12 @@ export default function ProjectsPage() {
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project)
+    setIsModalOpen(true)
   }
 
   const closeModal = () => {
-    setSelectedProject(null)
+    setIsModalOpen(false)
+    setTimeout(() => setSelectedProject(null), 300) // Wait for animation
   }
 
   useEffect(() => {
@@ -143,262 +196,194 @@ export default function ProjectsPage() {
   return (
     <>
       {/* Background Animation */}
-      <div className="background-animation">
-        <div className="background-gradient"></div>
-        <div className="gradient-orb gradient-orb-1"></div>
-        <div className="gradient-orb gradient-orb-2"></div>
-        <div className="gradient-orb gradient-orb-3"></div>
-        <div className="grid-pattern"></div>
-        <div className="dot-pattern"></div>
-      </div>
+      <BackgroundAnimation variant="full" />
 
-      <main>
-        <Section>
-          <Container>
-            {/* Page Header */}
-            <PageHeader
-              title="All Projects"
-              description={
-                <>
-                  Explore my portfolio of <span id="project-count">{projects.length}</span> product management and
-                  industrial engineering initiatives
-                </>
-              }
+      <Section>
+        <Container>
+          {/* Page Header */}
+          <PageHeader
+            title="All Projects"
+            description={
+              <>
+                Explore my portfolio of <span id="project-count">{projects.length}</span> product
+                management and industrial engineering initiatives
+              </>
+            }
+          />
+
+          {/* Controls Bar */}
+          <ControlsBar>
+            {/* Search Input */}
+            <SearchInput
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder="Search projects, tags, or technologies..."
             />
 
-            {/* Controls Bar */}
-            <ControlsBar>
-              {/* Search Input */}
-              <SearchInput
-                value={searchQuery}
-                onChange={setSearchQuery}
-                placeholder="Search projects, tags, or technologies..."
-              />
-
-              {/* Filter and Sort Controls */}
-              <div className="filter-controls">
-                {/* Category Dropdown */}
-                <Dropdown
-                  label={getCategoryLabel()}
-                  isOpen={isCategoryDropdownOpen}
-                  onToggle={() => {
-                    setIsCategoryDropdownOpen(!isCategoryDropdownOpen)
-                    setIsSortDropdownOpen(false)
-                  }}
-                  className="category-filter"
-                  buttonClassName="category-button"
-                  contentClassName="category-dropdown"
-                >
-                  <button
-                    className={`dropdown-item ${selectedCategory === 'all' ? 'active' : ''}`}
-                    onClick={() => {
-                      setSelectedCategory('all')
-                      setIsCategoryDropdownOpen(false)
-                    }}
-                  >
-                    All Categories
-                  </button>
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      className={`dropdown-item ${selectedCategory === category ? 'active' : ''}`}
-                      onClick={() => {
-                        setSelectedCategory(category)
-                        setIsCategoryDropdownOpen(false)
-                      }}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </Dropdown>
-
-                {/* Sort Dropdown */}
-                <Dropdown
-                  label={getSortLabel()}
-                  isOpen={isSortDropdownOpen}
-                  onToggle={() => {
-                    setIsSortDropdownOpen(!isSortDropdownOpen)
+            {/* Filter and Sort Controls */}
+            <div className="flex flex-wrap items-center gap-4 max-md:w-full max-md:flex-col max-md:items-stretch">
+              {/* Category Dropdown */}
+              <Dropdown
+                label={getCategoryLabel()}
+                isOpen={isCategoryDropdownOpen}
+                onToggle={() => {
+                  setIsCategoryDropdownOpen(!isCategoryDropdownOpen)
+                  setIsSortDropdownOpen(false)
+                }}
+                className="min-w-[200px] shrink-0 max-md:w-full"
+                id="category-dropdown-menu"
+              >
+                <button
+                  className={cn(
+                    'block w-full border-none bg-transparent px-4 py-3 text-left text-sm text-foreground transition-colors hover:bg-secondary',
+                    selectedCategory === 'all' &&
+                      'hover:bg-primary/90 bg-primary font-semibold text-primary-foreground'
+                  )}
+                  onClick={() => {
+                    setSelectedCategory('all')
                     setIsCategoryDropdownOpen(false)
                   }}
-                  className="sort-filter"
-                  buttonClassName="sort-button"
-                  contentClassName="sort-dropdown"
-                  showSortIcon={true}
+                  role="menuitem"
+                  aria-current={selectedCategory === 'all' ? 'true' : undefined}
                 >
+                  All Categories
+                </button>
+                {categories.map(category => (
                   <button
-                    className={`dropdown-item ${sortBy === 'dateDesc' ? 'active' : ''}`}
+                    key={category}
+                    className={cn(
+                      'block w-full border-none bg-transparent px-4 py-3 text-left text-sm text-foreground transition-colors hover:bg-secondary',
+                      selectedCategory === category &&
+                        'hover:bg-primary/90 bg-primary font-semibold text-primary-foreground'
+                    )}
                     onClick={() => {
-                      setSortBy('dateDesc')
-                      setIsSortDropdownOpen(false)
+                      setSelectedCategory(category)
+                      setIsCategoryDropdownOpen(false)
                     }}
+                    role="menuitem"
+                    aria-current={selectedCategory === category ? 'true' : undefined}
                   >
-                    Newest First
+                    {category}
                   </button>
-                  <button
-                    className={`dropdown-item ${sortBy === 'dateAsc' ? 'active' : ''}`}
-                    onClick={() => {
-                      setSortBy('dateAsc')
-                      setIsSortDropdownOpen(false)
-                    }}
-                  >
-                    Oldest First
-                  </button>
-                  <button
-                    className={`dropdown-item ${sortBy === 'nameAsc' ? 'active' : ''}`}
-                    onClick={() => {
-                      setSortBy('nameAsc')
-                      setIsSortDropdownOpen(false)
-                    }}
-                  >
-                    Name A-Z
-                  </button>
-                  <button
-                    className={`dropdown-item ${sortBy === 'nameDesc' ? 'active' : ''}`}
-                    onClick={() => {
-                      setSortBy('nameDesc')
-                      setIsSortDropdownOpen(false)
-                    }}
-                  >
-                    Name Z-A
-                  </button>
-                </Dropdown>
-              </div>
-            </ControlsBar>
+                ))}
+              </Dropdown>
 
-            {/* Results Count */}
-            <ResultsInfo currentCount={filteredProjects.length} totalCount={projects.length} />
-
-            {/* Project Grid */}
-            <ProjectGrid>
-              {loading ? (
-                <>
-                  {[1, 2, 3, 4, 5, 6].map(i => (
-                    <Skeleton key={i} className="h-96 w-full" />
-                  ))}
-                </>
-              ) : filteredProjects.length > 0 ? (
-                filteredProjects.map(project => (
-                  <ProjectCard
-                    key={project._id}
-                    project={project}
-                    onClick={() => handleProjectClick(project)}
-                  />
-                ))
-              ) : (
-                <p className="text-muted-foreground text-center col-span-full">
-                  No projects found matching your criteria.
-                </p>
-              )}
-            </ProjectGrid>
-          </Container>
-        </Section>
-      </main>
-
-      {/* Project Dialog */}
-      <Dialog open={!!selectedProject} onOpenChange={(open) => !open && closeModal()}>
-        {selectedProject && (
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <Badge variant="outline" className="w-fit mb-2">
-                {selectedProject.category}
-              </Badge>
-              <DialogTitle className="text-3xl">{selectedProject.title}</DialogTitle>
-            </DialogHeader>
-
-            <div className="space-y-6 mt-4">
-              {selectedProject.images &&
-                Array.isArray(selectedProject.images) &&
-                selectedProject.images.length > 0 && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {selectedProject.images.map((img, index) => (
-                      <img
-                        key={index}
-                        src={img}
-                        alt={`${selectedProject.title} ${index + 1}`}
-                        className="rounded-lg w-full object-cover"
-                      />
-                    ))}
-                  </div>
-                )}
-
-              {selectedProject.overview && (
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Overview</h3>
-                  <p className="text-muted-foreground">{selectedProject.overview}</p>
-                </div>
-              )}
-
-              {selectedProject.longDescription && (
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Description</h3>
-                  <p className="text-muted-foreground">{selectedProject.longDescription}</p>
-                </div>
-              )}
-
-              {selectedProject.technologies &&
-                Array.isArray(selectedProject.technologies) &&
-                selectedProject.technologies.length > 0 && (
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Technologies</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProject.technologies.map((tech, index) => (
-                        <Badge key={index} variant="outline">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-              {selectedProject.challenges &&
-                Array.isArray(selectedProject.challenges) &&
-                selectedProject.challenges.length > 0 && (
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Challenges</h3>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                      {selectedProject.challenges.map((challenge, index) => (
-                        <li key={index}>{challenge}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-              {selectedProject.outcomes &&
-                Array.isArray(selectedProject.outcomes) &&
-                selectedProject.outcomes.length > 0 && (
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Outcomes</h3>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                      {selectedProject.outcomes.map((outcome, index) => (
-                        <li key={index}>{outcome}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-              {(selectedProject.pdf || selectedProject.demo) && (
-                <div className="flex gap-3 pt-4">
-                  {selectedProject.pdf && (
-                    <Button href={selectedProject.pdf} variant="primary" download>
-                      Download PDF
-                    </Button>
+              {/* Sort Dropdown */}
+              <Dropdown
+                label={getSortLabel()}
+                isOpen={isSortDropdownOpen}
+                onToggle={() => {
+                  setIsSortDropdownOpen(!isSortDropdownOpen)
+                  setIsCategoryDropdownOpen(false)
+                }}
+                className="min-w-[180px] shrink-0 max-md:w-full"
+                showSortIcon={true}
+                id="sort-dropdown-menu"
+              >
+                <button
+                  className={cn(
+                    'block w-full border-none bg-transparent px-4 py-3 text-left text-sm text-foreground transition-colors hover:bg-secondary',
+                    sortBy === 'dateDesc' &&
+                      'hover:bg-primary/90 bg-primary font-semibold text-primary-foreground'
                   )}
-                  {selectedProject.demo && (
-                    <Button
-                      href={selectedProject.demo}
-                      variant="outline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View Demo
-                    </Button>
+                  onClick={() => {
+                    setSortBy('dateDesc')
+                    setIsSortDropdownOpen(false)
+                  }}
+                  role="menuitem"
+                  aria-current={sortBy === 'dateDesc' ? 'true' : undefined}
+                >
+                  Newest First
+                </button>
+                <button
+                  className={cn(
+                    'block w-full border-none bg-transparent px-4 py-3 text-left text-sm text-foreground transition-colors hover:bg-secondary',
+                    sortBy === 'dateAsc' &&
+                      'hover:bg-primary/90 bg-primary font-semibold text-primary-foreground'
                   )}
-                </div>
-              )}
+                  onClick={() => {
+                    setSortBy('dateAsc')
+                    setIsSortDropdownOpen(false)
+                  }}
+                  role="menuitem"
+                  aria-current={sortBy === 'dateAsc' ? 'true' : undefined}
+                >
+                  Oldest First
+                </button>
+                <button
+                  className={cn(
+                    'block w-full border-none bg-transparent px-4 py-3 text-left text-sm text-foreground transition-colors hover:bg-secondary',
+                    sortBy === 'nameAsc' &&
+                      'hover:bg-primary/90 bg-primary font-semibold text-primary-foreground'
+                  )}
+                  onClick={() => {
+                    setSortBy('nameAsc')
+                    setIsSortDropdownOpen(false)
+                  }}
+                  role="menuitem"
+                  aria-current={sortBy === 'nameAsc' ? 'true' : undefined}
+                >
+                  Name A-Z
+                </button>
+                <button
+                  className={cn(
+                    'block w-full border-none bg-transparent px-4 py-3 text-left text-sm text-foreground transition-colors hover:bg-secondary',
+                    sortBy === 'nameDesc' &&
+                      'hover:bg-primary/90 bg-primary font-semibold text-primary-foreground'
+                  )}
+                  onClick={() => {
+                    setSortBy('nameDesc')
+                    setIsSortDropdownOpen(false)
+                  }}
+                  role="menuitem"
+                  aria-current={sortBy === 'nameDesc' ? 'true' : undefined}
+                >
+                  Name Z-A
+                </button>
+              </Dropdown>
             </div>
-          </DialogContent>
-        )}
-      </Dialog>
+          </ControlsBar>
+
+          {/* Results Count */}
+          <div role="status" aria-live="polite" aria-atomic="true">
+            <ResultsInfo currentCount={filteredProjects.length} totalCount={projects.length} />
+          </div>
+
+          {/* Section heading for proper hierarchy (visually hidden) */}
+          <h2 className="sr-only">Project Listings</h2>
+
+          {/* Project Grid */}
+          <ProjectGrid>
+            {loading ? (
+              <>
+                <span className="sr-only" aria-live="polite" aria-label="Loading projects">
+                  Loading projects...
+                </span>
+                {[1, 2, 3, 4, 5, 6].map(i => (
+                  <ProjectCardSkeleton key={i} aria-hidden="true" />
+                ))}
+              </>
+            ) : filteredProjects.length > 0 ? (
+              filteredProjects.map(project => (
+                <ProjectCard
+                  key={project._id}
+                  project={project}
+                  onClick={() => handleProjectClick(project)}
+                />
+              ))
+            ) : (
+              <p className="col-span-full text-center text-muted-foreground">
+                {projects.length === 0
+                  ? 'No projects available yet.'
+                  : 'No projects found matching your criteria.'}
+              </p>
+            )}
+          </ProjectGrid>
+        </Container>
+      </Section>
+
+      {/* Project Modal */}
+      <ProjectModal project={selectedProject} isOpen={isModalOpen} onClose={closeModal} />
     </>
   )
 }

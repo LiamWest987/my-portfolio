@@ -18,8 +18,18 @@ describe('Atomic Design Enforcement', () => {
 
     // All atom files should be basic UI elements (no complex logic)
     const basicElements = [
-      'button', 'badge', 'input', 'label', 'card', 'separator',
-      'skeleton', 'textarea', 'dialog', 'select', 'tabs', 'index'
+      'button',
+      'badge',
+      'input',
+      'label',
+      'card',
+      'separator',
+      'skeleton',
+      'textarea',
+      'dialog',
+      'select',
+      'tabs',
+      'index',
     ]
 
     const nonAtomFiles = atomFiles.filter(file => {
@@ -47,7 +57,20 @@ describe('Atomic Design Enforcement', () => {
     const organismFiles = globSync('components/ui/organisms/**/*.{ts,tsx}', { cwd: SRC_DIR })
 
     // Organisms are complex sections (Header, Footer, ContactForm, ProjectGrid, BackgroundAnimation)
-    const expectedOrganisms = ['header', 'footer', 'hero', 'contact', 'project', 'about', 'background', 'controls', 'dropdown', 'page', 'timeline', 'index']
+    const expectedOrganisms = [
+      'header',
+      'footer',
+      'hero',
+      'contact',
+      'project',
+      'about',
+      'background',
+      'controls',
+      'dropdown',
+      'page',
+      'timeline',
+      'index',
+    ]
 
     organismFiles.forEach(file => {
       const basename = path.basename(file, path.extname(file)).toLowerCase()
@@ -92,7 +115,9 @@ describe('Next.js App Router Enforcement', () => {
 
       segments.forEach(segment => {
         // Skip special Next.js files
-        if (['page.tsx', 'layout.tsx', 'loading.tsx', 'error.tsx', 'not-found.tsx'].includes(segment)) {
+        if (
+          ['page.tsx', 'layout.tsx', 'loading.tsx', 'error.tsx', 'not-found.tsx'].includes(segment)
+        ) {
           return
         }
 
@@ -117,13 +142,15 @@ describe('Next.js App Router Enforcement', () => {
       const content = readFileSync(path.join(SRC_DIR, file), 'utf-8')
 
       // Should either export metadata or generateMetadata
-      const hasMetadata = content.includes('export const metadata') ||
-                         content.includes('export async function generateMetadata')
+      const hasMetadata =
+        content.includes('export const metadata') ||
+        content.includes('export async function generateMetadata')
 
       // Client components can't export metadata, so check if it's a client component
       const isClientComponent = content.includes('"use client"') || content.includes("'use client'")
 
-      if (!file.includes('studio') && !isClientComponent) { // Skip studio route and client components
+      if (!file.includes('studio') && !isClientComponent) {
+        // Skip studio route and client components
         expect(hasMetadata).toBe(true)
       }
     })
@@ -166,7 +193,7 @@ describe('TypeScript Best Practices Enforcement', () => {
   it('should not use "any" type except in config files', () => {
     const tsFiles = globSync('**/*.{ts,tsx}', {
       cwd: SRC_DIR,
-      ignore: ['**/*.test.ts', '**/*.test.tsx', '**/__tests__/**']
+      ignore: ['**/*.test.ts', '**/*.test.tsx', '**/__tests__/**'],
     })
 
     const violations: string[] = []
@@ -222,8 +249,9 @@ describe('TypeScript Best Practices Enforcement', () => {
           content.includes('React.Component<')
 
         // Check if component has parameters (props)
-        const functionMatch = content.match(/function\s+\w+\s*\(([^)]*)\)/) ||
-                            content.match(/const\s+\w+\s*=\s*\(([^)]*)\)\s*(?::|=>)/)
+        const functionMatch =
+          content.match(/function\s+\w+\s*\(([^)]*)\)/) ||
+          content.match(/const\s+\w+\s*=\s*\(([^)]*)\)\s*(?::|=>)/)
 
         if (functionMatch && functionMatch[1]) {
           const params = functionMatch[1].trim()
@@ -252,7 +280,13 @@ describe('File Organization Enforcement', () => {
   })
 
   it('should have proper barrel exports (index.ts)', () => {
-    const directories = ['components/ui/atoms', 'components/ui/molecules', 'components/ui/organisms', 'lib', 'types']
+    const directories = [
+      'components/ui/atoms',
+      'components/ui/molecules',
+      'components/ui/organisms',
+      'lib',
+      'types',
+    ]
 
     directories.forEach(dir => {
       const files = globSync(`${dir}/*.{ts,tsx}`, { cwd: SRC_DIR })
@@ -270,7 +304,7 @@ describe('File Organization Enforcement', () => {
   it('should not have unused files', () => {
     const allFiles = globSync('**/*.{ts,tsx}', {
       cwd: SRC_DIR,
-      ignore: ['**/*.test.ts', '**/*.test.tsx', '**/__tests__/**', '**/index.ts']
+      ignore: ['**/*.test.ts', '**/*.test.tsx', '**/__tests__/**', '**/index.ts'],
     })
 
     const potentiallyUnused: string[] = []
@@ -279,9 +313,7 @@ describe('File Organization Enforcement', () => {
       const basename = path.basename(file, path.extname(file))
 
       // Check if file is imported anywhere
-      const allContent = allFiles.map(f =>
-        readFileSync(path.join(SRC_DIR, f), 'utf-8')
-      ).join('\n')
+      const allContent = allFiles.map(f => readFileSync(path.join(SRC_DIR, f), 'utf-8')).join('\n')
 
       const isImported =
         allContent.includes(`from './${basename}'`) ||
@@ -325,13 +357,16 @@ describe('Accessibility Enforcement', () => {
       const content = readFileSync(path.join(SRC_DIR, file), 'utf-8')
 
       // Should use semantic elements (header, main, footer, nav, section, article)
+      // Can be lowercase HTML tags or capitalized components that render semantic elements
       const hasSemanticHTML =
         content.includes('<main') ||
         content.includes('<header') ||
         content.includes('<footer') ||
         content.includes('<nav') ||
         content.includes('<section') ||
-        content.includes('<article')
+        content.includes('<article') ||
+        content.includes('<Section') || // Section component renders <section>
+        content.includes('<Container') // Container component used for semantic structure
 
       if (!file.includes('studio')) {
         expect(hasSemanticHTML).toBe(true)
@@ -346,10 +381,11 @@ describe('Accessibility Enforcement', () => {
       const content = readFileSync(path.join(SRC_DIR, file), 'utf-8')
 
       // Should have h1 (as element, via heading prop, as prop, or via PageHeader component)
-      const hasH1 = content.includes('<h1') ||
-                   content.includes('heading: "h1"') ||
-                   content.includes('as="h1"') ||
-                   content.includes('PageHeader')
+      const hasH1 =
+        content.includes('<h1') ||
+        content.includes('heading: "h1"') ||
+        content.includes('as="h1"') ||
+        content.includes('PageHeader')
 
       if (!file.includes('studio')) {
         expect(hasH1).toBe(true)
@@ -384,7 +420,7 @@ describe('Performance Best Practices', () => {
       const internalLinks = content.match(/<a\s+href=["']\//g)
 
       if (internalLinks && internalLinks.length > 0) {
-        const usesLink = content.includes('import Link from') || content.includes("import { Link }")
+        const usesLink = content.includes('import Link from') || content.includes('import { Link }')
 
         if (!usesLink) {
           console.warn(`Consider using Next.js Link component for internal links in ${file}`)

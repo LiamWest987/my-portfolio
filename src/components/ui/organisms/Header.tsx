@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from '@/components/common'
@@ -27,6 +27,7 @@ export function Header() {
   const pathname = usePathname()
   const { theme, setTheme, isDropdownOpen, setIsDropdownOpen } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const themeButtonRef = useRef<HTMLButtonElement>(null)
 
   // Handle Escape key to close dropdown and mobile menu
   useEffect(() => {
@@ -72,6 +73,8 @@ export function Header() {
     e.stopPropagation()
     setTheme(mode)
     setIsDropdownOpen(false)
+    // Return focus to theme button for accessibility
+    setTimeout(() => themeButtonRef.current?.focus(), 0)
   }
 
   const navLinks = [
@@ -116,6 +119,7 @@ export function Header() {
           {/* Theme Dropdown */}
           <div className="theme-dropdown relative">
             <button
+              ref={themeButtonRef}
               className="flex cursor-pointer items-center gap-1 rounded-md border border-border bg-secondary p-2 text-foreground transition-all duration-150 hover:border-accent hover:bg-muted"
               aria-label="Change theme"
               onClick={toggleDropdown}
@@ -131,6 +135,8 @@ export function Header() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
               >
                 <circle cx="12" cy="12" r="5" />
                 <line x1="12" y1="1" x2="12" y2="3" />
@@ -153,6 +159,8 @@ export function Header() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
               >
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
@@ -167,6 +175,8 @@ export function Header() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
               >
                 <polyline points="6 9 12 15 18 9" />
               </svg>

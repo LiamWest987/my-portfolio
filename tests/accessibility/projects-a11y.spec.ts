@@ -706,32 +706,54 @@ test.describe('Projects Page Accessibility', () => {
         await page.waitForTimeout(500)
       }
 
-      // Open a modal by clicking a project card
+      // Wait for projects to load
       await page.waitForSelector('[data-testid="project-card"]', { timeout: 10000 })
+
+      // Click first project card to open modal
       const projectCard = page.locator('[data-testid="project-card"]').first()
       await projectCard.click()
 
+      // Wait for modal to fully open with animation
       const dialog = page.getByRole('dialog')
       await expect(dialog).toBeVisible()
+      await page.waitForTimeout(300) // Wait for open animation
 
-      // The scrollable content area is the div with overflow-y-auto class
+      // Find the scrollable content area
       const dialogContent = dialog.locator('.overflow-y-auto').first()
 
-      // Check if scrollable
-      const isScrollable = await dialogContent.evaluate(el => {
-        return el.scrollHeight > el.clientHeight
-      })
+      // Wait for content to be present
+      await expect(dialogContent).toBeAttached()
+
+      // Check if content is scrollable
+      const { isScrollable } = await dialogContent.evaluate(el => ({
+        isScrollable: el.scrollHeight > el.clientHeight,
+        scrollHeight: el.scrollHeight,
+        clientHeight: el.clientHeight,
+      }))
 
       if (isScrollable) {
-        // Focus on scrollable area and test keyboard scrolling
+        // Ensure element can receive focus
+        await dialogContent.evaluate(el => {
+          if (!el.hasAttribute('tabindex')) {
+            el.setAttribute('tabindex', '-1')
+          }
+        })
+
         await dialogContent.focus()
+
+        // Try keyboard scrolling
         await page.keyboard.press('PageDown')
+        await page.waitForTimeout(100)
 
         const scrollTop = await dialogContent.evaluate(el => el.scrollTop)
-        expect(scrollTop).toBeGreaterThanOrEqual(0)
+        expect(scrollTop).toBeGreaterThan(0)
       } else {
-        // Not scrollable, just verify the modal is accessible
-        expect(await dialog.isVisible()).toBe(true)
+        // Content fits without scrolling, verify modal is functional
+        await expect(dialog).toBeVisible()
+
+        // Verify close button works
+        const closeButton = dialog.getByRole('button', { name: /close/i })
+        await expect(closeButton).toBeVisible()
       }
     })
   })

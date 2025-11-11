@@ -82,7 +82,7 @@ export default function Home() {
               badge="Engineering & VR Development Portfolio"
               title={
                 <>
-                  Hi, I'm <span className="text-primary font-bold">Liam West</span>
+                  Hi, I&apos;m <span className="text-primary font-bold">Liam West</span>
                 </>
               }
               subtitle={

@@ -17,7 +17,7 @@ const builder = imageUrlBuilder(client);
  * @param source - Sanity image object
  * @returns Optimized image URL
  */
-export function urlFor(source: any) {
+export function urlFor(source: Parameters<typeof builder.image>[0]) {
   return builder.image(source);
 }
 
@@ -48,7 +48,7 @@ export async function fetchProjects() {
       }
     `);
     // Convert Sanity CDN URLs to local proxy URLs
-    return projects.map((project: any) => ({
+    return projects.map((project: { pdfPath?: string; [key: string]: unknown }) => ({
       ...project,
       pdf: project.pdfPath ? `/pdfs/${project.pdfPath.split("/").pop()}` : null,
     }));

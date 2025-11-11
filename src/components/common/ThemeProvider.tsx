@@ -35,7 +35,6 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     const initialTheme = savedMode || 'dark'
     setThemeState(initialTheme)
     applyTheme(initialTheme)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const applyTheme = (mode: Theme) => {

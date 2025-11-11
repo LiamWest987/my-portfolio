@@ -1,7 +1,32 @@
+/**
+ * Sanity CMS Client and Data Fetching Module
+ *
+ * Provides configured Sanity client instance and helper functions for fetching
+ * portfolio data including projects, skills, education, experience, and awards.
+ *
+ * @module lib/sanity/client
+ */
+
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-// Initialize Sanity client
+/**
+ * Configured Sanity client instance.
+ *
+ * @remarks
+ * Configuration:
+ * - Uses project ID from environment or defaults to "40f0qafr"
+ * - Uses dataset from environment or defaults to "portfolio"
+ * - Enables CDN in production for improved performance
+ * - API version locked to "2024-01-01" for consistency
+ *
+ * @example
+ * ```typescript
+ * import { client } from '@/lib/sanity/client';
+ *
+ * const data = await client.fetch('*[_type == "project"]');
+ * ```
+ */
 export const client = createClient({
   projectId: process.env['NEXT_PUBLIC_SANITY_PROJECT_ID'] || "40f0qafr",
   dataset: process.env['NEXT_PUBLIC_SANITY_DATASET'] || "portfolio",
@@ -9,21 +34,72 @@ export const client = createClient({
   apiVersion: "2024-01-01",
 });
 
-// Image URL builder helper
+/**
+ * Image URL builder instance for Sanity images.
+ *
+ * @internal
+ */
 const builder = imageUrlBuilder(client);
 
 /**
- * Generate optimized image URL from Sanity image reference
- * @param source - Sanity image object
- * @returns Optimized image URL
+ * Generates an optimized image URL builder from a Sanity image reference.
+ *
+ * @param source - Sanity image object, reference, or asset document
+ * @returns Image URL builder with chainable transformation methods
+ *
+ * @remarks
+ * The returned builder allows chaining transformations like:
+ * - `.width(300)` - Set image width
+ * - `.height(200)` - Set image height
+ * - `.format('webp')` - Change image format
+ * - `.quality(80)` - Adjust quality
+ * - `.url()` - Get the final URL string
+ *
+ * @example
+ * ```typescript
+ * import { urlFor } from '@/lib/sanity/client';
+ *
+ * // Basic usage
+ * const imageUrl = urlFor(project.image).url();
+ *
+ * // With transformations
+ * const thumbnail = urlFor(project.image)
+ *   .width(300)
+ *   .height(200)
+ *   .format('webp')
+ *   .url();
+ * ```
  */
 export function urlFor(source: Parameters<typeof builder.image>[0]) {
   return builder.image(source);
 }
 
 /**
- * Fetch all projects from Sanity
- * @returns Array of project objects
+ * Fetches all projects from Sanity CMS ordered by date (newest first).
+ *
+ * @returns Promise resolving to array of project objects with complete details
+ *
+ * @remarks
+ * Returns comprehensive project data including:
+ * - Basic info (id, title, category, date)
+ * - Media (images, PDFs)
+ * - Content (descriptions, overview, technologies)
+ * - Metadata (tags, featured status)
+ * - Links (demo URLs)
+ *
+ * PDF paths are automatically converted from Sanity CDN URLs to local proxy URLs
+ * for proper serving through the application. Empty array is returned on error.
+ *
+ * @throws Logs error to console if fetch fails, but returns empty array instead of throwing
+ *
+ * @example
+ * ```typescript
+ * const projects = await fetchProjects();
+ * console.log(`Found ${projects.length} projects`);
+ *
+ * // Filter featured projects
+ * const featured = projects.filter(p => p.featured);
+ * ```
  */
 export async function fetchProjects() {
   try {
@@ -59,9 +135,27 @@ export async function fetchProjects() {
 }
 
 /**
- * Fetch a single project by ID
- * @param id - Project ID
- * @returns Project object
+ * Fetches a single project from Sanity CMS by its unique identifier.
+ *
+ * @param id - Unique Sanity document ID of the project
+ * @returns Promise resolving to project object or null if not found
+ *
+ * @remarks
+ * Returns project data including title, category, date, image, descriptions,
+ * technologies, and demo link. PDF path is automatically converted from Sanity
+ * CDN URL to local proxy URL.
+ *
+ * @throws Logs error to console if fetch fails, but returns null instead of throwing
+ *
+ * @example
+ * ```typescript
+ * const project = await fetchProjectById('project-123');
+ *
+ * if (project) {
+ *   console.log(project.title);
+ *   console.log(project.technologies);
+ * }
+ * ```
  */
 export async function fetchProjectById(id: string) {
   try {
@@ -94,8 +188,27 @@ export async function fetchProjectById(id: string) {
 }
 
 /**
- * Fetch all skill categories from Sanity
- * @returns Array of skill category objects
+ * Fetches all skill categories from Sanity CMS ordered by display order.
+ *
+ * @returns Promise resolving to array of skill category objects
+ *
+ * @remarks
+ * Each skill category includes:
+ * - Unique ID
+ * - Category title (e.g., "Programming Languages", "Tools")
+ * - Display order number
+ * - Array of individual skills in the category
+ * - Optional icon identifier
+ *
+ * @throws Logs error to console if fetch fails, but returns empty array instead of throwing
+ *
+ * @example
+ * ```typescript
+ * const skills = await fetchSkills();
+ * skills.forEach(category => {
+ *   console.log(`${category.title}: ${category.skills.join(', ')}`);
+ * });
+ * ```
  */
 export async function fetchSkills() {
   try {
@@ -116,8 +229,21 @@ export async function fetchSkills() {
 }
 
 /**
- * Fetch all education entries from Sanity
- * @returns Array of education objects
+ * Fetches all education entries from Sanity CMS ordered by display order.
+ *
+ * @returns Promise resolving to array of education objects
+ *
+ * @remarks
+ * Each education entry includes degree, school name, dates, and description.
+ * The `isCurrent` flag indicates if the education is ongoing.
+ *
+ * @throws Logs error to console if fetch fails, but returns empty array instead of throwing
+ *
+ * @example
+ * ```typescript
+ * const education = await fetchEducation();
+ * const current = education.filter(e => e.isCurrent);
+ * ```
  */
 export async function fetchEducation() {
   try {
@@ -142,8 +268,26 @@ export async function fetchEducation() {
 }
 
 /**
- * Fetch all experience entries from Sanity
- * @returns Array of experience objects
+ * Fetches all work experience entries from Sanity CMS ordered by display order.
+ *
+ * @returns Promise resolving to array of experience objects
+ *
+ * @remarks
+ * Each experience entry includes:
+ * - Role and company information
+ * - Start/end dates and period string
+ * - Description of responsibilities
+ * - Skills utilized
+ * - Key achievements
+ * - Current employment status
+ *
+ * @throws Logs error to console if fetch fails, but returns empty array instead of throwing
+ *
+ * @example
+ * ```typescript
+ * const experience = await fetchExperience();
+ * const currentJob = experience.find(e => e.isCurrent);
+ * ```
  */
 export async function fetchExperience() {
   try {
@@ -170,8 +314,21 @@ export async function fetchExperience() {
 }
 
 /**
- * Fetch all awards from Sanity
- * @returns Array of award objects
+ * Fetches all awards and recognitions from Sanity CMS ordered by display order.
+ *
+ * @returns Promise resolving to array of award objects
+ *
+ * @remarks
+ * Each award includes title, description, issuer, date, category, and highlight status.
+ * The `isHighlighted` flag can be used to feature notable awards prominently.
+ *
+ * @throws Logs error to console if fetch fails, but returns empty array instead of throwing
+ *
+ * @example
+ * ```typescript
+ * const awards = await fetchAwards();
+ * const highlighted = awards.filter(a => a.isHighlighted);
+ * ```
  */
 export async function fetchAwards() {
   try {
@@ -197,8 +354,32 @@ export async function fetchAwards() {
 }
 
 /**
- * Fetch contact page data from Sanity
- * @returns Contact page data object
+ * Fetches contact page configuration data from Sanity CMS.
+ *
+ * @returns Promise resolving to contact data object or null if not found
+ *
+ * @remarks
+ * Returns a singleton document containing:
+ * - Main heading text
+ * - Subtext/description
+ * - Location information
+ * - LinkedIn profile URL
+ * - Email address
+ * - Resume file URL
+ * - Success message image URL
+ *
+ * This data is typically used to populate the contact page with CMS-managed content.
+ *
+ * @throws Logs error to console if fetch fails, but returns null instead of throwing
+ *
+ * @example
+ * ```typescript
+ * const contactData = await fetchContact();
+ * if (contactData) {
+ *   console.log(`Email: ${contactData.email}`);
+ *   console.log(`LinkedIn: ${contactData.linkedinUrl}`);
+ * }
+ * ```
  */
 export async function fetchContact() {
   try {

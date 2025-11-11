@@ -1,0 +1,95 @@
+import {createClient} from '@sanity/client'
+
+const client = createClient({
+  projectId: '40f0qafr',
+  dataset: 'portfolio',
+  useCdn: false,
+  token: process.env.SANITY_AUTH_TOKEN,
+  apiVersion: '2024-01-01'
+})
+
+const educationData = [
+  {
+    _type: 'education',
+    degree: 'High School Diploma',
+    school: 'Reedy High School',
+    startDate: '2022-08-01',
+    endDate: null,
+    isCurrent: true,
+    description: 'Focus on AP and STEM Courses. Maintained 3.9 GPA. Member of NHS, NTHS, and DECA. Earned Industry-Based Certifications in Intro to 3D Modeling, Engineering Technology Foundations, and Culinary 1. Qualified for 6 credit hours at Rochester Institute of Technology in Engineering 101 and 102. Qualified for 6 college credit hours through NOCTI and NCCRS.',
+    order: 1
+  }
+]
+
+const experienceData = [
+  {
+    _type: 'experience',
+    role: 'VR Design Intern',
+    company: 'Two-Semester Virtual Reality Internship at A&M, Frisco',
+    startDate: '2024-09-01',
+    endDate: null,
+    isCurrent: true,
+    description: 'Designed immersive virtual spaces for educational purposes, collaborating with professors to translate existing learning activities into VR experiences. Conducted client interviews and developed storyboards, sketches, and low-fidelity prototypes to ensure alignment with client goals. Collaborated in a team environment to manage responsibilities, meet deadlines, and deliver a functional VR prototype.',
+    skills: [
+      'Virtual Reality Design',
+      '3D Modeling',
+      'Client Interviews',
+      'Storyboarding',
+      'Prototyping',
+      'Team Collaboration',
+      'Project Management'
+    ],
+    achievements: [
+      'Created a VR learning experience for crime scene investigation, enabling users to explore and collect evidence in a simulated environment',
+      'Successfully translated traditional learning activities into immersive VR experiences'
+    ],
+    order: 1
+  },
+  {
+    _type: 'experience',
+    role: 'Carhop',
+    company: 'Sonic Drive-In',
+    startDate: '2024-02-01',
+    endDate: '2025-02-01',
+    isCurrent: false,
+    description: 'Provided exceptional customer service in a fast-paced restaurant environment. Accurately took and entered customer orders into the point-of-sale system. Delivered food and beverages to customers\' vehicles, ensuring orders were complete and met quality standards. Processed cash and credit card transactions and balanced cash drawers.',
+    skills: [
+      'Customer Service',
+      'Point-of-Sale Systems',
+      'Cash Handling',
+      'Attention to Detail',
+      'Time Management',
+      'Communication',
+      'Working Under Stress'
+    ],
+    achievements: [
+      'Maintained clean and organized workspace ensuring inviting environment for customers',
+      'Provided personalized menu recommendations to enhance dining experience',
+      'Consistently delivered accurate orders meeting quality standards'
+    ],
+    order: 2
+  }
+]
+
+async function importData() {
+  try {
+    console.log('Importing education data...')
+    for (const edu of educationData) {
+      const result = await client.create(edu)
+      console.log(`✓ Created education: ${result.school}`)
+    }
+
+    console.log('\nImporting experience data...')
+    for (const exp of experienceData) {
+      const result = await client.create(exp)
+      console.log(`✓ Created experience: ${result.role} at ${result.company}`)
+    }
+
+    console.log('\n✅ All data imported successfully!')
+  } catch (error) {
+    console.error('Error importing data:', error)
+    process.exit(1)
+  }
+}
+
+importData()

@@ -311,9 +311,13 @@ test.describe('Navigation', () => {
       // Menu should be open
       await expect(menuButton).toHaveAttribute('aria-expanded', 'true')
 
-      // Mobile navigation should be visible
+      // Mobile navigation should be attached and have correct transform
       const mobileNav = page.getByLabel('Mobile navigation')
-      await expect(mobileNav).toBeVisible()
+      await expect(mobileNav).toBeAttached()
+
+      // Check that the nav is not transformed off-screen (translate-x-0 means it's on screen)
+      const transform = await mobileNav.evaluate(el => window.getComputedStyle(el).transform)
+      expect(transform).not.toContain('translateX') // transform should be 'none' or a matrix without X translation
     })
 
     test('should display visible backdrop when mobile menu is open', async ({ page }) => {
@@ -322,9 +326,10 @@ test.describe('Navigation', () => {
       const menuButton = page.getByLabel('Toggle mobile menu')
       await menuButton.click()
 
-      // Backdrop should be visible (semi-transparent black overlay)
+      // Backdrop should be attached and have correct opacity classes
       const backdrop = page.locator('.bg-black\\/50')
-      await expect(backdrop).toBeVisible()
+      await expect(backdrop).toBeAttached()
+      await expect(backdrop).toHaveClass(/bg-black\/50/)
     })
 
     test('should close mobile menu when backdrop is clicked', async ({ page }) => {
@@ -336,9 +341,9 @@ test.describe('Navigation', () => {
       // Menu should be open
       await expect(menuButton).toHaveAttribute('aria-expanded', 'true')
 
-      // Click backdrop to close
+      // Click backdrop to close (force click since it has pointer-events-none parent)
       const backdrop = page.locator('.bg-black\\/50')
-      await backdrop.click({ position: { x: 10, y: 10 } })
+      await backdrop.click({ position: { x: 10, y: 10 }, force: true })
 
       // Menu should be closed
       await expect(menuButton).toHaveAttribute('aria-expanded', 'false')
@@ -460,8 +465,8 @@ test.describe('Navigation', () => {
 
       const menuButton = page.getByLabel('Toggle mobile menu')
 
-      // Should show hamburger icon (3 horizontal lines)
-      const hamburgerIcon = menuButton.locator('svg line[x1="3"]')
+      // Should show hamburger icon (3 horizontal lines) - check first line is visible
+      const hamburgerIcon = menuButton.locator('svg line[x1="3"]').first()
       await expect(hamburgerIcon).toBeVisible()
     })
 

@@ -7,7 +7,7 @@ interface ValueCardProps {
   description: string;
 }
 
-const ValueCard: React.FC<ValueCardProps> = ({ icon, title, description }) => {
+export const ValueCard: React.FC<ValueCardProps> = ({ icon, title, description }) => {
   return (
     <div className={styles['valueCard']}>
       <div className={styles['valueIcon']}>{icon}</div>
@@ -16,5 +16,3 @@ const ValueCard: React.FC<ValueCardProps> = ({ icon, title, description }) => {
     </div>
   );
 };
-
-export default ValueCard;

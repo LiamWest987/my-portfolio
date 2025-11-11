@@ -8,7 +8,7 @@ interface SearchInputProps {
   placeholder?: string
 }
 
-export default function SearchInput({ value, onChange, placeholder }: SearchInputProps) {
+export function SearchInput({ value, onChange, placeholder }: SearchInputProps) {
   return (
     <div className={styles['searchWrapper']}>
       <svg

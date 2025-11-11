@@ -2,26 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { fetchProjects } from '@/lib/sanity/client'
-import {
-  Section,
-  Container,
-  PageHeader,
-  SearchInput,
-  Dropdown,
-  ControlsBar,
-  ResultsInfo,
-  ProjectGrid,
-  Button,
-  ProjectCard,
-} from '@/components/ui/'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/atoms/dialog'
-import { Skeleton } from '@/components/ui/atoms/skeleton'
-import { Badge } from '@/components/ui/Badge'
+import { Section, Container, PageHeader, SearchInput, Dropdown, ControlsBar, ResultsInfo, ProjectGrid, Button, ProjectCard, Dialog, DialogContent, DialogHeader, DialogTitle, Skeleton, Badge } from '@/components/ui'
 
 interface Project {
   _id: string

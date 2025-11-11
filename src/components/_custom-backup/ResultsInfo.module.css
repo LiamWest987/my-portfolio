@@ -1,8 +1,0 @@
-.resultsInfo {
-  margin-bottom: var(--spacing-lg);
-}
-
-.resultsInfo p {
-  font-size: var(--font-size-sm);
-  color: var(--muted-foreground);
-}

@@ -2,10 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { fetchContact } from '@/lib/sanity/client'
-import { Section, Container, SectionHeader } from '@/components/ui'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/atoms/input'
-import { Textarea } from '@/components/ui/atoms/textarea'
+import { Section, Container, SectionHeader, Button, Input, Textarea } from '@/components/ui'
 
 interface ContactData {
   _id: string

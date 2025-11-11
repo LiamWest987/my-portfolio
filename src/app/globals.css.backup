@@ -130,33 +130,6 @@
   --nav-bg: rgba(15, 23, 42, 0.95);
   --hover-color: rgba(139, 92, 246, 0.1);
   --surface-color: #1e293b;
-
-  /* Tailwind-ready HSL color variables */
-  /* These are used by tailwind.config.ts for theme colors */
-  --background-hsl: 222.2 84% 4.9%;
-  --foreground-hsl: 210 40% 98%;
-  --card-hsl: 217.2 32.6% 17.5%;
-  --card-foreground-hsl: 210 40% 98%;
-  --popover-hsl: 222.2 84% 4.9%;
-  --popover-foreground-hsl: 210 40% 98%;
-  --primary-hsl: 210 40% 98%;
-  --primary-foreground-hsl: 222.2 47.4% 11.2%;
-  --secondary-hsl: 217.2 32.6% 17.5%;
-  --secondary-foreground-hsl: 210 40% 98%;
-  --muted-hsl: 217.2 32.6% 17.5%;
-  --muted-foreground-hsl: 215 20.2% 65.1%;
-  --accent-hsl: 217.2 32.6% 17.5%;
-  --accent-foreground-hsl: 210 40% 98%;
-  --destructive-hsl: 0 62.8% 30.6%;
-  --destructive-foreground-hsl: 210 40% 98%;
-  --border-hsl: 217.2 32.6% 17.5%;
-  --input-hsl: 217.2 32.6% 17.5%;
-  --ring-hsl: 212.7 26.8% 83.9%;
-  --chart-1: 220 70% 50%;
-  --chart-2: 160 60% 45%;
-  --chart-3: 30 80% 55%;
-  --chart-4: 280 65% 60%;
-  --chart-5: 340 75% 55%;
 }
 
 /* ===== SLATE THEME ===== */
@@ -1433,16 +1406,17 @@ a:focus-visible {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
   width: 0;
   height: 2px;
   background: var(--primary-color);
   transition: all var(--transition-medium);
+  transform: translateX(-50%);
 }
 
 .nav-links a:hover::after,
 .nav-links a.active::after {
-  width: 110%;
+  width: 80%;
 }
 
 .nav-links a:hover,

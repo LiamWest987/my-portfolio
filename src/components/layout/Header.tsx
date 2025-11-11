@@ -2,13 +2,11 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { useTheme } from '../common/ThemeProvider'
+import { usePathname } from 'next/navigation'
+import { useTheme } from '@/components/common'
 
-interface HeaderProps {
-  currentPage?: 'home' | 'projects' | 'about' | 'contact'
-}
-
-export function Header({ currentPage = 'home' }: HeaderProps) {
+export function Header() {
+  const pathname = usePathname()
   const { theme, setTheme, isDropdownOpen, setIsDropdownOpen } = useTheme()
 
   const toggleDropdown = (e: React.MouseEvent) => {
@@ -31,22 +29,22 @@ export function Header({ currentPage = 'home' }: HeaderProps) {
         <nav>
           <ul className="nav-links">
             <li>
-              <Link href="/" className={currentPage === 'home' ? 'active' : ''}>
+              <Link href="/" className={pathname === '/' ? 'active' : ''}>
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/projects" className={currentPage === 'projects' ? 'active' : ''}>
+              <Link href="/projects" className={pathname === '/projects' ? 'active' : ''}>
                 Projects
               </Link>
             </li>
             <li>
-              <Link href="/about" className={currentPage === 'about' ? 'active' : ''}>
+              <Link href="/about" className={pathname === '/about' ? 'active' : ''}>
                 About & Skills
               </Link>
             </li>
             <li>
-              <Link href="/contact" className={currentPage === 'contact' ? 'active' : ''}>
+              <Link href="/contact" className={pathname === '/contact' ? 'active' : ''}>
                 Contact
               </Link>
             </li>

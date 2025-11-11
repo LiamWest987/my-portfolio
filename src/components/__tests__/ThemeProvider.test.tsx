@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, renderHook, waitFor } from '@testing-library/react'
-import { ThemeProvider, useTheme } from '../common/ThemeProvider'
+import { ThemeProvider, useTheme } from '@/components/common'
 
 describe('ThemeProvider', () => {
   beforeEach(() => {

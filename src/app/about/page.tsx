@@ -2,16 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { fetchSkills, fetchEducation, fetchExperience, fetchAwards } from '@/lib/sanity/client'
-import {
-  Section,
-  Container,
-  SectionHeader,
-  SkillCategoryCard,
-  TimelineItem,
-} from '@/components/ui'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/atoms/tabs'
-import { Skeleton } from '@/components/ui/atoms/skeleton'
-import ValueCard from '@/components/ui/ValueCard'
+import { Section, Container, SectionHeader, SkillCategoryCard, TimelineItem, ValueCard, Tabs, TabsContent, TabsList, TabsTrigger, Skeleton } from '@/components/ui'
 
 interface SkillCategory {
   _id: string
@@ -124,7 +115,7 @@ export default function AboutPage() {
               description="Engineering student passionate about circuit design, aerospace systems, and VR development. I combine technical expertise with creativity to build innovative solutions that push the boundaries of technology and learning."
             />
 
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <ValueCard
                 icon={
                   <svg

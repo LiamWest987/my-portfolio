@@ -2,14 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { fetchProjects, fetchContact } from '@/lib/sanity/client'
-import { Button } from '@/components/ui/Button'
-import { Container } from '@/components/ui/Container'
-import { Section } from '@/components/ui/Section'
-import { ProjectCard } from '@/components/ui/ProjectCard'
-import { ProjectModal } from '@/components/ui/ProjectModal'
-import { HeroSection } from '@/components/ui/HeroSection'
-import { SectionHeader } from '@/components/ui/SectionHeader'
-import ValueCard from '@/components/ui/ValueCard'
+import { Button, Container, Section, ProjectCard, ProjectModal, HeroSection, SectionHeader, ValueCard } from '@/components/ui'
 
 interface Project {
   _id: string

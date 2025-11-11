@@ -3,10 +3,16 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   darkMode: 'class',
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/lib/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  safelist: [
+    'md:grid-cols-2',
+    'lg:grid-cols-4',
+    'grid-cols-1',
+    'grid',
+    'gap-6',
   ],
   theme: {
     container: {

@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
-import { Header } from '../layout/Header'
-import { ThemeProvider } from '../common/ThemeProvider'
+import { Header } from '@/components/layout'
+import { ThemeProvider } from '@/components/common'
 
 // Mock Next.js Link component
 vi.mock('next/link', () => ({
@@ -11,6 +11,11 @@ vi.mock('next/link', () => ({
       {children}
     </a>
   ),
+}))
+
+// Mock Next.js usePathname hook
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/',
 }))
 
 const renderWithTheme = (ui: React.ReactElement) => {
@@ -32,18 +37,6 @@ describe('Header', () => {
   })
 
   it('applies active class to current page', () => {
-    renderWithTheme(<Header currentPage="projects" />)
-    const projectsLink = screen.getByText('Projects')
-    expect(projectsLink).toHaveClass('active')
-  })
-
-  it('does not apply active class to other pages', () => {
-    renderWithTheme(<Header currentPage="projects" />)
-    const homeLink = screen.getByText('Home')
-    expect(homeLink).not.toHaveClass('active')
-  })
-
-  it('defaults to home page when no currentPage is provided', () => {
     renderWithTheme(<Header />)
     const homeLink = screen.getByText('Home')
     expect(homeLink).toHaveClass('active')

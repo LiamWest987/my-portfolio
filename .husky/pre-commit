@@ -1,3 +1,10 @@
-npm run type-check
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Fast checks only (lint-staged handles per-file checks)
 npx lint-staged
-npm test -- --run
+
+# Run SEO tests to ensure metadata is valid
+npm test -- src/app/__tests__/metadata.test.ts src/app/__tests__/opengraph-image.test.ts --run
+
+# Full checks run in CI/CD

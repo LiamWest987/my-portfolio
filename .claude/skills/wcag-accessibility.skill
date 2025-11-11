@@ -1,0 +1,912 @@
+---
+name: wcag-accessibility
+description: Comprehensive WCAG 2.1 Level AA accessibility compliance guidance for web and mobile applications. Use when creating accessible interfaces, auditing accessibility, implementing ARIA, testing with screen readers, ensuring keyboard navigation, checking color contrast, or building any digital product that must meet accessibility standards. Covers automated testing, manual testing, POUR principles, and remediation strategies for all platforms and frameworks.
+---
+
+# WCAG 2.1 Accessibility Compliance
+
+Comprehensive guidance for building and testing accessible digital experiences that comply with WCAG 2.1 Level AA standards.
+
+## Quick Start Decision Tree
+
+```
+Are you creating new content?
+├─ Yes → Follow Design & Development Guidelines below
+└─ No → Are you auditing existing content?
+    ├─ Yes → Follow Testing Workflow
+    └─ No → Are you fixing issues?
+        └─ Yes → Follow Remediation Patterns
+```
+
+## The POUR Principles
+
+WCAG 2.1 is organized around four foundational principles. All content must be:
+
+### 1. Perceivable
+Information and UI components must be presentable to users in ways they can perceive.
+
+**Key Requirements:**
+- Text alternatives for non-text content
+- Captions and transcripts for media
+- Adaptable content structure
+- Sufficient color contrast (4.5:1 normal, 3:1 large text)
+- Content doesn't rely solely on color
+- Text resizable to 200%
+
+**Common Violations:**
+- Missing alt text on images
+- Insufficient color contrast
+- Color-only indicators
+- Auto-playing media without controls
+
+### 2. Operable
+User interface components and navigation must be operable.
+
+**Key Requirements:**
+- Full keyboard accessibility
+- No keyboard traps
+- Sufficient time for interactions
+- No seizure-inducing flashes
+- Clear navigation and skip links
+- Visible focus indicators
+- Touch targets ≥44×44 pixels
+
+**Common Violations:**
+- Keyboard inaccessible controls
+- Hidden focus indicators
+- Insufficient touch target sizes
+- Missing skip links
+
+### 3. Understandable
+Information and UI operation must be understandable.
+
+**Key Requirements:**
+- Page language declared
+- Predictable navigation and behavior
+- Input labels and instructions
+- Error identification and suggestions
+- Consistent UI patterns
+
+**Common Violations:**
+- Unlabeled form fields
+- Unclear error messages
+- Inconsistent navigation
+- Confusing instructions
+
+### 4. Robust
+Content must work with current and future technologies, including assistive technologies.
+
+**Key Requirements:**
+- Valid, semantic HTML
+- Proper ARIA usage
+- Programmatically determinable names, roles, values
+- Status message announcements
+
+**Common Violations:**
+- Invalid HTML
+- Improper ARIA
+- Missing accessible names
+- Dynamic content not announced
+
+## Design & Development Guidelines
+
+### Semantic HTML First
+
+Use appropriate HTML elements before reaching for ARIA:
+
+**✓ Good:**
+```html
+<button>Submit</button>
+<nav>...</nav>
+<main>...</main>
+<article>...</article>
+```
+
+**✗ Bad:**
+```html
+<div role="button" tabindex="0" onclick="...">Submit</div>
+<div role="navigation">...</div>
+```
+
+### Heading Hierarchy
+
+Maintain proper heading structure (h1 → h2 → h3):
+
+```html
+<h1>Page Title</h1>
+  <h2>Section</h2>
+    <h3>Subsection</h3>
+    <h3>Subsection</h3>
+  <h2>Section</h2>
+```
+
+**Rules:**
+- One h1 per page
+- Don't skip levels
+- Headings describe content
+- Not used for styling (use CSS)
+
+### Color Contrast
+
+**Minimum Requirements (WCAG AA):**
+- Normal text: 4.5:1
+- Large text (18pt+ or 14pt+ bold): 3:1
+- UI components: 3:1
+
+**Testing Tools:**
+- WebAIM Contrast Checker
+- Chrome DevTools Color Picker
+- Contrast ratio features in design tools
+
+**Common Issues:**
+- Light gray text on white
+- Colored text on colored backgrounds
+- Button states with poor contrast
+
+### Keyboard Navigation
+
+All interactive elements must be keyboard accessible:
+
+**Keyboard Patterns:**
+- `Tab` / `Shift+Tab` - Navigate between elements
+- `Enter` / `Space` - Activate buttons/links
+- `Arrow keys` - Navigate within components (menus, radios)
+- `Esc` - Close modals/menus
+
+**Implementation:**
+```html
+<!-- Button: works by default -->
+<button>Click me</button>
+
+<!-- Custom interactive elements need tabindex and handlers -->
+<div role="button" tabindex="0" 
+     onclick="handleClick()" 
+     onkeydown="handleKeyPress(event)">
+  Custom button
+</div>
+
+<script>
+function handleKeyPress(event) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    handleClick();
+  }
+}
+</script>
+```
+
+**Focus Management:**
+```css
+/* Visible focus indicators */
+:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* NEVER do this */
+:focus {
+  outline: none; /* ✗ Bad */
+}
+```
+
+**Focus Trapping in Modals:**
+```javascript
+// Trap focus within modal
+const modal = document.querySelector('[role="dialog"]');
+const focusableElements = modal.querySelectorAll(
+  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+);
+const firstElement = focusableElements[0];
+const lastElement = focusableElements[focusableElements.length - 1];
+
+modal.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault();
+      lastElement.focus();
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault();
+      firstElement.focus();
+    }
+  }
+});
+```
+
+### Images and Alt Text
+
+**Decision Tree:**
+```
+Is the image meaningful (conveys information)?
+├─ Yes → Use descriptive alt text
+│   └─ Is it complex (chart, diagram)?
+│       ├─ Yes → Use long description (aria-describedby or linked text)
+│       └─ No → Use concise alt text
+└─ No (decorative) → Use empty alt="" and aria-hidden="true"
+```
+
+**Examples:**
+```html
+<!-- Informative image -->
+<img src="chart.png" 
+     alt="Sales increased 45% from Q1 to Q2 2025" />
+
+<!-- Decorative image -->
+<img src="decorative-border.png" 
+     alt="" 
+     aria-hidden="true" />
+
+<!-- Complex image with long description -->
+<img src="complex-chart.png" 
+     alt="Annual revenue breakdown by region"
+     aria-describedby="chart-description" />
+<div id="chart-description">
+  Detailed description of the chart data...
+</div>
+
+<!-- Linked image (alt describes link destination) -->
+<a href="/about">
+  <img src="logo.png" alt="Company name - About Us" />
+</a>
+```
+
+### Forms and Labels
+
+**Every input needs a label:**
+```html
+<!-- Visible label -->
+<label for="email">Email Address</label>
+<input type="email" id="email" required />
+
+<!-- Visually hidden label (if design doesn't show label) -->
+<label for="search" class="sr-only">Search</label>
+<input type="search" id="search" placeholder="Search..." />
+
+<!-- aria-label (when label element won't work) -->
+<button aria-label="Close modal">
+  <span aria-hidden="true">×</span>
+</button>
+
+<!-- aria-labelledby (reference existing text) -->
+<h2 id="dialog-title">Confirm Delete</h2>
+<div role="dialog" aria-labelledby="dialog-title">
+  ...
+</div>
+```
+
+**Error Handling:**
+```html
+<form>
+  <label for="email">
+    Email Address
+    <span aria-label="required">*</span>
+  </label>
+  <input 
+    type="email" 
+    id="email" 
+    required
+    aria-invalid="true"
+    aria-describedby="email-error" />
+  
+  <p id="email-error" role="alert" class="error">
+    Please enter a valid email address
+  </p>
+</form>
+```
+
+**Field Instructions:**
+```html
+<label for="password">Password</label>
+<input 
+  type="password" 
+  id="password"
+  aria-describedby="password-requirements" />
+<p id="password-requirements">
+  Must be at least 8 characters with one number and one special character
+</p>
+```
+
+### ARIA Best Practices
+
+**ARIA Five Rules:**
+1. Use semantic HTML when possible
+2. Don't change native semantics (unless essential)
+3. All interactive ARIA controls must be keyboard accessible
+4. Don't use `role="presentation"` or `aria-hidden="true"` on focusable elements
+5. All interactive elements must have an accessible name
+
+**Common ARIA Patterns:**
+```html
+<!-- Buttons -->
+<button aria-label="Delete item">
+  <span aria-hidden="true">🗑️</span>
+</button>
+
+<!-- Toggle buttons -->
+<button 
+  aria-pressed="false"
+  aria-label="Toggle dark mode">
+  🌙
+</button>
+
+<!-- Expandable sections -->
+<button 
+  aria-expanded="false"
+  aria-controls="section-1">
+  Show details
+</button>
+<div id="section-1" hidden>
+  Details content...
+</div>
+
+<!-- Loading states -->
+<div role="status" aria-live="polite" aria-atomic="true">
+  Loading...
+</div>
+
+<!-- Error announcements -->
+<div role="alert" aria-live="assertive">
+  Error: Form submission failed
+</div>
+
+<!-- Live regions for dynamic content -->
+<div 
+  role="region" 
+  aria-live="polite" 
+  aria-atomic="false">
+  Search found 24 results
+</div>
+```
+
+**ARIA Landmark Roles:**
+```html
+<header role="banner">...</header>
+<nav role="navigation">...</nav>
+<main role="main">...</main>
+<aside role="complementary">...</aside>
+<footer role="contentinfo">...</footer>
+```
+
+Note: HTML5 semantic elements have implicit roles, but explicit ARIA improves compatibility.
+
+### Skip Links
+
+Provide skip navigation for keyboard users:
+
+```html
+<body>
+  <a href="#main-content" class="skip-link">
+    Skip to main content
+  </a>
+  
+  <header>
+    <!-- Navigation -->
+  </header>
+  
+  <main id="main-content" tabindex="-1">
+    <!-- Main content -->
+  </main>
+</body>
+
+<style>
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+</style>
+```
+
+### Responsive and Mobile
+
+**Touch Targets:**
+- Minimum 44×44 pixels
+- Adequate spacing between targets
+- Consider larger for small screens
+
+**Orientation:**
+- Support both portrait and landscape
+- Don't lock orientation unless essential
+
+**Reflow at 320px:**
+- Content reflows to single column
+- No horizontal scrolling for reading
+- Test at 400% zoom
+
+**Text Spacing:**
+Content must remain readable with:
+- Line height: 1.5× font size
+- Paragraph spacing: 2× font size  
+- Letter spacing: 0.12× font size
+- Word spacing: 0.16× font size
+
+## Testing Workflow
+
+### 1. Automated Testing (30-40% coverage)
+
+**Recommended Tools:**
+- **axe DevTools** (browser extension) - Most comprehensive
+- **WAVE** (browser extension) - Visual feedback
+- **Lighthouse** (Chrome DevTools) - Quick baseline
+
+**Integration Testing:**
+```javascript
+// With Playwright + axe-core
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test('page should be accessible', async ({ page }) => {
+  await page.goto('/');
+  
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+    .analyze();
+  
+  expect(results.violations).toEqual([]);
+});
+```
+
+```javascript
+// With Jest + jest-axe
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
+
+test('Component is accessible', async () => {
+  const { container } = render(<MyComponent />);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+```
+
+**What Automated Tools Catch:**
+- Missing alt text
+- Color contrast issues
+- Missing form labels
+- Incorrect ARIA usage
+- Heading hierarchy problems
+- Invalid HTML
+
+**What They Miss:**
+- Keyboard operability
+- Focus management
+- Screen reader experience
+- Content quality
+- Context and meaning
+
+### 2. Keyboard Testing (Manual)
+
+**Test Checklist:**
+- [ ] Can reach all interactive elements with Tab
+- [ ] Tab order is logical
+- [ ] Focus is visible on all elements
+- [ ] Can activate all controls (Enter/Space)
+- [ ] Can dismiss modals/menus (Escape)
+- [ ] No keyboard traps
+- [ ] Skip links work
+- [ ] Arrow keys work in complex widgets
+
+**Test Script:**
+1. Unplug/disable mouse
+2. Press Tab to navigate forward
+3. Press Shift+Tab to navigate backward
+4. Use Enter/Space to activate
+5. Use Escape to close
+6. Use Arrow keys in dropdowns/menus
+
+### 3. Screen Reader Testing (Manual)
+
+**Recommended Screen Readers:**
+- **NVDA** (Windows) - Free
+- **JAWS** (Windows) - Industry standard
+- **VoiceOver** (macOS/iOS) - Built-in
+- **TalkBack** (Android) - Built-in
+
+**VoiceOver (macOS) Quick Start:**
+- Enable: `Cmd+F5`
+- Navigate: `Ctrl+Option+Arrow keys`
+- Interact: `Ctrl+Option+Space`
+- Web Rotor: `Ctrl+Option+U`
+
+**NVDA (Windows) Quick Start:**
+- Download free from nvaccess.org
+- Navigate: Arrow keys
+- Read next: Down arrow
+- Elements list: Insert+F7
+
+**What to Test:**
+- [ ] Page title announced correctly
+- [ ] Headings make sense in isolation
+- [ ] Form labels announced
+- [ ] Button purposes clear
+- [ ] Images have meaningful descriptions
+- [ ] Error messages announced
+- [ ] Dynamic content updates announced
+- [ ] Tab order matches visual order
+
+### 4. Visual Testing
+
+**Zoom Testing:**
+- Test at 200% browser zoom
+- Test at 400% zoom (320px width)
+- No loss of content or functionality
+- No horizontal scrolling for reading
+
+**Color Contrast:**
+- Use browser DevTools color picker
+- Test all text combinations
+- Test UI component states (hover, focus, disabled)
+- Test custom graphics and icons
+
+**Content Reflow:**
+- Resize browser to 320px width
+- Check single-column layout
+- Verify no horizontal scrolling
+- Ensure all content accessible
+
+### 5. Component-Specific Testing
+
+**Forms:**
+- [ ] All fields have labels
+- [ ] Required fields indicated
+- [ ] Error messages specific and helpful
+- [ ] Errors linked to fields (aria-describedby)
+- [ ] Success messages announced
+
+**Modals/Dialogs:**
+- [ ] Focus moves to modal on open
+- [ ] Focus trapped within modal
+- [ ] Escape key closes modal
+- [ ] Focus returns to trigger on close
+- [ ] Proper ARIA (role="dialog", aria-modal)
+
+**Dropdowns/Menus:**
+- [ ] Keyboard accessible (Arrow keys)
+- [ ] Selected item announced
+- [ ] Expandable state communicated (aria-expanded)
+- [ ] Logical grouping
+
+**Carousels/Sliders:**
+- [ ] Can pause auto-advance
+- [ ] Keyboard accessible controls
+- [ ] Current slide announced
+- [ ] Number of slides communicated
+
+**Data Tables:**
+- [ ] Header cells marked with `<th>`
+- [ ] Headers associated with data cells
+- [ ] Complex tables use scope/headers/id
+- [ ] Caption describes table purpose
+
+## Common Patterns and Solutions
+
+### Pattern: Accessible Modal
+
+```html
+<button id="open-modal">Open Settings</button>
+
+<div 
+  role="dialog" 
+  aria-labelledby="dialog-title"
+  aria-modal="true"
+  hidden>
+  <h2 id="dialog-title">Settings</h2>
+  
+  <!-- Modal content -->
+  
+  <button id="close-modal">Close</button>
+</div>
+
+<script>
+const openBtn = document.getElementById('open-modal');
+const closeBtn = document.getElementById('close-modal');
+const modal = document.querySelector('[role="dialog"]');
+let previousFocus;
+
+openBtn.addEventListener('click', () => {
+  previousFocus = document.activeElement;
+  modal.hidden = false;
+  modal.querySelector('button').focus();
+  document.body.style.overflow = 'hidden';
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.hidden = true;
+  document.body.style.overflow = '';
+  previousFocus.focus();
+});
+
+// Trap focus, close on Escape (see Focus Trapping section)
+</script>
+```
+
+### Pattern: Accessible Tabs
+
+```html
+<div class="tabs">
+  <div role="tablist" aria-label="Settings tabs">
+    <button 
+      role="tab" 
+      aria-selected="true" 
+      aria-controls="panel-1"
+      id="tab-1">
+      General
+    </button>
+    <button 
+      role="tab" 
+      aria-selected="false" 
+      aria-controls="panel-2"
+      id="tab-2"
+      tabindex="-1">
+      Privacy
+    </button>
+  </div>
+  
+  <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+    General settings content
+  </div>
+  
+  <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+    Privacy settings content
+  </div>
+</div>
+```
+
+**Keyboard Behavior:**
+- Arrow keys switch tabs
+- Active tab is focusable (tabindex="0")
+- Inactive tabs not focusable (tabindex="-1")
+- Tab key moves to panel content
+
+### Pattern: Accessible Tooltip
+
+```html
+<button 
+  aria-describedby="tooltip-1"
+  onmouseenter="showTooltip()"
+  onfocus="showTooltip()"
+  onmouseleave="hideTooltip()"
+  onblur="hideTooltip()">
+  Help
+</button>
+
+<div 
+  id="tooltip-1" 
+  role="tooltip"
+  hidden>
+  Additional help information
+</div>
+```
+
+**Requirements (WCAG 1.4.13):**
+- Dismissible without moving pointer
+- Hoverable (can move pointer to tooltip)
+- Persistent until dismissed or no longer valid
+
+### Pattern: Live Regions
+
+```html
+<!-- Polite announcement (won't interrupt) -->
+<div role="status" aria-live="polite" aria-atomic="true">
+  <span id="status-message"></span>
+</div>
+
+<!-- Assertive announcement (interrupts) -->
+<div role="alert" aria-live="assertive">
+  <span id="error-message"></span>
+</div>
+
+<script>
+// Update message
+document.getElementById('status-message').textContent = 
+  'Form saved successfully';
+</script>
+```
+
+**Use Cases:**
+- Form submission results
+- Search result counts
+- Loading states
+- Validation feedback
+- Chat messages
+
+## Remediation Strategies
+
+### Prioritization Framework
+
+**Critical (Fix Immediately):**
+- No keyboard access to core functionality
+- Severe contrast failures (<3:1)
+- Missing form labels
+- Broken page structure
+- Inaccessible error states
+
+**High Priority:**
+- Missing alt text on meaningful images
+- Moderate contrast issues (3:1-4.5:1)
+- Missing heading hierarchy
+- Focus not visible
+- Missing ARIA labels
+
+**Medium Priority:**
+- Suboptimal focus order
+- Minor contrast issues
+- Incomplete ARIA implementation
+- Missing skip links
+- Inconsistent patterns
+
+**Low Priority:**
+- Decorative images missing empty alt
+- Minor semantic HTML improvements
+- Nice-to-have ARIA enhancements
+
+### Quick Fixes
+
+**Missing alt text:**
+```html
+<!-- Before -->
+<img src="product.jpg">
+
+<!-- After -->
+<img src="product.jpg" alt="Blue wireless headphones">
+```
+
+**Missing form labels:**
+```html
+<!-- Before -->
+<input type="email" placeholder="Email">
+
+<!-- After -->
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="your@email.com">
+```
+
+**Poor contrast:**
+```css
+/* Before */
+.text { color: #999; } /* 2.85:1 on white */
+
+/* After */
+.text { color: #767676; } /* 4.54:1 on white */
+```
+
+**Hidden focus:**
+```css
+/* Before */
+:focus { outline: none; }
+
+/* After - Remove the problematic rule */
+/* Or add visible focus */
+:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+```
+
+## Platform-Specific Guidance
+
+### React
+
+```jsx
+// Manage focus
+import { useRef, useEffect } from 'react';
+
+function Modal({ isOpen, onClose }) {
+  const closeButtonRef = useRef(null);
+  
+  useEffect(() => {
+    if (isOpen && closeButtonRef.current) {
+      closeButtonRef.current.focus();
+    }
+  }, [isOpen]);
+  
+  return (
+    <div role="dialog" aria-modal="true">
+      <button ref={closeButtonRef} onClick={onClose}>
+        Close
+      </button>
+    </div>
+  );
+}
+
+// Announce dynamic content
+function SearchResults({ results, isLoading }) {
+  return (
+    <>
+      <div role="status" aria-live="polite" aria-atomic="true">
+        {isLoading ? 'Loading...' : `Found ${results.length} results`}
+      </div>
+      {/* Results display */}
+    </>
+  );
+}
+```
+
+### Vue
+
+```vue
+<template>
+  <button
+    @click="toggle"
+    :aria-expanded="isOpen.toString()"
+    aria-controls="content">
+    Toggle Content
+  </button>
+  
+  <div id="content" v-show="isOpen">
+    Content here
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const isOpen = ref(false);
+const toggle = () => isOpen.value = !isOpen.value;
+</script>
+```
+
+### Angular
+
+```typescript
+@Component({
+  selector: 'app-button',
+  template: `
+    <button
+      [attr.aria-pressed]="pressed"
+      (click)="toggle()">
+      {{ label }}
+    </button>
+  `
+})
+export class AccessibleButtonComponent {
+  @Input() label = '';
+  pressed = false;
+  
+  toggle() {
+    this.pressed = !this.pressed;
+  }
+}
+```
+
+## Resources
+
+### Documentation
+For complete WCAG 2.1 success criteria with detailed requirements, see `references/wcag-criteria.md`
+
+### External References
+- WCAG 2.1 Guidelines: https://www.w3.org/TR/WCAG21/
+- How to Meet WCAG (Quick Reference): https://www.w3.org/WAI/WCAG21/quickref/
+- WebAIM: https://webaim.org/
+- A11y Project Checklist: https://www.a11yproject.com/checklist/
+- MDN Accessibility: https://developer.mozilla.org/en-US/docs/Web/Accessibility
+- Deque University: https://dequeuniversity.com/
+- Inclusive Components: https://inclusive-components.design/
+
+### Testing Tools
+- **axe DevTools**: Browser extension, most comprehensive
+- **WAVE**: Visual accessibility checker
+- **Lighthouse**: Built into Chrome DevTools
+- **NVDA**: Free Windows screen reader
+- **Color Contrast Analyzer**: Desktop tool
+- **Accessibility Insights**: Microsoft's testing suite
+
+## Key Reminders
+
+1. **Automated testing finds only 30-40%** of accessibility issues
+2. **Manual testing is essential** - keyboard, screen reader, visual
+3. **Use semantic HTML first**, then ARIA when necessary
+4. **Test early and often** - don't wait until the end
+5. **Test with real users** with disabilities when possible
+6. **Color contrast** is one of the most common failures
+7. **Keyboard accessibility** is foundational for many users
+8. **Focus indicators** must always be visible
+9. **Every interactive element** needs an accessible name
+10. **Documentation helps** team consistency and maintenance

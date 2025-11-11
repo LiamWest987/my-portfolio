@@ -13,6 +13,8 @@
  * Exit code: 0 if all pass, non-zero if any fail
  */
 
+/* eslint-disable no-console */
+
 import { execSync } from 'child_process'
 import chalk from 'chalk'
 

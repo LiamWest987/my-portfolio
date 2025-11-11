@@ -1,12 +1,12 @@
-import { ImageResponse } from 'next/og';
+import { ImageResponse } from 'next/og'
 
-export const alt = 'Contact Liam West';
+export const alt = 'Contact Liam West'
 export const size = {
   width: 1200,
   height: 630,
-};
+}
 
-export const contentType = 'image/png';
+export const contentType = 'image/png'
 
 export default async function Image() {
   return new ImageResponse(
@@ -56,7 +56,7 @@ export default async function Image() {
               marginTop: 10,
             }}
           >
-            Let's discuss engineering projects and opportunities
+            Let&apos;s discuss engineering projects and opportunities
           </div>
         </div>
       </div>
@@ -64,5 +64,5 @@ export default async function Image() {
     {
       ...size,
     }
-  );
+  )
 }

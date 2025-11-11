@@ -714,7 +714,8 @@ test.describe('Projects Page Accessibility', () => {
       const dialog = page.getByRole('dialog')
       await expect(dialog).toBeVisible()
 
-      const dialogContent = dialog.locator('[class*="DialogContent"]').first()
+      // The scrollable content area is the div with overflow-y-auto class
+      const dialogContent = dialog.locator('.overflow-y-auto').first()
 
       // Check if scrollable
       const isScrollable = await dialogContent.evaluate(el => {
@@ -722,14 +723,14 @@ test.describe('Projects Page Accessibility', () => {
       })
 
       if (isScrollable) {
-        // Should be able to scroll with keyboard
+        // Focus on scrollable area and test keyboard scrolling
         await dialogContent.focus()
         await page.keyboard.press('PageDown')
 
         const scrollTop = await dialogContent.evaluate(el => el.scrollTop)
         expect(scrollTop).toBeGreaterThanOrEqual(0)
       } else {
-        // Not scrollable, just verify content is accessible
+        // Not scrollable, just verify the modal is accessible
         expect(await dialog.isVisible()).toBe(true)
       }
     })

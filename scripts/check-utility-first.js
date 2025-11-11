@@ -7,6 +7,8 @@
  * It can also be run manually with: npm run check:utility-first
  */
 
+/* eslint-disable no-console */
+
 import { globSync } from 'glob'
 import fs from 'fs'
 import path from 'path'
@@ -17,15 +19,9 @@ const __dirname = path.dirname(__filename)
 const SRC_DIR = path.join(__dirname, '../src')
 
 // Configuration
-const ALLOWED_CSS_MODULES = [
-  'BackgroundAnimation.module.css',
-  'not-found.module.css',
-]
+const ALLOWED_CSS_MODULES = ['BackgroundAnimation.module.css', 'not-found.module.css']
 
-const ALLOWED_CSS_MODULE_IMPORTS = [
-  'BackgroundAnimation.tsx',
-  'not-found.tsx',
-]
+const ALLOWED_CSS_MODULE_IMPORTS = ['BackgroundAnimation.tsx', 'not-found.tsx']
 
 let exitCode = 0
 
@@ -67,7 +63,7 @@ function checkCSSModuleImports() {
 
   const tsxFiles = globSync('**/*.{tsx,ts}', {
     cwd: SRC_DIR,
-    ignore: ['**/__tests__/**', '**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}']
+    ignore: ['**/__tests__/**', '**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}'],
   })
 
   const violations = []
@@ -105,7 +101,7 @@ function checkInlineStyles() {
 
   const tsxFiles = globSync('**/*.tsx', {
     cwd: SRC_DIR,
-    ignore: ['**/__tests__/**']
+    ignore: ['**/__tests__/**'],
   })
 
   const violations = []
@@ -157,8 +153,9 @@ function checkCVAUsage() {
     if (fs.existsSync(atomPath)) {
       const content = fs.readFileSync(atomPath, 'utf-8')
 
-      const hasCVA = content.includes("from 'class-variance-authority'") ||
-                     content.includes('from "class-variance-authority"')
+      const hasCVA =
+        content.includes("from 'class-variance-authority'") ||
+        content.includes('from "class-variance-authority"')
       const usesCVA = content.includes('cva(')
       const hasTypes = content.includes('VariantProps')
 
@@ -180,7 +177,7 @@ function checkDesignTokens() {
 
   const tsxFiles = globSync('**/*.tsx', {
     cwd: SRC_DIR,
-    ignore: ['**/__tests__/**']
+    ignore: ['**/__tests__/**'],
   })
 
   const violations = []
@@ -211,7 +208,7 @@ function checkDesignTokens() {
 
 // Run all checks
 log('\n🔍 Running Utility-First Enforcement Checks...', colors.magenta)
-log('=' .repeat(60), colors.magenta)
+log('='.repeat(60), colors.magenta)
 
 checkCSSModules()
 checkCSSModuleImports()

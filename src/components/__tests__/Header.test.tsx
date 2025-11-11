@@ -6,7 +6,15 @@ import { ThemeProvider } from '@/components/common'
 
 // Mock Next.js Link component
 vi.mock('next/link', () => ({
-  default: ({ children, href, className }: { children: React.ReactNode; href: string; className?: string }) => (
+  default: ({
+    children,
+    href,
+    className,
+  }: {
+    children: React.ReactNode
+    href: string
+    className?: string
+  }) => (
     <a href={href} className={className}>
       {children}
     </a>
@@ -30,17 +38,19 @@ describe('Header', () => {
 
   it('renders all navigation links', () => {
     renderWithTheme(<Header />)
-    expect(screen.getByText('Home')).toBeInTheDocument()
-    expect(screen.getByText('Projects')).toBeInTheDocument()
-    expect(screen.getByText('About & Skills')).toBeInTheDocument()
-    expect(screen.getByText('Contact')).toBeInTheDocument()
+    // Each link appears twice (desktop + mobile nav)
+    expect(screen.getAllByText('Home').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('Projects').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('About & Skills').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('Contact').length).toBeGreaterThanOrEqual(1)
   })
 
   it('applies active styling to current page', () => {
     renderWithTheme(<Header />)
-    const homeLink = screen.getByText('Home')
-    // Check for Tailwind class that indicates active state (text-accent)
-    expect(homeLink).toHaveClass('text-accent')
+    const homeLinks = screen.getAllByText('Home')
+    // At least one home link should have active styling
+    const hasActiveLink = homeLinks.some(link => link.className.includes('text-accent'))
+    expect(hasActiveLink).toBe(true)
   })
 
   it('renders theme toggle button', () => {
@@ -76,10 +86,11 @@ describe('Header', () => {
   it('has correct link hrefs', () => {
     renderWithTheme(<Header />)
 
-    expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/')
-    expect(screen.getByText('Projects').closest('a')).toHaveAttribute('href', '/projects')
-    expect(screen.getByText('About & Skills').closest('a')).toHaveAttribute('href', '/about')
-    expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact')
+    // Check first instance of each link (desktop nav)
+    expect(screen.getAllByText('Home')[0].closest('a')).toHaveAttribute('href', '/')
+    expect(screen.getAllByText('Projects')[0].closest('a')).toHaveAttribute('href', '/projects')
+    expect(screen.getAllByText('About & Skills')[0].closest('a')).toHaveAttribute('href', '/about')
+    expect(screen.getAllByText('Contact')[0].closest('a')).toHaveAttribute('href', '/contact')
   })
 
   it('logo links to home page', () => {
@@ -228,5 +239,84 @@ describe('Header', () => {
 
     // Should be rotated
     expect(chevron).toHaveClass('rotate-180')
+  })
+
+  it('renders mobile menu button', () => {
+    renderWithTheme(<Header />)
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+    expect(mobileMenuButton).toBeInTheDocument()
+  })
+
+  it('opens mobile menu when hamburger button is clicked', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(<Header />)
+
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+
+    // Initially closed (aria-expanded should be false)
+    expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'false')
+
+    await user.click(mobileMenuButton)
+
+    // Should be open after click
+    expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('closes mobile menu when backdrop is clicked', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(<Header />)
+
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+    await user.click(mobileMenuButton)
+
+    // Menu should be open
+    expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'true')
+
+    // Click backdrop (div with bg-background/80 class)
+    const backdrop = document.querySelector('.bg-background\\/80')
+    if (backdrop) {
+      await user.click(backdrop as HTMLElement)
+    }
+
+    // Menu should be closed
+    expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('closes mobile menu when Escape key is pressed', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(<Header />)
+
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+
+    // Open mobile menu
+    await user.click(mobileMenuButton)
+    expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'true')
+
+    // Press Escape
+    fireEvent.keyDown(document, { key: 'Escape' })
+
+    // Should be closed
+    expect(mobileMenuButton).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('shows hamburger icon when menu is closed', () => {
+    renderWithTheme(<Header />)
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+
+    // Check for hamburger icon (3 lines)
+    const hamburgerIcon = mobileMenuButton.querySelector('svg line[x1="3"]')
+    expect(hamburgerIcon).toBeInTheDocument()
+  })
+
+  it('shows close icon when menu is open', async () => {
+    const user = userEvent.setup()
+    renderWithTheme(<Header />)
+
+    const mobileMenuButton = screen.getByLabelText('Toggle mobile menu')
+    await user.click(mobileMenuButton)
+
+    // Check for close icon (X)
+    const closeIcon = mobileMenuButton.querySelector('svg line[x1="18"]')
+    expect(closeIcon).toBeInTheDocument()
   })
 })

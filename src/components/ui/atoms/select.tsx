@@ -5,10 +5,34 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import { cn } from "@/lib/utils"
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons"
 
+/**
+ * Select root component from Radix UI.
+ * Manages state and provides context for select components.
+ *
+ * @example
+ * ```tsx
+ * <Select>
+ *   <SelectTrigger>
+ *     <SelectValue placeholder="Select an option" />
+ *   </SelectTrigger>
+ *   <SelectContent>
+ *     <SelectItem value="1">Option 1</SelectItem>
+ *   </SelectContent>
+ * </Select>
+ * ```
+ */
 const Select = SelectPrimitive.Root
 
+/**
+ * SelectGroup groups related select items together.
+ * Useful for organizing options into categories.
+ */
 const SelectGroup = SelectPrimitive.Group
 
+/**
+ * SelectValue displays the currently selected value.
+ * Should be used within SelectTrigger.
+ */
 const SelectValue = SelectPrimitive.Value
 
 const SelectTrigger = React.forwardRef<

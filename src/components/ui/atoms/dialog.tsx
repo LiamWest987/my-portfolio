@@ -5,14 +5,47 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { cn } from "@/lib/utils"
 import { Cross2Icon } from "@radix-ui/react-icons"
 
+/**
+ * Dialog root component from Radix UI.
+ * Manages the state and context for dialog components.
+ *
+ * @example
+ * ```tsx
+ * <Dialog>
+ *   <DialogTrigger>Open</DialogTrigger>
+ *   <DialogContent>Content here</DialogContent>
+ * </Dialog>
+ * ```
+ */
 const Dialog = DialogPrimitive.Root
 
+/**
+ * DialogTrigger component opens the dialog when clicked.
+ * Automatically manages aria attributes and interactions.
+ */
 const DialogTrigger = DialogPrimitive.Trigger
 
+/**
+ * DialogPortal renders dialog content in a portal (outside DOM hierarchy).
+ * Ensures proper stacking context and accessibility.
+ */
 const DialogPortal = DialogPrimitive.Portal
 
+/**
+ * DialogClose component closes the dialog when clicked.
+ * Can be used for custom close buttons.
+ */
 const DialogClose = DialogPrimitive.Close
 
+/**
+ * DialogOverlay provides a dark backdrop behind the dialog content.
+ * Animates in and out based on dialog state.
+ *
+ * @param props - Component props from Radix UI DialogPrimitive.Overlay
+ * @param props.className - Additional CSS classes to apply
+ * @param ref - Forwarded ref to the overlay element
+ * @returns A styled overlay element with animations
+ */
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -28,6 +61,30 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
+/**
+ * DialogContent is the main container for dialog content.
+ * Centered modal with close button and smooth animations.
+ *
+ * @param props - Component props from Radix UI DialogPrimitive.Content
+ * @param props.className - Additional CSS classes to apply
+ * @param props.children - Dialog content to render
+ * @param ref - Forwarded ref to the content element
+ * @returns A styled, centered dialog with close button
+ *
+ * @example
+ * ```tsx
+ * <DialogContent>
+ *   <DialogHeader>
+ *     <DialogTitle>Title</DialogTitle>
+ *   </DialogHeader>
+ *   <p>Dialog content</p>
+ * </DialogContent>
+ * ```
+ *
+ * @remarks
+ * Automatically includes a close button in the top-right corner.
+ * Renders within DialogPortal and includes DialogOverlay.
+ */
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
@@ -52,6 +109,13 @@ const DialogContent = React.forwardRef<
 ))
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
+/**
+ * DialogHeader provides consistent header spacing and layout for dialogs.
+ *
+ * @param props - Standard div HTML attributes
+ * @param props.className - Additional CSS classes to apply
+ * @returns A styled dialog header section
+ */
 const DialogHeader = ({
   className,
   ...props
@@ -66,6 +130,13 @@ const DialogHeader = ({
 )
 DialogHeader.displayName = "DialogHeader"
 
+/**
+ * DialogFooter provides a footer section for dialog actions.
+ *
+ * @param props - Standard div HTML attributes
+ * @param props.className - Additional CSS classes to apply
+ * @returns A styled dialog footer section
+ */
 const DialogFooter = ({
   className,
   ...props
@@ -80,6 +151,15 @@ const DialogFooter = ({
 )
 DialogFooter.displayName = "DialogFooter"
 
+/**
+ * DialogTitle displays the main heading for a dialog.
+ * Important for accessibility - identifies the dialog to screen readers.
+ *
+ * @param props - Component props from Radix UI DialogPrimitive.Title
+ * @param props.className - Additional CSS classes to apply
+ * @param ref - Forwarded ref to the title element
+ * @returns A styled dialog title element
+ */
 const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -95,6 +175,15 @@ const DialogTitle = React.forwardRef<
 ))
 DialogTitle.displayName = DialogPrimitive.Title.displayName
 
+/**
+ * DialogDescription displays secondary descriptive text in a dialog.
+ * Important for accessibility - provides dialog context to screen readers.
+ *
+ * @param props - Component props from Radix UI DialogPrimitive.Description
+ * @param props.className - Additional CSS classes to apply
+ * @param ref - Forwarded ref to the description element
+ * @returns A styled dialog description element
+ */
 const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>

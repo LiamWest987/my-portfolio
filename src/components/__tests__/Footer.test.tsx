@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
-import { Footer } from '@/components/layout'
+import { Footer } from '@/components/ui'
 
 // Mock Next.js Link component
 vi.mock('next/link', () => ({
@@ -77,26 +77,10 @@ describe('Footer', () => {
     })
   })
 
-  it('email link has correct data attributes', () => {
+  it('email link has correct href', () => {
     render(<Footer />)
     const emailLink = screen.getByLabelText('Email')
-    expect(emailLink).toHaveAttribute('data-email-user', 'liamwest987')
-    expect(emailLink).toHaveAttribute('data-email-domain', 'gmail.com')
-  })
-
-  it('email link has correct attributes and is clickable', () => {
-    render(<Footer />)
-
-    const emailLink = screen.getByLabelText('Email')
-
-    // Verify it's a link with proper attributes
-    expect(emailLink).toBeInTheDocument()
-    expect(emailLink).toHaveAttribute('href', '#')
-    expect(emailLink).toHaveAttribute('data-email-user', 'liamwest987')
-    expect(emailLink).toHaveAttribute('data-email-domain', 'gmail.com')
-
-    // Click event handler is tested implicitly by the data attributes being present
-    // The actual mailto behavior is browser-specific and doesn't need testing
+    expect(emailLink).toHaveAttribute('href', 'mailto:liamwest987@gmail.com')
   })
 
   it('back to top button is rendered', () => {

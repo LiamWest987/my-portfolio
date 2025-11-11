@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 
 type Theme = 'light' | 'dark'
 
@@ -13,6 +13,19 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
+/**
+ * Hook to access theme context
+ *
+ * Must be used within a ThemeProvider component.
+ *
+ * @returns Theme context with current theme and setter functions
+ * @throws {Error} If used outside of ThemeProvider
+ * @example
+ * ```tsx
+ * const { theme, setTheme } = useTheme()
+ * setTheme('dark')
+ * ```
+ */
 export function useTheme() {
   const context = useContext(ThemeContext)
   if (context === undefined) {
@@ -21,10 +34,27 @@ export function useTheme() {
   return context
 }
 
+/**
+ * Props for the ThemeProvider component
+ */
 interface ThemeProviderProps {
+  /** Child components that can access theme context */
   children: ReactNode
 }
 
+/**
+ * Theme provider component for managing light/dark mode
+ *
+ * Provides theme state and control to all child components via React Context.
+ * Persists theme preference to localStorage and applies it to document root.
+ *
+ * @example
+ * ```tsx
+ * <ThemeProvider>
+ *   <App />
+ * </ThemeProvider>
+ * ```
+ */
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>('dark')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -39,9 +69,11 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const applyTheme = (mode: Theme) => {
     if (mode === 'dark') {
+      document.documentElement.classList.remove('light')
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
+      document.documentElement.classList.add('light')
     }
     // Always use slate theme
     document.documentElement.setAttribute('data-theme', 'slate')

@@ -1,0 +1,248 @@
+/**
+ * BackgroundAnimation - Module styles
+ * Provides various animated background effects
+ */
+
+/* ===== BACKGROUND ANIMATION CONTAINER ===== */
+.backgroundAnimation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ===== BACKGROUND GRADIENT ===== */
+.backgroundGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    oklch(var(--background)) 0%,
+    oklch(var(--secondary)) 50%,
+    oklch(var(--background)) 100%
+  );
+  opacity: 0.3;
+  animation: wave 20s ease-in-out infinite;
+}
+
+/* ===== GRADIENT ORBS ===== */
+.gradientOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.gradientOrb1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, oklch(var(--primary)) 0%, transparent 70%);
+  top: -10%;
+  right: -10%;
+  animation: floatOrb 25s infinite, pulseOrb 8s infinite;
+}
+
+.gradientOrb2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, oklch(var(--accent)) 0%, transparent 70%);
+  bottom: -10%;
+  left: -5%;
+  animation: floatOrb 30s infinite reverse, pulseOrb 10s infinite;
+  animation-delay: 5s;
+}
+
+.gradientOrb3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, oklch(var(--primary)) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: floatOrb 20s infinite, pulseOrb 6s infinite;
+  animation-delay: 2s;
+}
+
+/* ===== GRID PATTERN ===== */
+.gridPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(oklch(var(--border)) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(var(--border)) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.1;
+  animation: float1 20s ease-in-out infinite;
+}
+
+/* ===== DOT PATTERN ===== */
+.dotPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle,
+    oklch(var(--primary)) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+  opacity: 0.15;
+  animation: float2 15s ease-in-out infinite;
+}
+
+/* ===== ANIMATIONS ===== */
+
+/* Wave animation for gradient */
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(-5%) translateY(-5%);
+  }
+  50% {
+    transform: translateX(5%) translateY(5%);
+  }
+  75% {
+    transform: translateX(-5%) translateY(5%);
+  }
+}
+
+/* Float animation for orbs */
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10%, -10%) scale(1.05);
+  }
+  50% {
+    transform: translate(-5%, 15%) scale(0.95);
+  }
+  75% {
+    transform: translate(15%, 5%) scale(1.02);
+  }
+}
+
+/* Pulse animation for orbs */
+@keyframes pulseOrb {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Float animations for patterns */
+@keyframes float1 {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  33% {
+    transform: translateY(-5px) translateX(5px);
+  }
+  66% {
+    transform: translateY(5px) translateX(-5px);
+  }
+}
+
+@keyframes float3 {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-20px) rotate(5deg);
+  }
+}
+
+@keyframes float4 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(20px) rotate(-5deg);
+  }
+}
+
+@keyframes float5 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(10px, -10px) rotate(10deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* ===== ACCESSIBILITY: REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundAnimation *,
+  .backgroundGradient,
+  .gradientOrb,
+  .gradientOrb1,
+  .gradientOrb2,
+  .gradientOrb3,
+  .gridPattern,
+  .dotPattern {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  .gradientOrb1 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .gradientOrb2 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .gradientOrb3 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .gridPattern {
+    background-size: 30px 30px;
+  }
+
+  .dotPattern {
+    background-size: 20px 20px;
+  }
+}

@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
  * Includes Open Graph and Twitter Card metadata for rich link previews.
  */
 export const metadata: Metadata = {
-  metadataBase: new URL('https://liamwest.com'),
+  metadataBase: new URL('https://liamwest.me'),
   title: {
     default: 'Liam West - Engineering Portfolio',
     template: '%s | Liam West',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'Portfolio',
     'Liam West',
   ],
-  authors: [{ name: 'Liam West', url: 'https://liamwest.com' }],
+  authors: [{ name: 'Liam West', url: 'https://liamwest.me' }],
   creator: 'Liam West',
   robots: {
     index: true,

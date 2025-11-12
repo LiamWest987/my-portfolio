@@ -15,8 +15,7 @@ export default async function Image() {
     (
       <div
         style={{
-          fontSize: 64,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          background: '#0a0e1a',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -25,6 +24,7 @@ export default async function Image() {
           justifyContent: 'center',
           color: 'white',
           fontFamily: 'system-ui, sans-serif',
+          padding: '80px',
         }}
       >
         <div
@@ -33,32 +33,53 @@ export default async function Image() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 20,
+            gap: 32,
           }}
         >
-          <div style={{ fontSize: 72, fontWeight: 'bold' }}>Liam West</div>
+          <div
+            style={{
+              fontSize: 32,
+              fontWeight: 500,
+              color: '#94a3b8',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+            }}
+          >
+            Engineering & VR Development Portfolio
+          </div>
+          <div
+            style={{
+              fontSize: 96,
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+            }}
+          >
+            Hi, I'm{' '}
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              Liam West
+            </span>
+          </div>
           <div
             style={{
               fontSize: 36,
               fontWeight: 400,
               textAlign: 'center',
-              maxWidth: '80%',
-              opacity: 0.9,
+              maxWidth: '90%',
+              color: '#94a3b8',
+              lineHeight: 1.6,
             }}
           >
-            Engineering Portfolio
-          </div>
-          <div
-            style={{
-              fontSize: 24,
-              fontWeight: 300,
-              textAlign: 'center',
-              maxWidth: '70%',
-              opacity: 0.8,
-              marginTop: 10,
-            }}
-          >
-            Circuit Design • Aerospace Systems • VR Development
+            Engineering student driving{' '}
+            <span style={{ color: '#60a5fa' }}>innovation and excellence</span> through circuit
+            design, aerospace systems, and immersive VR development
           </div>
         </div>
       </div>

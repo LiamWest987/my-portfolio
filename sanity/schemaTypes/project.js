@@ -29,7 +29,9 @@ export default {
           {title: 'PLTW POE', value: 'PLTW POE'},
           {title: 'PLTW Aerospace', value: 'PLTW Aerospace'},
         ],
+        layout: 'radio', // Radio layout allows adding custom values in Sanity v3
       },
+      description: 'Select a category or click "Add item..." to create a custom category',
       validation: (Rule) => Rule.required(),
     },
     {

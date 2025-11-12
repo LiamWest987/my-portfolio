@@ -276,7 +276,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
         </div>
         <div className="flex-1 overflow-y-auto p-6 [&::-webkit-scrollbar-thumb:hover]:bg-foreground [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-secondary [&::-webkit-scrollbar]:w-2">
           {allImages.length > 0 && (
-            <div className="relative mb-6 w-full overflow-hidden rounded-lg">
+            <div className="border-muted-foreground/20 bg-muted/30 relative mb-6 w-full rounded-lg border-2 p-2">
               {hasMultipleImages && (
                 <button
                   className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-none bg-black/60 text-white opacity-70 backdrop-blur-sm transition-all hover:scale-110 hover:bg-black/80 hover:opacity-100"
@@ -300,14 +300,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                   </svg>
                 </button>
               )}
-              <div className="relative aspect-video w-full overflow-hidden bg-muted">
+              <div className="bg-background/50 relative aspect-video w-full overflow-hidden rounded-md">
                 {allImages.map((img, index) => (
                   <img
                     key={index}
                     src={img as string}
                     alt={`${project.title} - Screenshot ${index + 1} of ${allImages.length}`}
                     className={cn(
-                      'absolute left-0 top-0 h-full w-full object-contain transition-opacity duration-300',
+                      'absolute left-0 top-0 h-full w-full rounded-md object-contain transition-opacity duration-300',
                       index === currentImageIndex
                         ? 'pointer-events-auto opacity-100'
                         : 'pointer-events-none opacity-0'

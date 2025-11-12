@@ -193,7 +193,9 @@ export default function Home() {
                 ),
               },
               {
-                href: '#',
+                href: contactData?.email
+                  ? `mailto:${contactData.email}`
+                  : 'mailto:liamwest987@gmail.com',
                 label: 'Email',
                 icon: (
                   <svg

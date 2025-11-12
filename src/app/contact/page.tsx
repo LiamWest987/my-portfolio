@@ -290,8 +290,8 @@ export default function ContactPage() {
           <div className="mx-auto max-w-[600px]">
             <div className="flex gap-8">
               {/* Location Card */}
-              <div className="group relative flex min-h-[180px] flex-1 flex-col items-center justify-center rounded-lg border border-border bg-card p-5 text-center transition-all duration-300 before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-primary before:to-accent before:p-px before:opacity-0 before:transition-opacity before:duration-300 before:[mask-composite:exclude] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] hover:-translate-y-0.5 hover:border-primary hover:shadow-md hover:before:opacity-30 md:p-6">
-                <div className="mb-4 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-slate-500/10 to-sky-500/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-accent group-hover:text-white">
+              <div className="relative flex min-h-[180px] flex-1 flex-col items-center justify-center rounded-lg border border-border bg-card p-5 text-center md:p-6">
+                <div className="mb-4 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-slate-500/10 to-sky-500/10 text-primary">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -316,7 +316,7 @@ export default function ContactPage() {
               </div>
 
               {/* Social Links Card */}
-              <div className="group relative flex min-h-[180px] flex-1 flex-col items-center justify-center rounded-lg border border-border bg-card p-5 text-center transition-all duration-300 before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-primary before:to-accent before:p-px before:opacity-0 before:transition-opacity before:duration-300 before:[mask-composite:exclude] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] hover:-translate-y-0.5 hover:border-primary hover:shadow-md hover:before:opacity-30 md:p-6">
+              <div className="relative flex min-h-[180px] flex-1 flex-col items-center justify-center rounded-lg border border-border bg-card p-5 text-center md:p-6">
                 <h3 className="mb-6 whitespace-nowrap text-xl font-medium md:text-2xl">
                   Connect With Me
                 </h3>

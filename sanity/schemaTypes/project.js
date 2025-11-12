@@ -28,6 +28,7 @@ export default {
           {title: 'Unity VR', value: 'Unity VR'},
           {title: 'PLTW POE', value: 'PLTW POE'},
           {title: 'PLTW Aerospace', value: 'PLTW Aerospace'},
+          {title: 'Civil Engineering', value: 'Civil Engineering'},
         ],
         layout: 'radio', // Radio layout allows adding custom values in Sanity v3
       },

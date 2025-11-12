@@ -75,6 +75,9 @@ export default async function Image() {
               maxWidth: '90%',
               color: '#94a3b8',
               lineHeight: 1.6,
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
             }}
           >
             Engineering student driving{' '}

@@ -83,8 +83,8 @@ export default {
       title: 'Long Description',
       type: 'text',
       rows: 8,
-      description: 'Detailed description shown in project modal (legacy field)',
-      validation: (Rule) => Rule.required(),
+      description:
+        'Detailed description shown in project modal (legacy field - use Overview instead)',
     },
     {
       name: 'overview',
@@ -92,6 +92,7 @@ export default {
       type: 'text',
       rows: 6,
       description: 'Detailed overview of the project goals and context',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'technologies',

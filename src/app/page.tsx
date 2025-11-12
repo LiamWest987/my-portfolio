@@ -13,8 +13,8 @@ import {
   HeroSection,
   SectionHeader,
   AboutCard,
-  BackgroundAnimation,
 } from '@/components/ui'
+import HeroBackgroundWebGL from '@/components/ui/organisms/HeroBackgroundWebGL'
 
 /**
  * Project data structure from Sanity CMS.
@@ -108,8 +108,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Background Animation */}
-      <BackgroundAnimation variant="full" />
+      {/* WebGL Background Animation */}
+      <HeroBackgroundWebGL gridSpacing={30} intensity={1.0} />
 
       <main>
         {/* Hero Section */}

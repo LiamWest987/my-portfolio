@@ -111,14 +111,14 @@ float smoothNoise(vec2 p) {
   return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 
-// Blur for frosted glass effect
+// Blur for frosted glass effect - Optimized to 5x5 kernel
 vec4 blur(sampler2D tex, vec2 uv, float radius) {
   vec4 color = vec4(0.0);
   float total = 0.0;
 
-  // 7x7 kernel (must use constants in WebGL loops)
-  for(float x = -3.0; x <= 3.0; x += 1.0) {
-    for(float y = -3.0; y <= 3.0; y += 1.0) {
+  // 5x5 kernel (reduced from 7x7 for better performance)
+  for(float x = -2.0; x <= 2.0; x += 1.0) {
+    for(float y = -2.0; y <= 2.0; y += 1.0) {
       vec2 offset = vec2(x, y) * radius / u_resolution;
       color += texture2D(tex, clamp(uv + offset, 0.0, 1.0));
       total += 1.0;
@@ -157,9 +157,9 @@ void main() {
   // STEP 3: Distortion based on surface normal (lensing)
   vec2 distortion = normal.xy * 0.04;
 
-  // STEP 4: Variable blur based on glass thickness
+  // STEP 4: Variable blur based on glass thickness (reduced for performance)
   float thickness = height;
-  float blurRadius = mix(1.0, 3.5, thickness); // Thicker = more blur
+  float blurRadius = mix(0.8, 2.0, thickness); // Reduced from (1.0, 3.5) for better performance
 
   // STEP 5: Sample background with blur + distortion + chromatic aberration
   float aberration = 0.002; // Reduced from 0.004
@@ -184,6 +184,7 @@ export interface RendererConfig {
   gridSpacing?: number
   nodeColor?: [number, number, number]
   glowColor?: [number, number, number]
+  backgroundColor?: [number, number, number, number]
 }
 
 export class GlassGridRenderer {
@@ -212,6 +213,7 @@ export class GlassGridRenderer {
   private gridSpacing: number = 30
   private nodeColor: [number, number, number] = [0.5, 0.7, 1.0] // Brighter blueprint blue
   private glowColor: [number, number, number] = [0.7, 0.95, 1.0] // Bright cyan
+  private backgroundColor: [number, number, number, number] = [0.04, 0.05, 0.08, 1.0] // Dark blue default
 
   // Performance tracking
   private lastTime: number = 0
@@ -225,6 +227,7 @@ export class GlassGridRenderer {
     this.gridSpacing = config.gridSpacing || this.gridSpacing
     this.nodeColor = config.nodeColor || this.nodeColor
     this.glowColor = config.glowColor || this.glowColor
+    this.backgroundColor = config.backgroundColor || this.backgroundColor
 
     this.initialize()
   }
@@ -398,8 +401,8 @@ export class GlassGridRenderer {
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer)
     gl.viewport(0, 0, this.canvas.width, this.canvas.height)
 
-    // Clear
-    gl.clearColor(0.04, 0.05, 0.08, 1.0) // Dark blue background
+    // Clear with configured background color
+    gl.clearColor(...this.backgroundColor)
     gl.clear(gl.COLOR_BUFFER_BIT)
 
     // Use grid program

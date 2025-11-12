@@ -5,7 +5,11 @@ import { ThemeProvider } from '@/components/common'
 import { Header, Footer } from '@/components/ui/organisms'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap', // Prevent invisible text during font load
+  preload: true, // Preload the font
+})
 
 /**
  * Application metadata configuration for SEO and social media sharing.
@@ -97,6 +101,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to external domains for faster loading */}
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+      </head>
       <body className={inter.className}>
         <a
           href="#main-content"

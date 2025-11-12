@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import { fetchProjects, fetchContact } from '@/lib/sanity/client'
 import {
   Button,
@@ -14,7 +15,12 @@ import {
   SectionHeader,
   AboutCard,
 } from '@/components/ui'
-import HeroBackgroundWebGL from '@/components/ui/organisms/HeroBackgroundWebGL'
+
+// Lazy load WebGL background for better initial load performance
+const HeroBackgroundWebGL = dynamic(
+  () => import('@/components/ui/organisms/HeroBackgroundWebGL'),
+  { ssr: false } // Disable SSR for WebGL (requires browser APIs)
+)
 
 /**
  * Project data structure from Sanity CMS.

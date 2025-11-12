@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { GlassGridRenderer } from '@/lib/webgl/GlassGridRenderer'
 import BackgroundAnimation from './BackgroundAnimation'
+import { useTheme } from '@/components/common'
 
 /**
  * Props for HeroBackgroundWebGL component
@@ -40,6 +41,7 @@ export default function HeroBackgroundWebGL({
   const lastTimeRef = useRef<number>(0)
   const [webglSupported, setWebglSupported] = useState<boolean | null>(null)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const { theme } = useTheme()
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -82,10 +84,17 @@ export default function HeroBackgroundWebGL({
 
     // Create renderer
     try {
+      // Set background color based on theme
+      const isLightMode = theme === 'light'
+      const backgroundColor: [number, number, number, number] = isLightMode
+        ? [0.95, 0.96, 0.98, 1.0] // Very light blue-gray for light mode
+        : [0.04, 0.05, 0.08, 1.0] // Dark blue for dark mode
+
       const renderer = new GlassGridRenderer(canvas, {
         gridSpacing,
         nodeColor: [0.4, 0.6, 0.9],
         glowColor: [0.6, 0.9, 1.0],
+        backgroundColor,
       })
       rendererRef.current = renderer
     } catch (error) {
@@ -121,7 +130,7 @@ export default function HeroBackgroundWebGL({
         rendererRef.current = null
       }
     }
-  }, [intensity, gridSpacing, prefersReducedMotion])
+  }, [intensity, gridSpacing, prefersReducedMotion, theme])
 
   // Handle mouse movement
   useEffect(() => {

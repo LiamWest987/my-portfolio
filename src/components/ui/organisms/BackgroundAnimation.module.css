@@ -22,14 +22,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    oklch(var(--background)) 0%,
-    oklch(var(--secondary)) 50%,
-    oklch(var(--background)) 100%
+  background: radial-gradient(
+    ellipse at center,
+    oklch(var(--secondary) / 0.3) 0%,
+    oklch(var(--background)) 70%
   );
-  opacity: 0.3;
-  animation: wave 20s ease-in-out infinite;
+  opacity: 0.5;
+  animation: gentlePulse 25s ease-in-out infinite;
 }
 
 /* ===== GRADIENT ORBS ===== */
@@ -48,7 +47,9 @@
   background: radial-gradient(circle, oklch(var(--primary)) 0%, transparent 70%);
   top: -10%;
   right: -10%;
-  animation: floatOrb 25s infinite, pulseOrb 8s infinite;
+  animation:
+    floatOrb 25s infinite,
+    pulseOrb 8s infinite;
 }
 
 .gradientOrb2 {
@@ -57,7 +58,9 @@
   background: radial-gradient(circle, oklch(var(--accent)) 0%, transparent 70%);
   bottom: -10%;
   left: -5%;
-  animation: floatOrb 30s infinite reverse, pulseOrb 10s infinite;
+  animation:
+    floatOrb 30s infinite reverse,
+    pulseOrb 10s infinite;
   animation-delay: 5s;
 }
 
@@ -68,7 +71,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: floatOrb 20s infinite, pulseOrb 6s infinite;
+  animation:
+    floatOrb 20s infinite,
+    pulseOrb 6s infinite;
   animation-delay: 2s;
 }
 
@@ -94,11 +99,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(
-    circle,
-    oklch(var(--primary)) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle, oklch(var(--primary)) 1px, transparent 1px);
   background-size: 30px 30px;
   opacity: 0.15;
   animation: float2 15s ease-in-out infinite;
@@ -106,25 +107,23 @@
 
 /* ===== ANIMATIONS ===== */
 
-/* Wave animation for gradient */
-@keyframes wave {
-  0%, 100% {
-    transform: translateX(0) translateY(0);
-  }
-  25% {
-    transform: translateX(-5%) translateY(-5%);
+/* Gentle pulse animation for gradient */
+@keyframes gentlePulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
   }
   50% {
-    transform: translateX(5%) translateY(5%);
-  }
-  75% {
-    transform: translateX(-5%) translateY(5%);
+    opacity: 0.7;
+    transform: scale(1.05);
   }
 }
 
 /* Float animation for orbs */
 @keyframes floatOrb {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   25% {
@@ -140,7 +139,8 @@
 
 /* Pulse animation for orbs */
 @keyframes pulseOrb {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.15;
   }
   50% {
@@ -150,7 +150,8 @@
 
 /* Float animations for patterns */
 @keyframes float1 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
   50% {
@@ -159,7 +160,8 @@
 }
 
 @keyframes float2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
   }
   33% {
@@ -171,7 +173,8 @@
 }
 
 @keyframes float3 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0) rotate(0deg);
   }
   50% {
@@ -180,7 +183,8 @@
 }
 
 @keyframes float4 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -189,7 +193,8 @@
 }
 
 @keyframes float5 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   50% {
@@ -198,7 +203,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.1;
   }
   50% {

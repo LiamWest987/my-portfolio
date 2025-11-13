@@ -7,8 +7,8 @@
  * @module lib/sanity/client
  */
 
-import { createClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
+import { createClient } from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
 
 /**
  * Configured Sanity client instance.
@@ -28,18 +28,18 @@ import imageUrlBuilder from "@sanity/image-url";
  * ```
  */
 export const client = createClient({
-  projectId: process.env['NEXT_PUBLIC_SANITY_PROJECT_ID'] || "40f0qafr",
-  dataset: process.env['NEXT_PUBLIC_SANITY_DATASET'] || "portfolio",
-  useCdn: process.env['NODE_ENV'] === "production", // Use CDN in production for better performance
-  apiVersion: "2024-01-01",
-});
+  projectId: process.env['NEXT_PUBLIC_SANITY_PROJECT_ID'] || '40f0qafr',
+  dataset: process.env['NEXT_PUBLIC_SANITY_DATASET'] || 'portfolio',
+  useCdn: process.env['NODE_ENV'] === 'production', // Use CDN in production for better performance
+  apiVersion: '2024-01-01',
+})
 
 /**
  * Image URL builder instance for Sanity images.
  *
  * @internal
  */
-const builder = imageUrlBuilder(client);
+const builder = imageUrlBuilder(client)
 
 /**
  * Generates an optimized image URL builder from a Sanity image reference.
@@ -71,7 +71,7 @@ const builder = imageUrlBuilder(client);
  * ```
  */
 export function urlFor(source: Parameters<typeof builder.image>[0]) {
-  return builder.image(source);
+  return builder.image(source)
 }
 
 /**
@@ -87,8 +87,8 @@ export function urlFor(source: Parameters<typeof builder.image>[0]) {
  * - Metadata (tags, featured status)
  * - Links (demo URLs)
  *
- * PDF paths are automatically converted from Sanity CDN URLs to local proxy URLs
- * for proper serving through the application. Empty array is returned on error.
+ * PDFs are served through an API proxy route at /api/pdf/[id] which fetches
+ * from Sanity CDN and serves through your domain. Empty array is returned on error.
  *
  * @throws Logs error to console if fetch fails, but returns empty array instead of throwing
  *
@@ -119,18 +119,33 @@ export async function fetchProjects() {
         challenges,
         outcomes,
         tags,
-        "pdfPath": pdf.asset->path,
+        "hasPdf": defined(pdf.asset),
         demo
       }
-    `);
-    // Convert Sanity CDN URLs to local proxy URLs
-    return projects.map((project: { pdfPath?: string; [key: string]: unknown }) => ({
-      ...project,
-      pdf: project.pdfPath ? `/pdfs/${project.pdfPath.split("/").pop()}` : null,
-    }));
+    `)
+    // Convert to use API proxy route with slug
+    return projects.map(
+      (project: { _id: string; title: string; hasPdf?: boolean; [key: string]: unknown }) => {
+        if (project.hasPdf) {
+          // Create a URL-friendly slug from the title
+          const slug = project.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '')
+          return {
+            ...project,
+            pdf: `/api/pdf/${slug}--${project._id}`,
+          }
+        }
+        return {
+          ...project,
+          pdf: null,
+        }
+      }
+    )
   } catch (error) {
-    console.error("Error fetching projects from Sanity:", error);
-    return [];
+    console.error('Error fetching projects from Sanity:', error)
+    return []
   }
 }
 
@@ -142,8 +157,7 @@ export async function fetchProjects() {
  *
  * @remarks
  * Returns project data including title, category, date, image, descriptions,
- * technologies, and demo link. PDF path is automatically converted from Sanity
- * CDN URL to local proxy URL.
+ * technologies, and demo link. PDFs are served through API proxy route.
  *
  * @throws Logs error to console if fetch fails, but returns null instead of throwing
  *
@@ -170,20 +184,24 @@ export async function fetchProjectById(id: string) {
         description,
         longDescription,
         technologies,
-        "pdfPath": pdf.asset->path,
+        "hasPdf": defined(pdf.asset),
         demo
       }
     `,
-      { id },
-    );
-    // Convert Sanity CDN URL to local proxy URL
-    if (project && project.pdfPath) {
-      project.pdf = `/pdfs/${project.pdfPath.split("/").pop()}`;
+      { id }
+    )
+    // Convert to use API proxy route with slug
+    if (project && project.hasPdf) {
+      const slug = project.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '')
+      project.pdf = `/api/pdf/${slug}--${project._id}`
     }
-    return project;
+    return project
   } catch (error) {
-    console.error("Error fetching project:", error);
-    return null;
+    console.error('Error fetching project:', error)
+    return null
   }
 }
 
@@ -220,11 +238,11 @@ export async function fetchSkills() {
         skills,
         icon
       }
-    `);
-    return skills;
+    `)
+    return skills
   } catch (error) {
-    console.error("Error fetching skills from Sanity:", error);
-    return [];
+    console.error('Error fetching skills from Sanity:', error)
+    return []
   }
 }
 
@@ -259,11 +277,11 @@ export async function fetchEducation() {
         description,
         order
       }
-    `);
-    return education;
+    `)
+    return education
   } catch (error) {
-    console.error("Error fetching education from Sanity:", error);
-    return [];
+    console.error('Error fetching education from Sanity:', error)
+    return []
   }
 }
 
@@ -305,11 +323,11 @@ export async function fetchExperience() {
         achievements,
         order
       }
-    `);
-    return experience;
+    `)
+    return experience
   } catch (error) {
-    console.error("Error fetching experience from Sanity:", error);
-    return [];
+    console.error('Error fetching experience from Sanity:', error)
+    return []
   }
 }
 
@@ -345,11 +363,11 @@ export async function fetchAwards() {
         isHighlighted,
         icon
       }
-    `);
-    return awards;
+    `)
+    return awards
   } catch (error) {
-    console.error("Error fetching awards from Sanity:", error);
-    return [];
+    console.error('Error fetching awards from Sanity:', error)
+    return []
   }
 }
 
@@ -394,10 +412,10 @@ export async function fetchContact() {
         "resume": resume.asset->url,
         "successImage": successImage.asset->url
       }
-    `);
-    return contact;
+    `)
+    return contact
   } catch (error) {
-    console.error("Error fetching contact from Sanity:", error);
-    return null;
+    console.error('Error fetching contact from Sanity:', error)
+    return null
   }
 }

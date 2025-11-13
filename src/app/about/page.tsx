@@ -159,9 +159,8 @@ export default function AboutPage() {
           <div className="mb-12 text-center">
             <h1 className="mb-4 text-4xl font-bold">About & Skills</h1>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Engineering student passionate about circuit design, aerospace systems, and VR
-              development. I combine technical expertise with creativity to build innovative
-              solutions that push the boundaries of technology and learning.
+              Engineering student passionate about designing better systems and creating
+              user-centric solutions.
             </p>
           </div>
 
@@ -185,7 +184,7 @@ export default function AboutPage() {
                 </svg>
               }
               title="Technical Excellence"
-              description="Mastering circuit design, digital electronics, and aerospace engineering fundamentals"
+              description="Mastering engineering fundamentals"
             />
 
             <AboutCard
@@ -207,7 +206,7 @@ export default function AboutPage() {
                 </svg>
               }
               title="Innovation Focus"
-              description="Developing cutting-edge VR simulations and immersive training experiences"
+              description="Developing innovative solutions through user-centric design and engineering"
             />
 
             <AboutCard
@@ -252,7 +251,7 @@ export default function AboutPage() {
                 </svg>
               }
               title="Continuous Learning"
-              description="Constantly exploring new technologies and expanding skills in electronics, aerospace, and software development"
+              description="Constantly exploring new technologies and expanding skills in multiple engineering disciplines"
             />
           </div>
         </Container>

@@ -38,7 +38,7 @@ export const siteConfig = {
   /** Full site name displayed in browser title and metadata */
   name: 'Liam West - Portfolio',
   /** Site description for SEO and social media previews */
-  description: 'Engineering student passionate about circuit design, aerospace systems, and VR development',
+  description: 'Engineering student interested in product management and engineering',
   /** Canonical site URL */
   url: 'https://liamwest.com',
   /** Author/owner information */

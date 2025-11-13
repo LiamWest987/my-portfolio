@@ -45,7 +45,7 @@ export default async function Image() {
               letterSpacing: '0.1em',
             }}
           >
-            Engineering & VR Development Portfolio
+            Engineering Portfolio
           </div>
           <div
             style={{
@@ -80,9 +80,8 @@ export default async function Image() {
               justifyContent: 'center',
             }}
           >
-            Engineering student driving{' '}
-            <span style={{ color: '#60a5fa' }}>innovation and excellence</span> through circuit
-            design, aerospace systems, and immersive VR development
+            Engineering student interested in{' '}
+            <span style={{ color: '#60a5fa' }}>product management and engineering</span>
           </div>
         </div>
       </div>

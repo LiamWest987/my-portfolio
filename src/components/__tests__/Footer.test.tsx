@@ -5,7 +5,15 @@ import { Footer } from '@/components/ui'
 
 // Mock Next.js Link component
 vi.mock('next/link', () => ({
-  default: ({ children, href, className }: { children: React.ReactNode; href: string; className?: string }) => (
+  default: ({
+    children,
+    href,
+    className,
+  }: {
+    children: React.ReactNode
+    href: string
+    className?: string
+  }) => (
     <a href={href} className={className}>
       {children}
     </a>
@@ -33,7 +41,7 @@ describe('Footer', () => {
   it('renders tagline', () => {
     render(<Footer />)
     expect(
-      screen.getByText(/Engineering student passionate about circuit design/)
+      screen.getByText(/Engineering student interested in product management and engineering/)
     ).toBeInTheDocument()
   })
 

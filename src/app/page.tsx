@@ -120,10 +120,10 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section aria-label="Hero introduction" className="relative overflow-hidden">
-          <h1 className="sr-only">Liam West - Engineering & VR Development Portfolio</h1>
+          <h1 className="sr-only">Liam West - Engineering Portfolio</h1>
 
           <HeroSection
-            badge="Engineering & VR Development Portfolio"
+            badge="Engineering Portfolio"
             title={
               <>
                 Hi, I&apos;m <span className="font-bold text-primary">Liam West</span>
@@ -131,9 +131,10 @@ export default function Home() {
             }
             subtitle={
               <>
-                Engineering student driving{' '}
-                <span className="font-semibold text-accent">innovation and excellence</span> through
-                circuit design, aerospace systems, and immersive VR development
+                Engineering student interested in{' '}
+                <span className="font-semibold text-accent">
+                  product management and engineering
+                </span>
               </>
             }
             actions={

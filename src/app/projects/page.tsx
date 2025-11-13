@@ -205,8 +205,8 @@ export default function ProjectsPage() {
             title="All Projects"
             description={
               <>
-                Explore my portfolio of <span id="project-count">{projects.length}</span> product
-                management and industrial engineering initiatives
+                Explore my portfolio of <span id="project-count">{projects.length}</span>{' '}
+                initiatives and projects
               </>
             }
           />

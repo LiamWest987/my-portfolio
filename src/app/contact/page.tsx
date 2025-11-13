@@ -130,9 +130,9 @@ export default function ContactPage() {
             titleId="contact-heading"
             description={
               loading
-                ? "Interested in engineering projects, VR development, or collaboration opportunities? Let's connect and discuss how we can work together."
+                ? "Interested in product management, engineering projects, or collaboration? Let's connect."
                 : contactData?.subtext ||
-                  "Interested in engineering projects, VR development, or collaboration opportunities? Let's connect and discuss how we can work together."
+                  "Interested in product management, engineering projects, or collaboration? Let's connect."
             }
           />
 

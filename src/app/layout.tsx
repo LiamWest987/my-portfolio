@@ -21,8 +21,7 @@ export const metadata: Metadata = {
     default: 'Liam West - Engineering Portfolio',
     template: '%s | Liam West',
   },
-  description:
-    'Engineering student driving innovation and excellence through circuit design, aerospace systems, and immersive VR development',
+  description: 'Engineering student interested in product management and engineering',
   keywords: [
     'Engineering',
     'VR Development',
@@ -50,8 +49,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: '/',
     title: 'Liam West - Engineering Portfolio',
-    description:
-      'Engineering student driving innovation and excellence through circuit design, aerospace systems, and immersive VR development',
+    description: 'Engineering student interested in product management and engineering',
     siteName: 'Liam West Portfolio',
     images: [
       {
@@ -65,8 +63,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Liam West - Engineering Portfolio',
-    description:
-      'Engineering student driving innovation and excellence through circuit design, aerospace systems, and immersive VR development',
+    description: 'Engineering student interested in product management and engineering',
     images: ['/og-image.png'],
   },
   icons: {

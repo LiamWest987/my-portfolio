@@ -441,37 +441,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
             </div>
           )}
 
-          {project.technologies && project.technologies.length > 0 && (
-            <div className="mb-6">
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-card-foreground">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-                  <line x1="7" y1="7" x2="7.01" y2="7" />
-                </svg>
-                Technologies Used
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech, index) => (
-                  <Badge key={index} variant="secondary">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
-
           {project.challenges &&
             (Array.isArray(project.challenges) ? project.challenges.length > 0 : true) && (
               <div className="mb-6">
@@ -512,13 +481,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
               </div>
             )}
 
-          {project.tags && project.tags.length > 0 && (
+          {project.technologies && project.technologies.length > 0 && (
             <div className="mb-6">
-              <h3 className="mb-4 text-lg font-semibold text-card-foreground">Tags</h3>
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-card-foreground">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                  <line x1="7" y1="7" x2="7.01" y2="7" />
+                </svg>
+                Technologies Used
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag, index) => (
-                  <Badge key={index} variant="outline">
-                    {tag}
+                {project.technologies.map((tech, index) => (
+                  <Badge key={index} variant="secondary">
+                    {tech}
                   </Badge>
                 ))}
               </div>

@@ -31,8 +31,7 @@ export default {
       title: 'Skills',
       type: 'array',
       of: [{type: 'string'}],
-      description: 'List of skills in this category',
-      validation: (Rule) => Rule.required().min(1),
+      description: 'List of skills in this category (optional)',
     },
     {
       name: 'icon',
@@ -101,7 +100,6 @@ export default {
           {title: '🚀 Rocket/Launch', value: 'rocket'},
         ],
       },
-      validation: (Rule) => Rule.required(),
     },
   ],
   orderings: [

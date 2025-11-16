@@ -14,6 +14,7 @@ import {
   Skeleton,
   BackgroundAnimation,
 } from '@/components/ui'
+import { Icon } from '@/lib/iconMap'
 
 /**
  * Skill category data structure from Sanity CMS.
@@ -274,7 +275,7 @@ export default function AboutPage() {
             </TabsList>
 
             {/* Skills Tab */}
-            <TabsContent value="skills" className="mt-6">
+            <TabsContent value="skills" className="mt-15">
               {loading ? (
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {[1, 2, 3].map(i => (
@@ -288,7 +289,7 @@ export default function AboutPage() {
                       key={category._id}
                       icon={
                         category.icon ? (
-                          <div dangerouslySetInnerHTML={{ __html: category.icon }} />
+                          <Icon name={category.icon} className="h-6 w-6" />
                         ) : undefined
                       }
                       title={category.title}
@@ -302,7 +303,7 @@ export default function AboutPage() {
             </TabsContent>
 
             {/* Education Tab */}
-            <TabsContent value="education" className="mt-6">
+            <TabsContent value="education" className="mt-15">
               {loading ? (
                 <div className="space-y-4">
                   {[1, 2].map(i => (
@@ -311,16 +312,20 @@ export default function AboutPage() {
                 </div>
               ) : education.length > 0 ? (
                 <div className="space-y-4">
-                  {education.map(edu => (
-                    <AboutCard
-                      key={edu._id}
-                      variant="timeline"
-                      title={edu.degree}
-                      subtitle={edu.school}
-                      date={formatDate(edu.startDate, edu.endDate, edu.isCurrent, edu.year)}
-                      description={edu.description}
-                    />
-                  ))}
+                  {education.map(edu => {
+                    const dateStr = formatDate(edu.startDate, edu.endDate, edu.isCurrent, edu.year);
+                    const subtitle = dateStr ? `${edu.school} | ${dateStr}` : edu.school;
+
+                    return (
+                      <AboutCard
+                        key={edu._id}
+                        variant="timeline"
+                        title={edu.degree}
+                        subtitle={subtitle}
+                        description={edu.description}
+                      />
+                    );
+                  })}
                 </div>
               ) : (
                 <p className="text-center text-muted-foreground">No education entries found.</p>
@@ -328,7 +333,7 @@ export default function AboutPage() {
             </TabsContent>
 
             {/* Experience Tab */}
-            <TabsContent value="experience" className="mt-6">
+            <TabsContent value="experience" className="mt-15">
               {loading ? (
                 <div className="space-y-4">
                   {[1, 2, 3].map(i => (
@@ -362,7 +367,7 @@ export default function AboutPage() {
             </TabsContent>
 
             {/* Achievements Tab */}
-            <TabsContent value="achievements" className="mt-6">
+            <TabsContent value="achievements" className="mt-15">
               {loading ? (
                 <div className="space-y-4">
                   {[1, 2, 3].map(i => (
@@ -371,18 +376,22 @@ export default function AboutPage() {
                 </div>
               ) : awards.length > 0 ? (
                 <div className="space-y-4">
-                  {awards.map(award => (
-                    <AboutCard
-                      key={award._id}
-                      variant="timeline"
-                      title={award.title}
-                      subtitle={award.issuer}
-                      date={(award.date || award.year) ?? ''}
-                      description={award.description}
-                      tags={award.category ? [award.category] : undefined}
-                      className={award.isHighlighted ? 'border-primary' : undefined}
-                    />
-                  ))}
+                  {awards.map(award => {
+                    const dateStr = award.date || award.year || '';
+                    const parts = [award.issuer, dateStr, award.category].filter(Boolean);
+                    const subtitle = parts.join(' | ');
+
+                    return (
+                      <AboutCard
+                        key={award._id}
+                        variant="timeline"
+                        title={award.title}
+                        subtitle={subtitle}
+                        description={award.description}
+                        className={award.isHighlighted ? 'border-primary' : undefined}
+                      />
+                    );
+                  })}
                 </div>
               ) : (
                 <p className="text-center text-muted-foreground">No awards found.</p>

@@ -103,17 +103,8 @@ export const AboutCard: React.FC<AboutCardProps> = ({
           {description && (
             <p className="mb-4 text-muted-foreground">{description}</p>
           )}
-          {tags && tags.length > 0 && (
-            <div className="mb-4 flex flex-wrap gap-2">
-              {tags.map((tag, index) => (
-                <Badge key={index} variant="outline">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          )}
           {achievements && achievements.length > 0 && (
-            <ul className="m-0 list-none p-0">
+            <ul className="m-0 mb-4 list-none p-0">
               {achievements.map((achievement, index) => (
                 <li key={index} className="mb-2 flex items-start gap-2 text-sm leading-relaxed text-muted-foreground">
                   <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
@@ -121,6 +112,15 @@ export const AboutCard: React.FC<AboutCardProps> = ({
                 </li>
               ))}
             </ul>
+          )}
+          {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag, index) => (
+                <Badge key={index} variant="outline">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
           )}
         </div>
       </Card>
